@@ -13,6 +13,9 @@ Release*/
 *.otf
 *.ttf
 
+# Videos
+*.mov
+
 
 #XCode
 *.pbxuser
