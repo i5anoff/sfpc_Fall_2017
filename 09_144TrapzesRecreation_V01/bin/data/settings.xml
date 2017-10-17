@@ -1,0 +1,9 @@
+<group>
+	<random_min_value>0</random_min_value>
+	<random_max_value>0</random_max_value>
+	<element_size>0.75</element_size>
+	<frame>0.585</frame>
+<group/>
+<distortion_max_value>60</distortion_max_value>
+	<distortion_min_value>-30</distortion_min_value>
+</group>
