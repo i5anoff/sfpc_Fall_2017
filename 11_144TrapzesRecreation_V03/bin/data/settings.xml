@@ -1,0 +1,9 @@
+<group>
+	<frame>0.8785</frame>
+	<number_elements>3</number_elements>
+	<element_size_x>0.325</element_size_x>
+	<element_size_y>0.8695</element_size_y>
+	<inner_copys>51.49</inner_copys>
+	<distortion_max_value>200</distortion_max_value>
+	<distortion_min_value>-100</distortion_min_value>
+</group>
