@@ -5,7 +5,6 @@ void ofApp::setup(){
     ofBackground(255);
     myImage.load("image_preview.jpg");
     resolution = 1;
-//    myImage.resize(500, 500);
     
 
 }
@@ -26,19 +25,22 @@ void ofApp::draw(){
     float imgHeight = myImage.getHeight() * imgScale;
     ofTranslate((ofGetWidth() - imgWidth) / 2, (ofGetHeight() - imgHeight) / 2);
     ofScale(imgScale, imgScale);
-    
+
     // Layout
-    int lineNum = 6;
+    int lineNum = 4;
     float lineHeight = myImage.getHeight() / lineNum;
 
     int lineCount = 0;
     float yOffset = 0;
-   
+
     for (int k = 0; k < lineNum; k++) {
         if(lineCount % 2 == 1){yOffset = -lineHeight;
         }else{yOffset = lineHeight;}
-        
+
         for (int i = 0; i < myImage.getWidth(); i += resolution) {
+//            float yCurve = ofMap(sin((ofGetElapsedTimef()*2) + i*0.025), -1, 1, -20, 20);
+//            ofPushMatrix();
+//                ofTranslate(0, yCurve);
             for (int j = 0; j < lineHeight; j += resolution){
                 ofColor c = myImage.getColor(i, j + (lineCount * lineHeight));
                 ofPushMatrix();
@@ -47,10 +49,12 @@ void ofApp::draw(){
                     ofDrawRectangle(0, 0, resolution, resolution);
                 ofPopMatrix();
             }
+//            ofPopMatrix();
         }
         lineCount += 1;
     }
- 
+    
+
 }
 
 //--------------------------------------------------------------
