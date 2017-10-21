@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(240);
-    myImage.load("IMG_9120SQ.JPEG");
+    myImage.load("IMG_9121SQ.JPEG");
     resolution = 1;
  lineNum = 2;
 
