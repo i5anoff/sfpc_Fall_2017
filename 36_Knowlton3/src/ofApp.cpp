@@ -2,60 +2,56 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofBackground(240);
-    myImage.load("IMG_9120SQ.JPEG");
+    ofBackground(255);
+    myPlayer.load("skeleton.mov");
+    myPlayer.play();
     resolution = 1;
- lineNum = 2;
+    
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    
+    myPlayer.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
  
+    myPlayer.getTexture();
     // Window Position
-    float frame = 0.9;
+    float frame = 0.75;
     float imgScale = ofGetWidth() * frame / myImage.getWidth();
     float imgWidth = myImage.getWidth() * imgScale;
     float imgHeight = myImage.getHeight() * imgScale;
     ofTranslate((ofGetWidth() - imgWidth) / 2, (ofGetHeight() - imgHeight) / 2);
     ofScale(imgScale, imgScale);
-    ofSetColor(255);
 
     // Layout
+    int lineNum = 4;
     float lineHeight = myImage.getHeight() / lineNum;
 
     int lineCount = 0;
     float yOffset = 0;
-    float xOffset = 0;
 
     for (int k = 0; k < lineNum; k++) {
         if(lineCount % 2 == 1){yOffset = -lineHeight;
         }else{yOffset = lineHeight;}
-       
+
         for (int i = 0; i < myImage.getWidth(); i += resolution) {
-           
-                for (int j = 0; j < lineHeight; j += resolution){
-                    float duplicate = ofMap(ofGetMouseY(), 0, ofGetHeight(), 0, + lineHeight);
-                    ofColor c = myImage.getColor(i, j + (lineCount * lineHeight));
-                    
-                    ofPushMatrix();
-                        ofTranslate(i ,j + (lineHeight * lineCount) + yOffset);
-                        ofSetColor(c);
-                 
-                        if(lineCount % 2 == 1){
-                            ofDrawRectangle(0, 0, resolution, resolution);
-                        }else{
-                            ofDrawRectangle(0, 0, resolution, resolution);
-                        }
-                    
-                    ofPopMatrix();
-                }
+//            float yCurve = ofMap(sin((ofGetElapsedTimef()*2) + i*0.025), -1, 1, -20, 20);
+//            ofPushMatrix();
+//                ofTranslate(0, yCurve);
+            for (int j = 0; j < lineHeight; j += resolution){
+                ofColor c = myImage.getColor(i, j + (lineCount * lineHeight));
+                ofPushMatrix();
+                    ofTranslate(i,j + (lineHeight * lineCount) + yOffset);
+                    ofSetColor(c);
+                    ofDrawRectangle(0, 0, resolution, resolution);
+                ofPopMatrix();
+            }
+//            ofPopMatrix();
         }
         lineCount += 1;
     }
@@ -65,30 +61,7 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == '1') {
-        lineNum = 2;
-        
-    }
-    if (key == '2') {
-        lineNum = 4;
-        
-    }
-    if (key == '3') {
-        lineNum = 6;
-        
-    }
-    if (key == '4') {
-        lineNum = 8;
-        
-    }
-    if (key == '5') {
-        lineNum = 16;
-        
-    }
-    if (key == '6') {
-        lineNum = 24;
-        
-    }
+    
 }
 
 //--------------------------------------------------------------

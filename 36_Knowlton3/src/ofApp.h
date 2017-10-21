@@ -23,11 +23,7 @@ class ofApp : public ofBaseApp{
     
     float resolution;
     ofImage myImage;
-    ofImage mosaic;
-    float maxScale;
-    float minScale;
-    vector <ofColor> pxlColor;
-    int lineNum;
-
+    ofVideoPlayer myPlayer;
+    
 		
 };
