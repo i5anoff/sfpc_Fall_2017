@@ -4,7 +4,6 @@
 void ofApp::setup(){
     ofBackground(240);
     myImage.load("IMG_9121SQ.JPEG");
-    resolution = 1;
  lineNum = 2;
 
 }
@@ -12,7 +11,8 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    
+    resolution = ofMap(ofGetMouseX(), 0, ofGetWindowWidth(), 1, 200);
+
 }
 
 //--------------------------------------------------------------
