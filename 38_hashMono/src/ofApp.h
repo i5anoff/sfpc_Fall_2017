@@ -21,7 +21,18 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    ofRectangel charBound;
-    ofPoint
+    void drawChar(string character);
+    
+    ofRectangle charGrid;
+    float gridX;
+    float gridW;
+
+    float ascLine;
+    float capLine;
+    float baseLine;
+    float desLine;
+    
+    float counter;
+
 		
 };
