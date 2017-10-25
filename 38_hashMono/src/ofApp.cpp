@@ -17,12 +17,12 @@ void ofApp::setup(){
     
     // Output
     counter = 0;
+    cursorPos = 0;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
 }
 
 //--------------------------------------------------------------
@@ -31,14 +31,19 @@ void ofApp::draw(){
     ofSetLineWidth(2);
     ofNoFill();
     
-    drawChar("X");
-    
+    for(int i = 0; i < myString.size(); i++){
+        char c = myString[i];
+         cursorPos = drawChar(c);
+         drawChar(c);
+        ofTranslate(cursorPos, 0);
+    }
+
 }
 //--------------------------------------------------------------
-void ofApp::drawChar(string character){
+float ofApp::drawChar(char character){
     
-    if (character == "X") {
-        float charValue = 58; // == Ascii Code for X
+    
+    if (character == 'X') {
         
         // Poroportional Adjustment within the grid
         float wAdj = 2 * gridX;
@@ -52,7 +57,9 @@ void ofApp::drawChar(string character){
         
         ofDrawLine(d1A, d1B);
         ofDrawLine(d2A, d2B);
-
+        
+        return width;
+    
     }
    
 }
@@ -66,8 +73,15 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     if (key == 'X'){
-        drawChar("X");
+        drawChar('X');
     }
+    
+    if (key == 127) {
+        myString.erase(myString.end()-1);
+    } else {
+    myString.push_back(key);
+    }
+    
 }
 
 //--------------------------------------------------------------

@@ -21,7 +21,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void drawChar(string character);
+    float drawChar(char character);
     
     ofRectangle charGrid;
     float gridX;
@@ -33,6 +33,8 @@ class ofApp : public ofBaseApp{
     float desLine;
     
     float counter;
+    string myString;
+    float cursorPos;
 
 		
 };
