@@ -5,49 +5,67 @@ void ofApp::setup(){
     ofSetBackgroundColor(240);
     ofSetColor(15);
     
-    // Grid for all Characters
-    gridX = 5;
-    charGrid.set(0, 0, 14 * gridX, 33 * gridX);
+    // Initial Morphing Values
+    widthIn = 1;
     
-    // Lines on the y-axsis
-    ascLine = 0;
-    capLine = 6 * gridX;
-    baseLine = 26 * gridX;
-    desLine = 33 * gridX;
-    
-    // Output
-    counter = 0;
+    // Text Output
     cursorPos = 0;
+    leading = 7 * 5;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
+    // Calculating Morphing Values
+
+//    for(int i = 0; i < myString.size(); i++){
+//        if(i == 2){
+//            widthIn = 1.61;
+//        } if(i == 3){
+//            widthIn = 2.61;
+//        }else {
+//            widthIn = 1;
+//        }
+//    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofTranslate(100, 100);
     ofSetLineWidth(2);
     ofNoFill();
     
     for(int i = 0; i < myString.size(); i++){
-        char c = myString[i];
-         cursorPos = drawChar(c);
-         drawChar(c);
-        ofTranslate(cursorPos, 0);
+        if(i % 3 == 1){
+            widthIn = 1.61;
+        } else if (i % 2 == 1){
+            widthIn = 2.61;
+        }else {
+            widthIn = 1;
+        }
+         char c = myString[i];
+         cursorPos = drawChar(c, widthIn);
+         drawChar(c, widthIn);
+         ofTranslate(cursorPos + leading, 0);
     }
-
 }
+
 //--------------------------------------------------------------
-float ofApp::drawChar(char character){
+float ofApp::drawChar(char character, float widthIn){
+   
+    // Grid for all Characters
+    gridX = 5 * widthIn;
+    gridY = 5;
     
+    // Lines on the y-axsis
+    ascLine = 0;
+    capLine = 6 * gridY;
+    baseLine = 26 * gridY;
+    desLine = 33 * gridY;
     
     if (character == 'X') {
-        
-        // Poroportional Adjustment within the grid
-        float wAdj = 2 * gridX;
-        float width = charGrid.getWidth() - wAdj;
+
+        float width = 12 * gridX;
         
         // Points (d = diagonal)
         ofPoint d1A = ofPoint(0, capLine);
@@ -59,11 +77,8 @@ float ofApp::drawChar(char character){
         ofDrawLine(d2A, d2B);
         
         return width;
-    
     }
-   
 }
-
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
@@ -72,14 +87,11 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    if (key == 'X'){
-        drawChar('X');
-    }
     
-    if (key == 127) {
+    if (key == 127 && myString.size() > 0) {
         myString.erase(myString.end()-1);
     } else {
-    myString.push_back(key);
+        myString.push_back(key);
     }
     
 }
