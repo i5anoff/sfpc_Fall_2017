@@ -6,29 +6,39 @@ void ofApp::setup(){
     ofSetColor(15);
     
     // Initial Morphing Values
-    widthIn = 1;
+    widthValue = 1;
     
     // Text Output
-    cursorPos = 0;
     leading = 7 * 5;
+    lineHeight = 33 * 5;
+    lineNum = 1;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
 
-    // Calculating Morphing Values
+    // Storing Morphing Data
+    for(int i = 0; i < myString.size(); i++){
+        if(i % 2 == 1){widthValue = 1.61;}
+        else if(i % 3 == 1){widthValue = 2.61;}
+        else { widthValue = 1;}
+        
+        widthIn[i] = widthValue;
+    }
+    
+    // Cursor Position
+    for(int i = 0; i < myString.size(); i++){
+        char c = myString[i];
+        cursorXPos[i] = drawChar(c, widthIn[i]) + leading;
+        cursorYPos[i] = drawChar(c, widthIn[i]) + leading;
+    }
 
-//    for(int i = 0; i < myString.size(); i++){
-//        if(i == 2){
-//            widthIn = 1.61;
-//        } if(i == 3){
-//            widthIn = 2.61;
-//        }else {
-//            widthIn = 1;
-//        }
-//    }
+    
+    
 }
+
 
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -36,17 +46,9 @@ void ofApp::draw(){
     ofNoFill();
     
     for(int i = 0; i < myString.size(); i++){
-        if(i % 3 == 1){
-            widthIn = 1.61;
-        } else if (i % 2 == 1){
-            widthIn = 2.61;
-        }else {
-            widthIn = 1;
-        }
-         char c = myString[i];
-         cursorPos = drawChar(c, widthIn);
-         drawChar(c, widthIn);
-         ofTranslate(cursorPos + leading, 0);
+        char c = myString[i];
+        drawChar(c, widthIn[i]);
+        ofTranslate(cursorXPos[i], 0);
     }
 }
 
@@ -63,7 +65,7 @@ float ofApp::drawChar(char character, float widthIn){
     baseLine = 26 * gridY;
     desLine = 33 * gridY;
     
-    if (character == 'X') {
+    if (character == 'x') {
 
         float width = 12 * gridX;
         
@@ -90,9 +92,12 @@ void ofApp::keyReleased(int key){
     
     if (key == 127 && myString.size() > 0) {
         myString.erase(myString.end()-1);
-    } else {
+    }else  if (key == 13){
+        lineNum += 1;
+    }else {
         myString.push_back(key);
     }
+
     
 }
 

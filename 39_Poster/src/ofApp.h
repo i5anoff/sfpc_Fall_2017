@@ -21,26 +21,15 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    float drawChar(char character, float widthIn);
-    
-    ofRectangle charGrid;
-    float gridX;
-    float gridY;
-    float gridW;
+    ofPolyline line1;
+    ofPolyline line2;
+    ofPolyline line3;
+    ofPolyline line4;
+    ofPolyline line5;
+    ofPolyline line6;
+    ofPolyline line7;
+    ofPolyline line8;
+    ofPolyline line9;
+    ofPolyline line10;
 
-    float ascLine;
-    float capLine;
-    float baseLine;
-    float desLine;
-    
-    string myString;
-    float leading;
-    float lineHeight;
-    float lineNum;
-    float cursorXPos[500];
-    float cursorYPos[500];
-
-    float widthIn[100];
-    float widthValue;
-		
 };
