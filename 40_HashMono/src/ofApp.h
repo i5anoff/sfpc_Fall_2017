@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
+
 
 
 class letterPoint {
@@ -127,12 +129,22 @@ public:
     void gotMessage(ofMessage msg);
     
     
+    letter E;
+    letter H;
+    letter L;
     letter O;
-    
     vector < letter > letters;
+    
+    float h;
     vector < float > w;
     
+    ofxPanel gui;
+
+    float FirstTimeStamp;
     vector < float > timeStamp;
+    ofxIntSlider typeSpeedMin;
+    ofxIntSlider typeSpeedMax;
+
     
     
     
