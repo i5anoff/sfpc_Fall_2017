@@ -22,6 +22,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    hashMono type;
+    hashMono t;
+    float unit;
+    float w;
+    float h;
+    float leading;
+    
+    vector < string > letters;
 		
 };
