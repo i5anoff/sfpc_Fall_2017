@@ -8,12 +8,14 @@ void hashMono::setup(){
     float unitX = 0.071;
     float w2 = 2 * unitX;
     float w3 = 3 * unitX;
+    float w4 = 4 * unitX;
     float w6 = 6 * unitX;
     float w7 = 7 * unitX;
     float w10 = 10 * unitX;
     float w12 = 12 * unitX;
 
     float unitY = 0.05;
+    float h7 = 7 * unitY;
     float h9 = 9 * unitY;
     float h10 = 10 * unitY;
     float h11 = 11 * unitY;
@@ -446,7 +448,7 @@ void hashMono::setup(){
     letterShape tempS;
     
     letterShape tempT;
-        tempT.bIsLine = true; // l vert
+        tempT.bIsLine = true; // c vert
         tempT.pts[0].set(1,0, 1, 0,w7,0, 0,0);
         tempT.pts[1].set(1,0, 1, 0,w7,0, 1,0);
         T.shapes.push_back(tempT);
@@ -467,12 +469,10 @@ void hashMono::setup(){
         tempU.pts[1].set(1,0, 1, 0,w12,0, 1,-r1);
         U.shapes.push_back(tempU);
         
-        
         tempU.bIsLine = true; //b hor
         tempU.pts[0].set(1, r1, 1, 0, 0, 0, 1, 0);
         tempU.pts[1].set(1, 0, 1, 0, w12, -r1, 1, 0);
         U.shapes.push_back(tempU);
-        
         
         tempU.bIsLine = false; // bl
         tempU.center.set(1,r1, 1, 0,0,0, 1,-r1);
@@ -487,14 +487,79 @@ void hashMono::setup(){
         U.shapes.push_back(tempU);
     
     letterShape tempV;
+        tempV.bIsLine = true; // l dia
+        tempV.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempV.pts[1].set(1,0, 1, 0,w7,0, 1,0);
+        V.shapes.push_back(tempV);
+    
+        tempV.bIsLine = true; // r dia
+        tempV.pts[0].set(1,0, 1, 0,1,0, 0,0);
+        tempV.pts[1].set(1,0, 1, 0,w7,0, 1,0);
+        V.shapes.push_back(tempV);
     
     letterShape tempW;
+        tempW.bIsLine = true; // l dia L
+        tempW.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempW.pts[1].set(1,0, 1, 0,w4,0, 1,0);
+        W.shapes.push_back(tempW);
+    
+        tempW.bIsLine = true; // l dia S
+        tempW.pts[0].set(1,0, 1, 0,w7,0, h7,0);
+        tempW.pts[1].set(1,0, 1, 0,w4,0, 1,0);
+        W.shapes.push_back(tempW);
+    
+        tempW.bIsLine = true; // l dia S
+        tempW.pts[0].set(1,0, 1, 0,w7,0, h7,0);
+        tempW.pts[1].set(1,0, 1, 0,w10,0, 1,0);
+        W.shapes.push_back(tempW);
+    
+        tempW.bIsLine = true; // r dia L
+        tempW.pts[0].set(1,0, 1, 0,1,0, 0,0);
+        tempW.pts[1].set(1,0, 1, 0,w10,0, 1,0);
+        W.shapes.push_back(tempW);
     
     letterShape tempX;
+        tempX.bIsLine = true; // l dia
+        tempX.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempX.pts[1].set(1,0, 1, 0,w12,0, 1,0);
+        X.shapes.push_back(tempX);
+    
+        tempX.bIsLine = true; // r dia
+        tempX.pts[0].set(1,0, 1, 0,w12,0, 0,0);
+        tempX.pts[1].set(1,0, 1, 0,0,0, 1,0);
+        X.shapes.push_back(tempX);
     
     letterShape tempY;
+        tempY.bIsLine = true; // l dia
+        tempY.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempY.pts[1].set(1,0, 1, 0,w7,0, h10,0);
+        Y.shapes.push_back(tempY);
+    
+        tempY.bIsLine = true; // r dia
+        tempY.pts[0].set(1,0, 1, 0,1,0, 0,0);
+        tempY.pts[1].set(1,0, 1, 0,w7,0, h10,0);
+        Y.shapes.push_back(tempY);
+    
+        tempY.bIsLine = true; // c vert
+        tempY.pts[0].set(1,0, 1, 0,w7,0, h10,0);
+        tempY.pts[1].set(1,0, 1, 0,w7,0, 1,0);
+        Y.shapes.push_back(tempY);
     
     letterShape tempZ;
+        tempZ.bIsLine = true; // c dia
+        tempZ.pts[0].set(1,0, 1, 0,w12,0, 0,0);
+        tempZ.pts[1].set(1,0, 1, 0,0,0, 1,0);
+        Z.shapes.push_back(tempZ);
+    
+        tempZ.bIsLine = true; // t hor
+        tempZ.pts[0].set(1,0, 1, 0,0,0, 0 ,0);
+        tempZ.pts[1].set(1,0, 1, 0,w12,0, 0,0);
+        Z.shapes.push_back(tempZ);
+    
+        tempZ.bIsLine = true; // t hor
+        tempZ.pts[0].set(1,0, 1, 0,0,0, 1 ,0);
+        tempZ.pts[1].set(1,0, 1, 0,w12,0, 1,0);
+        Z.shapes.push_back(tempZ);
     
     
     

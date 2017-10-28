@@ -10,6 +10,11 @@ void ofApp::setup(){
     letters.push_back("G");
     letters.push_back("I");
     letters.push_back("A");
+    letters.push_back("Z");
+    letters.push_back("V");
+    letters.push_back("W");
+    letters.push_back("Y");
+    letters.push_back("X");
     letters.push_back("D");
     letters.push_back("B");
     letters.push_back("R");
