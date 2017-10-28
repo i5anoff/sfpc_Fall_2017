@@ -7,6 +7,8 @@ void ofApp::setup(){
     typeSpeedMin;
     typeSpeedMax;
     
+    timeStamp.push_back(ofGetFrameNum());
+    
     
     gui.setup();
     gui.add(typeSpeedMin.setup("TS Min", 0, 0, 100));
@@ -123,22 +125,18 @@ void ofApp::update(){
     
     w.clear();
     for(int i = 0; i < letters.size(); i++){
-        float typeSpeed;
-
-        if (letters.size() < 1) {
+        if(timeStamp.size() < 1){
+            timeStamp.clear();
             timeStamp.push_back(ofGetFrameNum());
-            timeStamp.push_back(ofGetFrameNum());
-
         }
-        typeSpeed = timeStamp[i] - timeStamp[i-1];
-
+        float typeSpeed = timeStamp[i] - timeStamp[i-1];
         float width =  ofMap(ofClamp(typeSpeed, typeSpeedMin, typeSpeedMax), typeSpeedMin, typeSpeedMax,  40, 436);
         w.push_back(width);
-        
-        cout << "letter: " << i << " Prev Time: " << timeStamp[i-1] << " Cur Time: " << timeStamp[i] <<  " Speed: " << typeSpeed << endl;
+        cout << "current: " << timeStamp[i] << " prev: " << timeStamp[i-1] << " speed: " << typeSpeed << endl;
     }
-    
-    cout << "TS " << timeStamp.size() << " L: " << letters.size() << endl;
+    //        cout << "TS " << timeStamp.size() << " L: " << letters.size() << endl;
+
+
 }
 
 //--------------------------------------------------------------
@@ -187,14 +185,8 @@ void ofApp::keyPressed(int key){
 
 
     if (key == 127 && letters.size() > 0) {
-        
-        if (letters.size() == 0) {
-            timeStamp.clear();
-            timeStamp.push_back(ofGetFrameNum());
-        }else {
-            letters.erase(letters.end()-1);
-            timeStamp.erase(timeStamp.end()-1);
-        }
+        letters.erase(letters.end()-1);
+        timeStamp.erase(timeStamp.end()-1);
         }
     
 }
