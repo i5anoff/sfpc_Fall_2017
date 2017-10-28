@@ -6,11 +6,20 @@ void ofApp::setup(){
     
     letters.push_back("O");
     letters.push_back("H");
-    letters.push_back("U");
-    letters.push_back("C");
+    letters.push_back("P");
+    letters.push_back("G");
+    letters.push_back("I");
+    letters.push_back("A");
+    letters.push_back("D");
+    letters.push_back("B");
+    letters.push_back("R");
     letters.push_back("E");
     letters.push_back("F");
+    letters.push_back("U");
+    letters.push_back("C");
     letters.push_back("J");
+    letters.push_back("L");
+    letters.push_back("T");
 
     
 }
@@ -18,11 +27,11 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     unit = 3;
-    w = 14 * unit;
-    h = 20 * unit;
+//    w = 14 * unit;
+//    h = 20 * unit;
     leading = 5 * unit;
-//    w = ofMap(mouseX, 0, ofGetWidth(), 14 * unit, 50 * unit);
-//    h = ofMap(mouseY, 0, ofGetHeight(), 20 * unit, 150 * unit);
+    w = ofMap(mouseX, 0, ofGetWidth(), 14 * unit, 50 * unit);
+    h = ofMap(mouseY, 0, ofGetHeight(), 20 * unit, 150 * unit);
 }
 
 //--------------------------------------------------------------
