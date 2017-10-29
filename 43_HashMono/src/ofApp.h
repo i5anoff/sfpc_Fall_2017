@@ -25,6 +25,7 @@ class ofApp : public ofBaseApp{
     
     ofxPanel gui;
     
+    // type basics
     hashMono t;
     float unit;
     float w;
@@ -33,13 +34,19 @@ class ofApp : public ofBaseApp{
     float space;
     float lineHeight;
     
+    // type manipulation
     vector < float > width;
     
+    // type position
     vector < string > letters;
     vector < string > blanks;
     vector < float > xPos;
     vector < string > lines;
     vector < float > yPos;
+    
+    //layout
+    float padding;
+
     
     
 };

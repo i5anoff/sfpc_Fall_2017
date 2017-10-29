@@ -5,49 +5,27 @@ void ofApp::setup(){
     gui.setup();
     t.setup();
     
-    // type grid
+    //layout
+    padding = 100;
+
+    // type basics
     unit = 3;
     h = 20 * unit;
     leading = 3.5 * unit;
     space = 14 * unit;
     lineHeight = h * 1.5;
     
-    // letter position
+    // type position
     lines.push_back("null");
     
-//    letters.push_back("A");
-//    letters.push_back("B");
-//    letters.push_back("C");
-//    letters.push_back("D");
-//    letters.push_back("E");
-//    letters.push_back("F");
-//    letters.push_back("G");
-//    letters.push_back("H");
-//    letters.push_back("I");
-//    letters.push_back("J");
-//    letters.push_back("K");
-//    letters.push_back("L");
-//    letters.push_back("M");
-//    letters.push_back("N");
-//    letters.push_back("O");
-//    letters.push_back("P");
-//    letters.push_back("Q");
-//    letters.push_back("R");
-//    letters.push_back("S");
-//    letters.push_back("T");
-//    letters.push_back("U");
-//    letters.push_back("V");
-//    letters.push_back("W");
-//    letters.push_back("X");
-//    letters.push_back("Y");
-//    letters.push_back("Z");
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-
+    // type manipulation
+    
     width.clear();
     for(int i = 0; i < letters.size(); i++){
         w = 14 * unit;
@@ -61,6 +39,9 @@ void ofApp::update(){
         width.push_back(w);
     }
     
+    
+    // type position
+    
     yPos.clear();
     float yPosTemp = 0;
     for (int i = 0; i < letters.size(); i++) {
@@ -68,19 +49,23 @@ void ofApp::update(){
             yPosTemp += lineHeight;
         }
         yPos.push_back(yPosTemp);
-    }    
+    }
+    
     xPos.clear();
     float xPosTemp = 0;
     for (int i = 0; i < letters.size(); i++) {
-        if (blanks[i] == "32"){
+        if(blanks[i] == "32"){
             xPosTemp += leading + space;
         }if (lines[i+1] == "13"){
             xPosTemp = 0;
-        }
-        else {
+        }else {
             xPosTemp += width[i] + leading;
         }
         xPos.push_back(xPosTemp);
+       
+        if (xPosTemp > ofGetWidth() - (padding * 2)){
+            lines.erase(lines.end()-1);
+            lines.push_back("13");}
     }
 }
 
@@ -90,8 +75,6 @@ void ofApp::draw(){
     ofSetBackgroundColor(240);
     ofSetLineWidth(2);
 //    gui.draw();
-    
-    float padding = 100;
     ofTranslate(padding,padding);
     
     for(int i = 0; i < letters.size(); i++){
