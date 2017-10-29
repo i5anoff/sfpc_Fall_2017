@@ -40,8 +40,8 @@ class ofApp : public ofBaseApp{
     // type position
     vector < string > letters;
     vector < string > blanks;
-    vector < float > xPos;
     vector < string > lines;
+    vector < float > xPos;
     vector < float > yPos;
     
     //layout

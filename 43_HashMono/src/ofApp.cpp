@@ -18,7 +18,6 @@ void ofApp::setup(){
     // type position
     lines.push_back("null");
     
-
 }
 
 //--------------------------------------------------------------
