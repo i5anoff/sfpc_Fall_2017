@@ -7,9 +7,36 @@ void ofApp::setup(){
     
     unit = 3;
     h = 20 * unit;
-    leading = 3 * unit;
+    leading = 3.5 * unit;
     space = 14 * unit;
     
+    letters.push_back("A");
+    letters.push_back("B");
+    letters.push_back("C");
+    letters.push_back("D");
+    letters.push_back("E");
+    letters.push_back("F");
+    letters.push_back("G");
+    letters.push_back("H");
+    letters.push_back("I");
+    letters.push_back("J");
+    letters.push_back("K");
+    letters.push_back("L");
+    letters.push_back("M");
+    letters.push_back("N");
+    letters.push_back("O");
+    letters.push_back("P");
+    letters.push_back("Q");
+    letters.push_back("R");
+    letters.push_back("S");
+    letters.push_back("T");
+    letters.push_back("U");
+    letters.push_back("V");
+    letters.push_back("W");
+    letters.push_back("X");
+    letters.push_back("Y");
+    letters.push_back("Z");
+
 }
 
 //--------------------------------------------------------------
@@ -19,10 +46,10 @@ void ofApp::update(){
     for(int i = 0; i < letters.size(); i++){
         w = 14 * unit;
 
-        if(i % 2 == 1){
+        if(i % 6 == 1){
             w = w * 1.61;
         }
-        if(i % 3 == 1){
+        if(i % 4 == 1){
             w = w * 2.61;
         }
         width.push_back(w);
@@ -34,7 +61,7 @@ void ofApp::update(){
 void ofApp::draw(){
     ofSetColor(15);
     ofSetBackgroundColor(240);
-    ofSetLineWidth(3);
+    ofSetLineWidth(2);
 //    gui.draw();
     
     float padding = 100;

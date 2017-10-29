@@ -67,14 +67,13 @@ public:
     
     void draw(float x, float y, float w, float h){
         
-        
         if (bIsLine){
             
             ofPoint ptA = pts[0].getPointFor(x,y,w,h);
             ofPoint ptB = pts[1].getPointFor(x,y,w,h);
-            
+
             ofLine(ptA, ptB);
-            
+
         } else {
             
             ofPoint pt = center.getPointFor(x,y,w,h);
@@ -95,10 +94,11 @@ class letter {
 public:
     
     vector < letterShape > shapes;
+    float kerning;
     void draw( float x, float y, float w, float h){
         
         for (int i = 0; i < shapes.size(); i++){
-            shapes[i].draw(x,y,w,h);
+            shapes[i].draw(x + (w * kerning),y,w,h);
         }
         
     }
