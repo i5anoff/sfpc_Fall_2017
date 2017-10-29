@@ -31,12 +31,15 @@ class ofApp : public ofBaseApp{
     float h;
     float leading;
     float space;
+    float lineHeight;
     
     vector < float > width;
     
     vector < string > letters;
-    float xPos;
-    float yPos;
+    vector < string > blanks;
+    vector < float > xPos;
+    vector < string > lines;
+    vector < float > yPos;
     
     
 };
