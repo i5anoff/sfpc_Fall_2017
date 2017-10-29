@@ -9,6 +9,7 @@ void hashMono::setup(){
     float w2 = 2 * unitX;
     float w3 = 3 * unitX;
     float w4 = 4 * unitX;
+    float w5 = 5 * unitX;
     float w6 = 6 * unitX;
     float w7 = 7 * unitX;
     float w10 = 10 * unitX;
@@ -16,10 +17,14 @@ void hashMono::setup(){
 
     float unitY = 0.05;
     float h7 = 7 * unitY;
+    float h8 = 8 * unitY;
     float h9 = 9 * unitY;
     float h10 = 10 * unitY;
     float h11 = 11 * unitY;
+    float h13 = 13 * unitY;
     float h14 = 14 * unitY;
+    float h16 = 16 * unitY;
+    float h23 = 23 * unitY;
 
     float r1 =  15;
     float r2 =  20;
@@ -311,6 +316,22 @@ void hashMono::setup(){
         J.shapes.push_back(tempJ);
     
     letterShape tempK;
+        tempK.bIsLine = true; // t dia
+        tempK.pts[0].set(1,0, 1, 0,w12,0, 0,0);
+        tempK.pts[1].set(1,0, 1, 0,0,0, h13,0);
+        K.shapes.push_back(tempK);
+    
+        tempK.bIsLine = true; // b dia
+        tempK.pts[0].set(1,0, 1, 0,w5,0, h8,0);
+        tempK.pts[1].set(1,0, 1, 0,w12,0, 1,0);
+        K.shapes.push_back(tempK);
+
+        tempK.bIsLine = true; // l vert
+        tempK.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempK.pts[1].set(1,0, 1, 0,0,0, 1,0);
+        K.shapes.push_back(tempK);
+    
+
     
     letterShape tempL;
         tempL.bIsLine = true; // l vert
@@ -324,8 +345,41 @@ void hashMono::setup(){
         L.shapes.push_back(tempL);
     
     letterShape tempM;
+        tempM.bIsLine = true; // l dia
+        tempM.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempM.pts[1].set(1,0, 1, 0,w6,0, h14,0);
+        M.shapes.push_back(tempM);
+    
+        tempM.bIsLine = true; // r dia
+        tempM.pts[0].set(1,0, 1, 0,w12,0, 0,0);
+        tempM.pts[1].set(1,0, 1, 0,w6,0, h14,0);
+        M.shapes.push_back(tempM);
+    
+        tempM.bIsLine = true; // l vert
+        tempM.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempM.pts[1].set(1,0, 1, 0,0,0, 1,0);
+        M.shapes.push_back(tempM);
+    
+        tempM.bIsLine = true; // l vert
+        tempM.pts[0].set(1,0, 1, 0,w12,0, 0,0);
+        tempM.pts[1].set(1,0, 1, 0,w12,0, 1,0);
+        M.shapes.push_back(tempM);
     
     letterShape tempN;
+        tempN.bIsLine = true; // l dia
+        tempN.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempN.pts[1].set(1,0, 1, 0,w12,0, 1,0);
+        N.shapes.push_back(tempN);
+    
+        tempN.bIsLine = true; // l vert
+        tempN.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempN.pts[1].set(1,0, 1, 0,0,0, 1,0);
+        N.shapes.push_back(tempN);
+    
+        tempN.bIsLine = true; // r vert
+        tempN.pts[0].set(1,0, 1, 0,w12,0, 0,0);
+        tempN.pts[1].set(1,0, 1, 0,w12,0, 1,0);
+        N.shapes.push_back(tempN);
     
     letterShape tempO;
         tempO.bIsLine = true; // l vert
@@ -406,6 +460,54 @@ void hashMono::setup(){
         P.shapes.push_back(tempP);
     
     letterShape tempQ;
+        tempQ.bIsLine = true; // l vert
+        tempQ.pts[0].set(1,0, 1, r1,0,0, 0,0);
+        tempQ.pts[1].set(1,0, 1, 0,0,0, 1,-r1);
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = true; // r ver
+        tempQ.pts[0].set(1,0, 1, r1,w12,0, 0,0);
+        tempQ.pts[1].set(1,0, 1, 0,w12,0, 1,-r1);
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = true; // t hor
+        tempQ.pts[0].set(1, r1, 1, 0, 0, 0, 0, 0);
+        tempQ.pts[1].set(1, 0, 1, 0, w12, -r1, 0, 0);
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = true; //b hor
+        tempQ.pts[0].set(1, r1, 1, 0, 0, 0, 1, 0);
+        tempQ.pts[1].set(1, 0, 1, 0, w12, -r1, 1, 0);
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = false; // tl
+        tempQ.center.set(1,r1, 1, r1,0,0, 0,0);
+        tempQ.startAngle = PI;
+        tempQ.radius = r1;
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = false; // tr
+        tempQ.center.set(1,0, 1, r1, w12,-r1, 0,0);
+        tempQ.startAngle = 3*PI/2.0;
+        tempQ.radius = r1;
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = false; // bl
+        tempQ.center.set(1,r1, 1, 0,0,0, 1,-r1);
+        tempQ.startAngle = PI/2.0;
+        tempQ.radius = r1;
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = false; // br
+        tempQ.center.set(1,0, 1, -r1, w12, -r1, 1, 0);
+        tempQ.startAngle = 0;
+        tempQ.radius = r1;
+        Q.shapes.push_back(tempQ);
+    
+        tempQ.bIsLine = true; // b dia
+        tempQ.pts[0].set(1,0, 1, 0, w7,0, h16,0);
+        tempQ.pts[1].set(1,0, 1, 0, w10,0, h23, 0);
+        Q.shapes.push_back(tempQ);
     
     letterShape tempR;
         tempR.bIsLine = true; // l vert
@@ -446,6 +548,67 @@ void hashMono::setup(){
         R.shapes.push_back(tempR);
     
     letterShape tempS;
+        tempS.bIsLine = true; // l vert
+        tempS.pts[0].set(1,0, 1, r1,0,0, 0,0);
+        tempS.pts[1].set(1,0, 1, 0,0,0, h9,-r1);
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = true; // r vert
+        tempS.pts[0].set(1,0, 1, r1,w12,0, h9,0);
+        tempS.pts[1].set(1,0, 1, 0,w12,0, 1,-r1);
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = true; // t hor
+        tempS.pts[0].set(1, r1, 1, 0, 0, 0, 0, 0);
+        tempS.pts[1].set(1, 0, 1, 0, w12, -r1, 0, 0);
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = true; //m hor
+        tempS.pts[0].set(1, r1, 1, 0, 0, 0, h9, 0);
+        tempS.pts[1].set(1, 0, 1, 0, w12, -r1, h9, 0);
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = true; //b hor
+        tempS.pts[0].set(1, r1, 1, 0, 0, 0, 1, 0);
+        tempS.pts[1].set(1, 0, 1, 0, w12, -r1, 1, 0);
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = false; // tl
+        tempS.center.set(1,r1, 1, r1,0,0, 0,0);
+        tempS.startAngle = PI;
+        tempS.radius = r1;
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = false; // tr
+        tempS.center.set(1,0, 1, r1, w12,-r1, 0,0);
+        tempS.startAngle = 3*PI/2.0;
+        tempS.radius = r1;
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = false; // mr
+        tempS.center.set(1,0, 1, r1, w12,-r1, h9,0);
+        tempS.startAngle = 3*PI/2.0;
+        tempS.radius = r1;
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = false; // ml
+        tempS.center.set(1,r1, 1, 0,0,0, h9,-r1);
+        tempS.startAngle = PI/2.0;
+        tempS.radius = r1;
+        S.shapes.push_back(tempS);
+
+    
+        tempS.bIsLine = false; // bl
+        tempS.center.set(1,r1, 1, 0,0,0, 1,-r1);
+        tempS.startAngle = PI/2.0;
+        tempS.radius = r1;
+        S.shapes.push_back(tempS);
+    
+        tempS.bIsLine = false; // br
+        tempS.center.set(1,0, 1, -r1, w12, -r1, 1, 0);
+        tempS.startAngle = 0;
+        tempS.radius = r1;
+        S.shapes.push_back(tempS);
     
     letterShape tempT;
         tempT.bIsLine = true; // c vert
@@ -561,11 +724,17 @@ void hashMono::setup(){
         tempZ.pts[1].set(1,0, 1, 0,w12,0, 1,0);
         Z.shapes.push_back(tempZ);
     
+    letterShape tempSpace;
+        tempSpace.bIsLine = true; // l vert
+        tempSpace.pts[0].set(1,0, 1, 0,0,0, 0,0);
+        tempSpace.pts[1].set(1,0, 1, 0,0,0, 1,0);
+        H.shapes.push_back(tempH);
     
+        tempSpace.bIsLine = true; // r ver
+        tempSpace.pts[0].set(1,0, 1, 0,w12,0, 0,0);
+        tempSpace.pts[1].set(1,0, 1, 0,w12,0, 1,0);
+        H.shapes.push_back(tempH);
     
-
-    
-
 }
 
 
@@ -653,6 +822,9 @@ void hashMono::draw(string letter, float x, float y, float width, float height){
     }
     if (letter == "Z") {
         Z.draw(x, y, width, height);
+    }
+    if (letter == "32") {
+        space.draw(x, y, width, height);
     }
 
 }

@@ -67,6 +67,7 @@ public:
     
     void draw(float x, float y, float w, float h){
         
+        
         if (bIsLine){
             
             ofPoint ptA = pts[0].getPointFor(x,y,w,h);
@@ -137,6 +138,7 @@ public:
     letter X;
     letter Y;
     letter Z;
-    
+    letter space;
+
     
 };

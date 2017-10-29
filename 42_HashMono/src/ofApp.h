@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "hashMono.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -22,12 +23,22 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    ofxPanel gui;
+    
     hashMono t;
     float unit;
-    float w;
+    vector < float > w;
+//    float w;
     float h;
     float leading;
+    float space;
     
     vector < string > letters;
-		
+    float xPos;
+    float yPos;
+    
+    vector < float > timeStamp;
+    ofxIntSlider typeSpeedMin;
+    ofxIntSlider typeSpeedMax;
+    
 };

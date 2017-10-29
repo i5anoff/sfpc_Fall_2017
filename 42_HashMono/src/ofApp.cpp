@@ -4,28 +4,13 @@
 void ofApp::setup(){
     t.setup();
     
-    letters.push_back("O");
-    letters.push_back("H");
-    letters.push_back("P");
-    letters.push_back("G");
-    letters.push_back("I");
-    letters.push_back("A");
-    letters.push_back("Z");
-    letters.push_back("V");
-    letters.push_back("W");
-    letters.push_back("Y");
-    letters.push_back("X");
-    letters.push_back("D");
-    letters.push_back("B");
-    letters.push_back("R");
-    letters.push_back("E");
-    letters.push_back("F");
-    letters.push_back("U");
-    letters.push_back("C");
-    letters.push_back("J");
-    letters.push_back("L");
-    letters.push_back("T");
-
+    typeSpeedMin;
+    typeSpeedMax;
+    timeStamp.push_back(ofGetFrameNum());
+    
+    gui.setup();
+    gui.add(typeSpeedMin.setup("TS Min", 0, 0, 100));
+    gui.add(typeSpeedMax.setup("TS Max", 60, 0, 500));
     
 }
 
@@ -33,10 +18,22 @@ void ofApp::setup(){
 void ofApp::update(){
     unit = 3;
 //    w = 14 * unit;
-//    h = 20 * unit;
-    leading = 5 * unit;
-    w = ofMap(mouseX, 0, ofGetWidth(), 14 * unit, 50 * unit);
-    h = ofMap(mouseY, 0, ofGetHeight(), 20 * unit, 150 * unit);
+    h = 20 * unit;
+    leading = 3 * unit;
+    space = 14 * unit;
+    
+    w.clear();
+    for(int i = 0; i < letters.size(); i++){
+        if(timeStamp.size() < 1){
+            timeStamp.clear();
+            timeStamp.push_back(ofGetFrameNum());
+        }
+        float typeSpeed = timeStamp[i] - timeStamp[i-1];
+        float width =  ofMap(ofClamp(typeSpeed, typeSpeedMin, typeSpeedMax), typeSpeedMin, typeSpeedMax,  40, 436);
+        w.push_back(width);
+        //        cout << "current: " << timeStamp[i] << " prev: " << timeStamp[i-1] << " speed: " << typeSpeed << endl;
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -44,18 +41,23 @@ void ofApp::draw(){
     ofSetColor(15);
     ofSetBackgroundColor(240);
     ofSetLineWidth(3);
+    gui.draw();
     
-    ofTranslate(50,50);
+    float padding = 100;
+    ofTranslate(padding,padding);
+    
+    xPos = 0;
+    yPos = 0;
     
     for (int i =0; i < letters.size(); i++){
-        t.draw(letters[i], 0, 0, w, h);
-        ofTranslate(w + leading, 0);
-
+        t.draw(letters[i], xPos, yPos, w[i], h);
+        xPos += w[i] + leading;
+        if (xPos > ofGetWidth() - padding * 3){
+            xPos = 0;
+            yPos += h * 1.5;
+        }
     }
     
-//    t.draw("O", 0, 0, w, h);
-//    ofTranslate(w + leading, 0);
-//    t.draw("H", 0, 0, w, h);
 
 }
 
@@ -66,7 +68,94 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+    timeStamp.push_back(ofGetFrameNum());
 
+    if (key == 'a') {
+        letters.push_back("A");
+    }
+    if (key == 'b') {
+        letters.push_back("B");
+    }
+    if (key == 'c') {
+        letters.push_back("C");
+    }
+    if (key == 'd') {
+        letters.push_back("D");
+    }
+    if (key == 'e') {
+        letters.push_back("E");
+    }
+    if (key == 'f') {
+        letters.push_back("F");
+    }
+    if (key == 'g') {
+        letters.push_back("G");
+    }
+    if (key == 'h') {
+        letters.push_back("H");
+    }
+    if (key == 'i') {
+        letters.push_back("I");
+    }
+    if (key == 'j') {
+        letters.push_back("J");
+    }
+    if (key == 'k') {
+        letters.push_back("K");
+    }
+    if (key == 'l') {
+        letters.push_back("L");
+    }
+    if (key == 'm') {
+        letters.push_back("M");
+    }
+    if (key == 'n') {
+        letters.push_back("N");
+    }
+    if (key == 'o') {
+        letters.push_back("O");
+    }
+    if (key == 'p') {
+        letters.push_back("P");
+    }
+    if (key == 'q') {
+        letters.push_back("Q");
+    }
+    if (key == 'r') {
+        letters.push_back("R");
+    }
+    if (key == 's') {
+        letters.push_back("S");
+    }
+    if (key == 't') {
+        letters.push_back("T");
+    }
+    if (key == 'u') {
+        letters.push_back("U");
+    }
+    if (key == 'v') {
+        letters.push_back("V");
+    }
+    if (key == 'w') {
+        letters.push_back("W");
+    }
+    if (key == 'x') {
+        letters.push_back("X");
+    }
+    if (key == 'y') {
+        letters.push_back("Y");
+    }
+    if (key == 'z') {
+        letters.push_back("Z");
+    }
+    if (key == 127 && letters.size() > 0) {
+        letters.erase(letters.end()-1);
+    }
+    if (key == 32) {
+        letters.push_back("32");
+    }
+
+    cout << key << endl;
 }
 
 //--------------------------------------------------------------
