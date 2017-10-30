@@ -52,7 +52,7 @@ public:
     
     bool bIsLine;
     bool bIsMultiLine;
-
+    
     // if line!
     letterPoint pts[2];
     
@@ -63,31 +63,49 @@ public:
     
     void draw(float x, float y, float w, float h, float multiLine){
         
+        float lineWidth = 2;
+        float lineWidthStrong = 10;
+        
         if (bIsLine){
             
             ofPoint ptA = pts[0].getPointFor(x,y,w,h);
             ofPoint ptB = pts[1].getPointFor(x,y,w,h);
-
-            if (bIsMultiLine){
-                for (int i = 0; i < multiLine; i++){
-                    ofPushMatrix();
-                        ofTranslate(i * 5, 0);
-                        ofLine(ptA, ptB);
-                    ofPopMatrix();
-                }
-            }else {
-                ofLine(ptA, ptB);
-            }
-          
-        } else {
             
+            if (bIsMultiLine && multiLine > 1){
+                
+                for(int i = 0; i < multiLine; i++){
+                    float tempLw = ofMap(i, 0, multiLine, 5, 1);
+                    ofSetLineWidth(tempLw);
+                    
+                    ofPushStyle();
+                    ofPushMatrix();
+                    // ofScale(0, i * h*0.005);
+                    ofTranslate(i * (w * 0.15), 0);
+                    ofLine(ptA, ptB);
+                    ofPopMatrix();
+                    
+                    ofPopStyle();
+                }
+                
+            }else {
+                ofPushStyle();
+                ofSetLineWidth(lineWidth);
+                ofLine(ptA, ptB);
+                ofPopStyle();
+            }
+        }
+        
+        else {
             ofPoint pt = center.getPointFor(x,y,w,h);
             ofPolyline line;
             for (int i = 0; i < 30; i++){
                 float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
                 line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
             }
+            ofPushStyle();
+            ofSetLineWidth(lineWidth);
             line.draw();
+            ofPopStyle();
         }
         
     }
@@ -101,6 +119,7 @@ public:
     vector < letterShape > shapes;
     float kerning;
     void draw( float x, float y, float w, float h, int multiLine){
+        
         
         for (int i = 0; i < shapes.size(); i++){
             shapes[i].draw(x + (w * kerning),y,w,h, multiLine);
@@ -148,7 +167,7 @@ public:
     letter X;
     letter Y;
     letter Z;
-    letter space;
-
+    
     
 };
+

@@ -6,7 +6,8 @@ void ofApp::setup(){
     t.setup();
     
     // type basics
-    unit = 3;
+    unit = 5;
+    w = 14 * unit;
     h = 20 * unit;
     lineHeight = h * 1.5;
     leading = 3.5 * unit;
@@ -18,8 +19,88 @@ void ofApp::setup(){
     //layout
     ofSetColor(15);
     ofSetBackgroundColor(240);
-    ofSetLineWidth(2);
+//    ofSetLineWidth(2);
     padding = 100;
+    
+//    letters.push_back("A");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("B");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("C");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("D");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("E");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("F");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("G");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("H");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("I");
+//        blanks.push_back("null");
+//        lines.push_back("newLine");
+//    letters.push_back("J");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("K");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("L");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("M");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("N");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("O");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("P");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("Q");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("R");
+//        blanks.push_back("null");
+//        lines.push_back("newLine");
+//    letters.push_back("S");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("T");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("U");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("V");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("W");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("X");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("Y");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+//    letters.push_back("Z");
+//        blanks.push_back("null");
+//        lines.push_back("null");
+
     
 
 }
@@ -30,24 +111,27 @@ void ofApp::update(){
     // type manipulation
     
     width.clear();
+    float widthTemp = w;
     for(int i = 0; i < letters.size(); i++){
  
-        w = 14 * unit;
         if(i % 6 == 1){
-            w = w * 1.61;
+            widthTemp = widthTemp * 1.61;
         }
-        if(i % 9 == 1){
-            w = w * 2.61;
+        if(i % 4 == 1){
+            widthTemp = widthTemp * 2.61;
+        }else {
+            widthTemp = w;
         }
-        width.push_back(w);
+        width.push_back(widthTemp);
     }
     
     multiLine.clear();
     int multiLineTemp = 1;
     for(int i = 0; i < letters.size(); i++){
-       
-        if(i % 3 == 1){
-            multiLineTemp = 3;
+        if(i % 2 == 0){
+            multiLineTemp = 5;
+        }else {
+            multiLineTemp = 1;
         }
         multiLine.push_back(multiLineTemp);
     }
