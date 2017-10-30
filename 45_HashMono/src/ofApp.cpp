@@ -6,8 +6,7 @@ void ofApp::setup(){
     t.setup();
     
     // type basics
-    unit = 5;
-    w = 14 * unit;
+    unit = 6;
     h = 20 * unit;
     lineHeight = h * 1.5;
     leading = 3.5 * unit;
@@ -19,90 +18,9 @@ void ofApp::setup(){
     //layout
     ofSetColor(15);
     ofSetBackgroundColor(240);
-//    ofSetLineWidth(2);
+    ofSetLineWidth(2);
     padding = 100;
     
-//    letters.push_back("A");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("B");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("C");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("D");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("E");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("F");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("G");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("H");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("I");
-//        blanks.push_back("null");
-//        lines.push_back("newLine");
-//    letters.push_back("J");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("K");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("L");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("M");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("N");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("O");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("P");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("Q");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("R");
-//        blanks.push_back("null");
-//        lines.push_back("newLine");
-//    letters.push_back("S");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("T");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("U");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("V");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("W");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("X");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("Y");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-//    letters.push_back("Z");
-//        blanks.push_back("null");
-//        lines.push_back("null");
-
-    
-
 }
 
 //--------------------------------------------------------------
@@ -111,18 +29,16 @@ void ofApp::update(){
     // type manipulation
     
     width.clear();
-    float widthTemp = w;
     for(int i = 0; i < letters.size(); i++){
- 
+        
+        w = 14 * unit;
         if(i % 6 == 1){
-            widthTemp = widthTemp * 1.61;
+            w = w * 1.61;
         }
         if(i % 4 == 1){
-            widthTemp = widthTemp * 2.61;
-        }else {
-            widthTemp = w;
+            w = w * 2.61;
         }
-        width.push_back(widthTemp);
+        width.push_back(w);
     }
     
     multiLine.clear();
@@ -135,7 +51,6 @@ void ofApp::update(){
         }
         multiLine.push_back(multiLineTemp);
     }
-    
     
     // type position
     
@@ -159,7 +74,7 @@ void ofApp::update(){
             xPosTemp += width[i] + leading;
         }
         xPos.push_back(xPosTemp);
-       
+        
         if (xPosTemp > ofGetWidth() - (padding * 2)){
             lines.erase(lines.end()-1);
             lines.push_back("newLine");
@@ -172,12 +87,7 @@ void ofApp::draw(){
     ofTranslate(padding,padding);
     
     for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i],
-               xPos[i-1],
-               yPos[i],
-               width[i],
-               h,
-               multiLine[i]);
+        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i]);
     }
 }
 
@@ -331,52 +241,52 @@ void ofApp::keyReleased(int key){
         letters.push_back("Z");
         lines.push_back("null");
         blanks.push_back("null");
-
+        
     }
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::dragEvent(ofDragInfo dragInfo){
+    
 }

@@ -34,6 +34,10 @@ class ofApp : public ofBaseApp{
     float leading;
     float blank;
     
+    // animation
+    float startTime;
+    float duration;
+    
     // type manipulation
     vector < float > width;
     vector < int > multiLine;
