@@ -36,10 +36,20 @@ void ofApp::update(){
         if(i % 6 == 1){
             w = w * 1.61;
         }
-        if(i % 4 == 1){
+        if(i % 9 == 1){
             w = w * 2.61;
         }
         width.push_back(w);
+    }
+    
+    multiLine.clear();
+    int multiLineTemp = 1;
+    for(int i = 0; i < letters.size(); i++){
+       
+        if(i % 3 == 1){
+            multiLineTemp = 3;
+        }
+        multiLine.push_back(multiLineTemp);
     }
     
     
@@ -78,7 +88,12 @@ void ofApp::draw(){
     ofTranslate(padding,padding);
     
     for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h);
+        t.draw(letters[i],
+               xPos[i-1],
+               yPos[i],
+               width[i],
+               h,
+               multiLine[i]);
     }
 }
 

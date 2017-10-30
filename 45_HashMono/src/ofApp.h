@@ -36,7 +36,8 @@ class ofApp : public ofBaseApp{
     
     // type manipulation
     vector < float > width;
-    
+    vector < int > multiLine;
+
     // type position
     vector < string > letters;
     vector < string > blanks;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#define LETTERARGUMENTS x, y, width, height
+#define LETTERARGUMENTS x, y, width, height, multiLine
 
 class letterPoint {
     
@@ -51,7 +51,8 @@ class letterShape {
 public:
     
     bool bIsLine;
-    
+    bool bIsMultiLine;
+
     // if line!
     letterPoint pts[2];
     
@@ -60,15 +61,24 @@ public:
     float radius;
     float startAngle;
     
-    void draw(float x, float y, float w, float h){
+    void draw(float x, float y, float w, float h, float multiLine){
         
         if (bIsLine){
             
             ofPoint ptA = pts[0].getPointFor(x,y,w,h);
             ofPoint ptB = pts[1].getPointFor(x,y,w,h);
 
-            ofLine(ptA, ptB);
-
+            if (bIsMultiLine){
+                for (int i = 0; i < multiLine; i++){
+                    ofPushMatrix();
+                        ofTranslate(i * 5, 0);
+                        ofLine(ptA, ptB);
+                    ofPopMatrix();
+                }
+            }else {
+                ofLine(ptA, ptB);
+            }
+          
         } else {
             
             ofPoint pt = center.getPointFor(x,y,w,h);
@@ -90,10 +100,10 @@ public:
     
     vector < letterShape > shapes;
     float kerning;
-    void draw( float x, float y, float w, float h){
+    void draw( float x, float y, float w, float h, int multiLine){
         
         for (int i = 0; i < shapes.size(); i++){
-            shapes[i].draw(x + (w * kerning),y,w,h);
+            shapes[i].draw(x + (w * kerning),y,w,h, multiLine);
         }
         
     }
@@ -109,7 +119,8 @@ public:
               float x,
               float y,
               float width,
-              float height);
+              float height,
+              int multiLine);
     
     letter A;
     letter B;
