@@ -6,11 +6,15 @@ void ofApp::setup(){
     t.setup();
     
     // type basics
-    unit = 6;
+    unit = 3;
     h = 20 * unit;
     lineHeight = h * 1.5;
     leading = 3.5 * unit;
     blank = 14 * unit;
+    
+    // animation
+    startTime = ofGetElapsedTimef();
+    duration = 2;
     
     // type position
     lines.push_back("null");
@@ -26,26 +30,49 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    // animation
+    float elapsedTime = ofGetElapsedTimef() - startTime;
+    float pct = elapsedTime / duration;
+    pct = powf(pct, .7);
+            if (pct > 1){
+               pct = 1;
+            }
+    
     // type manipulation
     
     width.clear();
     for(int i = 0; i < letters.size(); i++){
         
         w = 14 * unit;
-        if(i % 6 == 1){
+        if(i % 2 == 1){
             w = w * 1.61;
         }
-        if(i % 4 == 1){
+        if(i % 3 == 1){
             w = w * 2.61;
         }
         width.push_back(w);
     }
+//    width.clear();
+//    float wTempA = w;
+//    float wTempB = w;
+//    for(int i = 0; i < letters.size(); i++){
+//
+//        w = 14 * unit;
+//        if(i % 6 == 1){
+//            wTempB = wTempB * 1.61;
+//        }
+//        if(i % 4 == 1){
+//            wTempB = wTempB * 2.61;
+//        }
+////        width.push_back((1-pct) * wTempB + pct * wTempA);
+//        width.push_back(wTempB);
+//    }
     
     multiLine.clear();
     int multiLineTemp = 1;
     for(int i = 0; i < letters.size(); i++){
         if(i % 2 == 0){
-            multiLineTemp = 5;
+            multiLineTemp = 3;
         }else {
             multiLineTemp = 1;
         }
@@ -53,8 +80,7 @@ void ofApp::update(){
     }
     
     // type position
-    
-    yPos.clear();
+        yPos.clear();
     float yPosTemp = 0;
     for (int i = 0; i < letters.size(); i++) {
         if (lines[i] == "newLine"){
@@ -93,7 +119,8 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
+    startTime = ofGetElapsedTimef();
+
     if (key == 127 && letters.size() > 0) { //backspace
         letters.erase(letters.end()-1);
         lines.erase(lines.end()-1);
