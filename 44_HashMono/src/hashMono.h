@@ -6,11 +6,6 @@ class letterPoint {
     
 public:
     
-    // not by x, y
-    // but by x,y,w,h scale and offset factors
-    
-    // x,y,w,h
-    
     float xScale;
     float xOffset;
     
@@ -37,7 +32,6 @@ public:
         yOffset = _yOffset;
         wOffset = _wOffset;
         hOffset = _hOffset;
-        
         
     }
     

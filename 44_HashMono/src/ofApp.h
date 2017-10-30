@@ -30,9 +30,9 @@ class ofApp : public ofBaseApp{
     float unit;
     float w;
     float h;
-    float leading;
-    float space;
     float lineHeight;
+    float leading;
+    float blank;
     
     // type manipulation
     vector < float > width;

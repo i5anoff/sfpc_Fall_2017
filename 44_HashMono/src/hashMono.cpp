@@ -5,27 +5,27 @@
 //---------------------------------------------------------------
 void hashMono::setup(){
     
-    float unitX = 0.071;
-    float w1 = 1 * unitX;
-    float w2 = 2 * unitX;
-    float w3 = 3 * unitX;
-    float w4 = 4 * unitX;
-    float w5 = 5 * unitX;
-    float w6 = 6 * unitX;
-    float w7 = 7 * unitX;
-    float w10 = 10 * unitX;
-    float w12 = 12 * unitX;
+    float xUnit = 0.071;
+    float w1 = 1 * xUnit;
+    float w2 = 2 * xUnit;
+    float w3 = 3 * xUnit;
+    float w4 = 4 * xUnit;
+    float w5 = 5 * xUnit;
+    float w6 = 6 * xUnit;
+    float w7 = 7 * xUnit;
+    float w10 = 10 * xUnit;
+    float w12 = 12 * xUnit;
 
-    float unitY = 0.05;
-    float h7 = 7 * unitY;
-    float h8 = 8 * unitY;
-    float h9 = 9 * unitY;
-    float h10 = 10 * unitY;
-    float h11 = 11 * unitY;
-    float h13 = 13 * unitY;
-    float h14 = 14 * unitY;
-    float h16 = 16 * unitY;
-    float h23 = 23 * unitY;
+    float yUnit = 0.05;
+    float h7 = 7 * yUnit;
+    float h8 = 8 * yUnit;
+    float h9 = 9 * yUnit;
+    float h10 = 10 * yUnit;
+    float h11 = 11 * yUnit;
+    float h13 = 13 * yUnit;
+    float h14 = 14 * yUnit;
+    float h16 = 16 * yUnit;
+    float h23 = 23 * yUnit;
 
     float r1 =  15;
     float r2 =  20;
