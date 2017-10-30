@@ -2,6 +2,7 @@
 
 #include "hashMono.h"
 
+
 //---------------------------------------------------------------
 void hashMono::setup(){
     
@@ -770,85 +771,85 @@ void hashMono::update(){
 //---------------------------------------------------------------
 void hashMono::draw(string letter, float x, float y, float width, float height){
     if (letter == "A") {
-        A.draw(x, y, width, height);
+        A.draw(LETTERARGUMENTS);
     }
     if (letter == "B") {
-        B.draw(x, y, width, height);
+        B.draw(LETTERARGUMENTS);
     }
     if (letter == "C") {
-        C.draw(x, y, width, height);
+        C.draw(LETTERARGUMENTS);
     }
     if (letter == "D") {
-        D.draw(x, y, width, height);
+        D.draw(LETTERARGUMENTS);
     }
     if (letter == "E") {
-        E.draw(x, y, width, height);
+        E.draw(LETTERARGUMENTS);
     }
     if (letter == "F") {
-        F.draw(x, y, width, height);
+        F.draw(LETTERARGUMENTS);
     }
     if (letter == "G") {
-        G.draw(x, y, width, height);
+        G.draw(LETTERARGUMENTS);
     }
     if (letter == "H") {
-        H.draw(x, y, width, height);
+        H.draw(LETTERARGUMENTS);
     }
     if (letter == "I") {
-        I.draw(x, y, width, height);
+        I.draw(LETTERARGUMENTS);
     }
     if (letter == "J") {
-        J.draw(x, y, width, height);
+        J.draw(LETTERARGUMENTS);
     }
     if (letter == "K") {
-        K.draw(x, y, width, height);
+        K.draw(LETTERARGUMENTS);
     }
     if (letter == "L") {
-        L.draw(x, y, width, height);
+        L.draw(LETTERARGUMENTS);
     }
     if (letter == "M") {
-        M.draw(x, y, width, height);
+        M.draw(LETTERARGUMENTS);
     }
     if (letter == "N") {
-        N.draw(x, y, width, height);
+        N.draw(LETTERARGUMENTS);
     }
     if (letter == "O") {
-        O.draw(x, y, width, height);
+        O.draw(LETTERARGUMENTS);
     }
     if (letter == "P") {
-        P.draw(x, y, width, height);
+        P.draw(LETTERARGUMENTS);
     }
     if (letter == "Q") {
-        Q.draw(x, y, width, height);
+        Q.draw(LETTERARGUMENTS);
     }
     if (letter == "R") {
-        R.draw(x, y, width, height);
+        R.draw(LETTERARGUMENTS);
     }
     if (letter == "S") {
-        S.draw(x, y, width, height);
+        S.draw(LETTERARGUMENTS);
     }
     if (letter == "T") {
-        T.draw(x, y, width, height);
+        T.draw(LETTERARGUMENTS);
     }
     if (letter == "U") {
-        U.draw(x, y, width, height);
+        U.draw(LETTERARGUMENTS);
     }
     if (letter == "V") {
-        V.draw(x, y, width, height);
+        V.draw(LETTERARGUMENTS);
     }
     if (letter == "W") {
-        W.draw(x, y, width, height);
+        W.draw(LETTERARGUMENTS);
     }
     if (letter == "X") {
-        X.draw(x, y, width, height);
+        X.draw(LETTERARGUMENTS);
     }
     if (letter == "Y") {
-        Y.draw(x, y, width, height);
+        Y.draw(LETTERARGUMENTS);
     }
     if (letter == "Z") {
-        Z.draw(x, y, width, height);
+        Z.draw(LETTERARGUMENTS);
     }
     if (letter == "32") {
-        space.draw(x, y, width, height);
+        space.draw(LETTERARGUMENTS);
     }
 
 }

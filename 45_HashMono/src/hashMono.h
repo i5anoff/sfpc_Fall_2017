@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#define LETTERARGUMENTS x, y, width, height
 
 class letterPoint {
     
@@ -104,7 +105,11 @@ public:
     
     void setup();
     void update();
-    void draw(string letter, float x, float y, float width, float height);
+    void draw(string letter,
+              float x,
+              float y,
+              float width,
+              float height);
     
     letter A;
     letter B;
