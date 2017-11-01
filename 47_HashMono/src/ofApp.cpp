@@ -7,17 +7,11 @@ void ofApp::setup(){
     
     // type basics
     unit = 3;
+    w = 14 * unit;
     h = 20 * unit;
     lineHeight = h * 1.5;
     leading = 3.5 * unit;
     blank = 14 * unit;
-    
-    // animation
-    startTime = ofGetElapsedTimef();
-    duration = 2;
-    
-    //type manipulation
-    randSeed = 1;
     
     // type position
     lines.push_back("null");
@@ -33,90 +27,51 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    // animation
-    float elapsedTime = ofGetElapsedTimef() - startTime;
-    float pct = elapsedTime / duration;
-    pct = powf(pct, .7);
-            if (pct > 1){
-               pct = 1;
-            }
-    
     // type manipulation
-    ofSeedRandom(randSeed);
+    ////////////////////////////////////////////////////////////
     
     width.clear();
-    int rand3 = ofRandom(1, 5);
-    int rand4 = ofRandom(1, 5);
+    float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
         
-        w = 14 * unit;
-        if(i % rand3 == 1){
-            w = w * 1.61;
-        }
-        if(i % rand4 == 1){
-            w = w * 2.61;
-        }
-        width.push_back(w);
+        if(i % 5 == 1)  wTemp *= 1.61;
+        if(i % 6 == 1)  wTemp *= 2.61;
+        width.push_back(wTemp);
     }
-//    width.clear();
-//    float wTempA = w;
-//    float wTempB = w;
-//    for(int i = 0; i < letters.size(); i++){
-//
-//        w = 14 * unit;
-//        if(i % 6 == 1){
-//            wTempB = wTempB * 1.61;
-//        }
-//        if(i % 4 == 1){
-//            wTempB = wTempB * 2.61;
-//        }
-////        width.push_back((1-pct) * wTempB + pct * wTempA);
-//        width.push_back(wTempB);
-//    }
     
     multiLine.clear();
     int multiLineTemp = 1;
-    int rand1 = ofRandom(1, 5);
-    int rand2 = ofRandom(1, 5);
     for(int i = 0; i < letters.size(); i++){
-        if(i % rand1 == 0){
-            multiLineTemp = 3;
-        }else if (i % rand2 == 0 ){
-            multiLineTemp = ofRandom(5, 15);
-        }
-        else {
-            multiLineTemp = 1;
-        }
+        
+        if(i % 3 == 0)          multiLineTemp = 3;
+        else if (i % 4 == 0 )   multiLineTemp = multiLineTemp = 5;
+        else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
     }
     
     // type position
-        yPos.clear();
+    ////////////////////////////////////////////////////////////
+
+    yPos.clear();
     float yPosTemp = 0;
     for (int i = 0; i < letters.size(); i++) {
-        if (lines[i] == "newLine"){
-            yPosTemp += lineHeight;
-        }
+        
+        if (lines[i] == "newLine")  yPosTemp += lineHeight;
         yPos.push_back(yPosTemp);
     }
     
     xPos.clear();
     float xPosTemp = 0;
     for (int i = 0; i < letters.size(); i++) {
-        if (blanks[i] == "blank"){
-            xPosTemp += leading + blank;
-        }if (lines[i+1] == "newLine"){
-            xPosTemp = 0;
-        }else {
-            xPosTemp += width[i] + leading;
-        }
+        
+        if (blanks[i] == "blank")       xPosTemp += leading + blank;
+        if (lines[i+1] == "newLine")    xPosTemp = 0;
+        else                            xPosTemp += width[i] + leading;
         xPos.push_back(xPosTemp);
         
         if (xPosTemp > ofGetWidth() - (padding * 2)){
             lines.erase(lines.end()-1);
             lines.push_back("newLine");
-//            lines.insert(letters[i], "newLine");
-//            lines.insert(letters[i], "newLine");
         }
     }
 }
@@ -132,8 +87,6 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    startTime = ofGetElapsedTimef();
-    randSeed += 1;
 
     if (key == 127 && letters.size() > 0) { //backspace
         letters.erase(letters.end()-1);
