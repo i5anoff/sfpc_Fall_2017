@@ -6,7 +6,7 @@ void ofApp::setup(){
     t.setup();
     
     // type basics
-    unit = 3;
+    unit = 4;
     w = 14 * unit;
     h = 20 * unit;
     lineHeight = h * 1.5;

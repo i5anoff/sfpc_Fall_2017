@@ -66,28 +66,31 @@ public:
         float lineWidth = 2;
         float lineWidthStrong = 10;
         
-  
+        
         if (bIsLine){
             
             ofPoint ptA = pts[0].getPointFor(x,y,w,h);
             ofPoint ptB = pts[1].getPointFor(x,y,w,h);
             
             if (bIsMultiLine && multiLine > 1){
-
+                
                 for(int i = 0; i < multiLine; i++){
                     ofPushStyle();
-                        float tempLw = ofMap(i, 0, multiLine, 5, 1);
+                        float tempLw = ofMap(i, 0, multiLine, 10, 2);
                         ofSetLineWidth(tempLw);
+                        ofPushMatrix();
+                            ofTranslate(i * (w * 0.15), 0);
+                            ofLine(ptA, ptB);
+                        ofPopMatrix();
                     ofPopStyle();
-                    ofPushMatrix();
-                        ofTranslate(i * (w * 0.15), 0);
-                        ofLine(ptA, ptB);
-                    ofPopMatrix();
                 }
                 
             }else {
-                ofSetLineWidth(lineWidth);
-                ofLine(ptA, ptB);
+                ofPushStyle();
+                    ofSetLineWidth(lineWidth);
+                    ofLine(ptA, ptB);
+                ofPopStyle();
+
             }
         }
         
@@ -98,10 +101,10 @@ public:
                 float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
                 line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
             }
-            ofPushStyle;
+            ofPushStyle();
                 ofSetLineWidth(lineWidth);
                 line.draw();
-            ofPopStyle;
+            ofPopStyle();
         }
     }
     
