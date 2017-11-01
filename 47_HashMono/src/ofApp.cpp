@@ -34,8 +34,9 @@ void ofApp::update(){
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % 5 == 1)  wTemp *= 1.61;
-        if(i % 6 == 1)  wTemp *= 2.61;
+        if(i % 6 == 1)          wTemp = w * 1.61;
+        else if(i % 4 == 1)     wTemp = w * 2.61;
+        else                    wTemp = w;
         width.push_back(wTemp);
     }
     
@@ -44,7 +45,6 @@ void ofApp::update(){
     for(int i = 0; i < letters.size(); i++){
         
         if(i % 3 == 0)          multiLineTemp = 3;
-        else if (i % 4 == 0 )   multiLineTemp = multiLineTemp = 5;
         else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
     }

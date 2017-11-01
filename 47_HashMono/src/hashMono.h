@@ -76,22 +76,16 @@ public:
 
                 for(int i = 0; i < multiLine; i++){
                     ofPushStyle();
-                    float tempLw = ofMap(i, 0, multiLine, 5, 1);
-                    ofSetLineWidth(tempLw);
-                    if(i > 1){
-                        ofSetColor(36,177,231);
-                    }
-                    ofPushMatrix();
-//                     ofScale(0, i * h*0.005);
-                    ofTranslate(i * (w * 0.15), 0);
-                    ofLine(ptA, ptB);
-                    ofPopMatrix();
-                    
+                        float tempLw = ofMap(i, 0, multiLine, 5, 1);
+                        ofSetLineWidth(tempLw);
                     ofPopStyle();
+                    ofPushMatrix();
+                        ofTranslate(i * (w * 0.15), 0);
+                        ofLine(ptA, ptB);
+                    ofPopMatrix();
                 }
                 
             }else {
-                ofPushStyle();
                 ofSetLineWidth(lineWidth);
                 ofLine(ptA, ptB);
             }
@@ -104,12 +98,11 @@ public:
                 float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
                 line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
             }
-            ofPushStyle();
-            ofSetLineWidth(lineWidth);
-            line.draw();
-            ofPopStyle();
+            ofPushStyle;
+                ofSetLineWidth(lineWidth);
+                line.draw();
+            ofPopStyle;
         }
-        ofPopMatrix();
     }
     
 };
