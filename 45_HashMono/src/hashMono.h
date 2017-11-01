@@ -66,20 +66,23 @@ public:
         float lineWidth = 2;
         float lineWidthStrong = 10;
         
+  
         if (bIsLine){
             
             ofPoint ptA = pts[0].getPointFor(x,y,w,h);
             ofPoint ptB = pts[1].getPointFor(x,y,w,h);
             
             if (bIsMultiLine && multiLine > 1){
-                
+
                 for(int i = 0; i < multiLine; i++){
+                    ofPushStyle();
                     float tempLw = ofMap(i, 0, multiLine, 5, 1);
                     ofSetLineWidth(tempLw);
-                    
-                    ofPushStyle();
+                    if(i > 1){
+                        ofSetColor(36,177,231);
+                    }
                     ofPushMatrix();
-                    // ofScale(0, i * h*0.005);
+//                     ofScale(0, i * h*0.005);
                     ofTranslate(i * (w * 0.15), 0);
                     ofLine(ptA, ptB);
                     ofPopMatrix();
@@ -91,7 +94,6 @@ public:
                 ofPushStyle();
                 ofSetLineWidth(lineWidth);
                 ofLine(ptA, ptB);
-                ofPopStyle();
             }
         }
         
@@ -107,7 +109,7 @@ public:
             line.draw();
             ofPopStyle();
         }
-        
+        ofPopMatrix();
     }
     
 };

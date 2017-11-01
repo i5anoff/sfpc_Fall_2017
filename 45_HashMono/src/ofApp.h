@@ -39,6 +39,7 @@ class ofApp : public ofBaseApp{
     float duration;
     
     // type manipulation
+    int randSeed;
     vector < float > width;
     vector < int > multiLine;
 

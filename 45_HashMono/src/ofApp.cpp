@@ -16,6 +16,9 @@ void ofApp::setup(){
     startTime = ofGetElapsedTimef();
     duration = 2;
     
+    //type manipulation
+    randSeed = 1;
+    
     // type position
     lines.push_back("null");
     
@@ -39,15 +42,18 @@ void ofApp::update(){
             }
     
     // type manipulation
+    ofSeedRandom(randSeed);
     
     width.clear();
+    int rand3 = ofRandom(1, 5);
+    int rand4 = ofRandom(1, 5);
     for(int i = 0; i < letters.size(); i++){
         
         w = 14 * unit;
-        if(i % 2 == 1){
+        if(i % rand3 == 1){
             w = w * 1.61;
         }
-        if(i % 3 == 1){
+        if(i % rand4 == 1){
             w = w * 2.61;
         }
         width.push_back(w);
@@ -70,10 +76,15 @@ void ofApp::update(){
     
     multiLine.clear();
     int multiLineTemp = 1;
+    int rand1 = ofRandom(1, 5);
+    int rand2 = ofRandom(1, 5);
     for(int i = 0; i < letters.size(); i++){
-        if(i % 2 == 0){
+        if(i % rand1 == 0){
             multiLineTemp = 3;
-        }else {
+        }else if (i % rand2 == 0 ){
+            multiLineTemp = ofRandom(5, 15);
+        }
+        else {
             multiLineTemp = 1;
         }
         multiLine.push_back(multiLineTemp);
@@ -104,6 +115,8 @@ void ofApp::update(){
         if (xPosTemp > ofGetWidth() - (padding * 2)){
             lines.erase(lines.end()-1);
             lines.push_back("newLine");
+//            lines.insert(letters[i], "newLine");
+//            lines.insert(letters[i], "newLine");
         }
     }
 }
@@ -120,6 +133,7 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     startTime = ofGetElapsedTimef();
+    randSeed += 1;
 
     if (key == 127 && letters.size() > 0) { //backspace
         letters.erase(letters.end()-1);
