@@ -114,20 +114,23 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     gui.draw();
+
     ofTranslate(padding,padding);
+//    ofRotateZ(-90);
+//    ofTranslate(-ofGetHeight() + padding * 2, 0);
+
+    for(int i = 0; i < letters.size(); i++){
+        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], r, dist);
+    }
     
 //    for(int i = 0; i < letters.size(); i++){
-//        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], r, dist);
+//        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
 //    }
-    
-    for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
-    }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    
     if (key == 127 && letters.size() > 0) { //backspace
         letters.erase(letters.end()-1);
         lines.erase(lines.end()-1);
