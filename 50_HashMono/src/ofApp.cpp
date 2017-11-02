@@ -6,17 +6,18 @@ void ofApp::setup(){
     t.setup();
     
     // type basics
-    unit = 9;
-    w = 14 * unit;
-    h = 20 * unit;
-    lineHeight = h * 1.5;
-    leading = 3.5 * unit;
-    blank = 14 * unit;
+    gui.add(unit.setup("unit", 5, 3, 15));
+
     
     // type position
     lines.push_back("null");
     
     //type manipulation
+    gui.add(mod1.setup("mod1", 2, 1, 20));
+    gui.add(mod2.setup("mod2", 3, 1, 20));
+    gui.add(mod3.setup("mod3", 3, 1, 20));
+    gui.add(mod4.setup("mod4", 3, 1, 20));
+
     gui.add(r.setup("rotate", 7, -360, 360));
     gui.add(dist.setup("dist", 0.0, 0.001, 0.5));
 
@@ -32,6 +33,14 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    // type basics
+    ////////////////////////////////////////////////////////////
+    w = 14 * unit;
+    h = 20 * unit;
+    lineHeight = h * 1.5;
+    leading = 3.5 * unit;
+    blank = 14 * unit;
+    
     // type manipulation
     ////////////////////////////////////////////////////////////
     
@@ -39,8 +48,8 @@ void ofApp::update(){
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % 6 == 1)          wTemp = w * 1.61;
-        else if(i % 4 == 1)     wTemp = w * 2.61;
+        if(i % mod1 == 1)          wTemp = w * 1.61;
+        else if(i % mod2 == 1)     wTemp = w * 2.61;
         else                    wTemp = w;
         width.push_back(wTemp);
     }
@@ -49,18 +58,29 @@ void ofApp::update(){
     float rTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % 5 == 1)          rTemp = -10;
-        else if(i % 3 == 1)     rTemp = 10;
+        if(i % mod3 == 1)          rTemp = -10;
+        else if(i % mod4 == 1)     rTemp = 10;
         else                    rTemp = 360;
         rotate.push_back(rTemp);
     }
     
-    multiLine.clear();
-    int multiLineTemp = 30;
+    distance.clear();
+    float dTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-//        if(i % 3 == 0)          multiLineTemp = 3;
-//        else                    multiLineTemp = 1;
+        if(i % mod3 == 1)          dTemp = 0.01;
+        else if(i % mod4 == 1)     dTemp = 0.01;
+        else                    dTemp = 0.03593;
+        distance.push_back(dTemp);
+    }
+    
+    multiLine.clear();
+    int multiLineTemp = 1;
+    for(int i = 0; i < letters.size(); i++){
+        
+        if(i % mod3 == 1)          multiLineTemp = 30;
+        else if(i % mod4 == 1)     multiLineTemp = 15;
+        else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
     }
     
@@ -96,8 +116,12 @@ void ofApp::draw(){
     gui.draw();
     ofTranslate(padding,padding);
     
+//    for(int i = 0; i < letters.size(); i++){
+//        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], r, dist);
+//    }
+    
     for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], dist);
+        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
     }
 }
 

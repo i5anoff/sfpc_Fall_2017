@@ -73,7 +73,7 @@ public:
                 
 
 
-                if (multiLine > 1 && bIsMultiLine){
+                if (bIsMultiLine){
                     
                     for(int i = 0; i < multiLine; i++){
                         ofPushStyle();

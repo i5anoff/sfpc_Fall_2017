@@ -27,7 +27,7 @@ class ofApp : public ofBaseApp{
     
     // type basics
     hashMono t;
-    float unit;
+    ofxIntSlider unit;
     float w;
     float h;
     float lineHeight;
@@ -36,10 +36,15 @@ class ofApp : public ofBaseApp{
     
     
     // type manipulation
+    ofxIntSlider mod1;
+    ofxIntSlider mod2;
+    ofxIntSlider mod3;
+    ofxIntSlider mod4;
     vector < float > width;
     vector < int > multiLine;
     ofxIntSlider r;
     vector < int > rotate;
+    vector < float > distance;
 
     ofxFloatSlider dist;
 
