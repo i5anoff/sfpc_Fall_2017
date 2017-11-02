@@ -2,21 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    t.setup();
-
-    
     gui.setup();
-    gui.add(amp.setup("amp", 1.1852, 0, 2));
-    gui.add(speed.setup("spee", 0.3025, 0.00, 2));
-    
-    gui.add(xOff.setup("xOff", 0.00, -100, 100));
-    gui.add(yOff.setup("xOff", 0.00, -100, 100));
-//        gui.add(freq.setup("freq", 0, 0, 100));
-//        gui.add(freqOffset.setup("freq offset", 0.00, 0.01, 2));
-
+    t.setup();
     
     // type basics
-    unit = 6;
+    unit = 9;
     w = 14 * unit;
     h = 20 * unit;
     lineHeight = h * 1.5;
@@ -26,93 +16,16 @@ void ofApp::setup(){
     // type position
     lines.push_back("null");
     
+    //type manipulation
+    gui.add(r.setup("rotate", 7, -360, 360));
+    gui.add(dist.setup("dist", 0.0, 0.001, 0.5));
+
+    
     //layout
     ofSetColor(15);
     ofSetBackgroundColor(240);
     ofSetLineWidth(2);
     padding = 100;
-    
-    // Prev Type
-    ////////////////////////////////////////////////////////////
-    letters.push_back("A");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("B");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("C");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("D");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("E");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("F");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("G");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("H");
-    lines.push_back("newLine");
-    blanks.push_back("null");
-    letters.push_back("I");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("J");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("K");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("L");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("M");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("N");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("O");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("P");
-    lines.push_back("newLine");
-    blanks.push_back("null");
-    letters.push_back("Q");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("R");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("S");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("T");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("U");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("V");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("W");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("X");
-    lines.push_back("newLine");
-    blanks.push_back("null");
-    letters.push_back("Y");
-    lines.push_back("null");
-    blanks.push_back("null");
-    letters.push_back("Z");
-    lines.push_back("null");
-    blanks.push_back("null");
-
     
 }
 
@@ -125,21 +38,29 @@ void ofApp::update(){
     width.clear();
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
-
-        if(i % 6 == 1)          wTemp = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)) , 0, 1, w , w * 1.61);
-        else if(i % 4 == 1)     wTemp = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)) , 0, 1, w , w * 2.61);
-        else                    wTemp = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)) , 0, 1, w * 0.61, w);
-
+        
+        if(i % 6 == 1)          wTemp = w * 1.61;
+        else if(i % 4 == 1)     wTemp = w * 2.61;
+        else                    wTemp = w;
         width.push_back(wTemp);
     }
-
-
-    multiLine.clear();
-    int multiLineTemp = 1;
+    
+    rotate.clear();
+    float rTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % 3 == 0)          multiLineTemp = (int)ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)) , 0, 1, 3 , 5);
-        else                    multiLineTemp = 1;
+        if(i % 5 == 1)          rTemp = -10;
+        else if(i % 3 == 1)     rTemp = 10;
+        else                    rTemp = 360;
+        rotate.push_back(rTemp);
+    }
+    
+    multiLine.clear();
+    int multiLineTemp = 30;
+    for(int i = 0; i < letters.size(); i++){
+        
+//        if(i % 3 == 0)          multiLineTemp = 3;
+//        else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
     }
     
@@ -175,21 +96,9 @@ void ofApp::draw(){
     gui.draw();
     ofTranslate(padding,padding);
     
-//    for(int i = 0; i < letters.size(); i++){
-//        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], xOff, yOff);
-//    }
-    
     for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i],
-               ofMap(sin(ofGetElapsedTimef()* 2), -1, 1, -1, 1),
-               ofMap(sin(ofGetElapsedTimef()* 2), -1, 1, -1, 1));
+        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], dist);
     }
-    
-    
-//            for(int i = 0; i < letters.size(); i++){
-//                t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)) , 0, 1, 3 , 5), ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)) , 0, 1, 3 , 5));
-//            }
-
 }
 
 //--------------------------------------------------------------

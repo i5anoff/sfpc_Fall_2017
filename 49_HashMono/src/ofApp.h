@@ -41,8 +41,8 @@ class ofApp : public ofBaseApp{
     
     ofxFloatSlider amp;
     ofxFloatSlider speed;
-    ofxFloatSlider xOff;
-    ofxFloatSlider yOff;
+    ofxIntSlider xOff;
+    ofxIntSlider yOff;
 
 
 

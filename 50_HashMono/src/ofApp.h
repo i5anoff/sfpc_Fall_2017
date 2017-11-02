@@ -38,12 +38,10 @@ class ofApp : public ofBaseApp{
     // type manipulation
     vector < float > width;
     vector < int > multiLine;
-    
-    ofxFloatSlider amp;
-    ofxFloatSlider speed;
-    ofxFloatSlider xOff;
-    ofxFloatSlider yOff;
+    ofxIntSlider r;
+    vector < int > rotate;
 
+    ofxFloatSlider dist;
 
 
     // type position

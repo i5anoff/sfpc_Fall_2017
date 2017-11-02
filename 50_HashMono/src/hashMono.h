@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#define LETTERARGUMENTS x, y, width, height, multiLine, xOff, yOff
+#define LETTERARGUMENTS x, y, width, height, multiLine, r, dist
 
 class letterPoint {
     
@@ -61,51 +61,61 @@ public:
     float radius;
     float startAngle;
     
-    void draw(float x, float y, float w, float h, float multiLine){
+    void draw(float x, float y, float w, float h, float multiLine, int r, float dist){
         
-        float lineWidth = 2;
-        float lineWidthStrong = 10;
+        float lineWidth = 1;
+        float lineWidthStrong = 15;
         
-        
-        if (bIsLine){
-            
-            ofPoint ptA = pts[0].getPointFor(x,y,w,h);
-            ofPoint ptB = pts[1].getPointFor(x,y,w,h);
-            
-            if (bIsMultiLine && multiLine > 1){
+            if (bIsLine){
                 
-                for(int i = 0; i < multiLine; i++){
+                ofPoint ptA = pts[0].getPointFor(x,y,w,h);
+                ofPoint ptB = pts[1].getPointFor(x,y,w,h);
+                
+
+
+                if (multiLine > 1 && bIsMultiLine){
+                    
+                    for(int i = 0; i < multiLine; i++){
+                        ofPushStyle();
+                            float tempLw = ofMap(i, 0, multiLine, 2, 0.5);
+                            ofSetLineWidth(lineWidth);
+                        if (i == 0) ofSetLineWidth(lineWidthStrong);
+                        if (i > 1) ofSetColor(120);
+                            ofPushMatrix();
+                       
+                        ofTranslate(x + w * 0.5 + i * (w * dist), y);
+//                        if (i > 0) ofScale(-i*0.15, -i*0.15);
+                        if (multiLine > 1) ofRotateZ(r*(i*0.5));
+                        ofTranslate(i * (w * dist), 0);
+                        ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
+                        
+
+                                ofLine(ptA, ptB);
+                            ofPopMatrix();
+                        ofPopStyle();
+                    }
+
+                }else {
                     ofPushStyle();
-                    float tempLw = ofMap(i, 0, multiLine, 5, 2);
-                    ofSetLineWidth(tempLw);
-                    ofPushMatrix();
-                    ofTranslate(i * (w * 0.15), 0);
-                    ofLine(ptA, ptB);
-                    ofPopMatrix();
+                        ofSetLineWidth(lineWidth);
+                        ofLine(ptA, ptB);
                     ofPopStyle();
+
                 }
-                
-            }else {
+            }
+
+            else {
+                ofPoint pt = center.getPointFor(x,y,w,h);
+                ofPolyline line;
+                for (int i = 0; i < 30; i++){
+                    float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
+                    line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
+                }
                 ofPushStyle();
-                ofSetLineWidth(lineWidth);
-                ofLine(ptA, ptB);
+                    ofSetLineWidth(lineWidth);
+                    line.draw();
                 ofPopStyle();
-                
             }
-        }
-        
-        else {
-            ofPoint pt = center.getPointFor(x,y,w,h);
-            ofPolyline line;
-            for (int i = 0; i < 30; i++){
-                float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
-                line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
-            }
-            ofPushStyle();
-            ofSetLineWidth(lineWidth);
-            line.draw();
-            ofPopStyle();
-        }
     }
     
 };
@@ -116,14 +126,11 @@ public:
     
     vector < letterShape > shapes;
     float kerning;
-    void draw( float x, float y, float w, float h, int multiLine, float xOff, float yOff){
+    void draw( float x, float y, float w, float h, int multiLine, int r, float dist){
         
         
         for (int i = 0; i < shapes.size(); i++){
-            ofPushMatrix();
-//                ofTranslate( i* xOff,i* yOff);
-                shapes[i].draw(x + (w * kerning) + i* xOff,y + i* yOff,w,h, multiLine);
-            ofPopMatrix();
+            shapes[i].draw(x + (w * kerning),y,w,h, multiLine, r, dist);
         }
         
     }
@@ -141,8 +148,8 @@ public:
               float width,
               float height,
               int multiLine,
-              float xOff,
-              float yOff);
+              int r,
+              float dist);
     
     letter A;
     letter B;

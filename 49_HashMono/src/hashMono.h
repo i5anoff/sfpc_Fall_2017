@@ -61,9 +61,9 @@ public:
     float radius;
     float startAngle;
     
-    void draw(float x, float y, float w, float h, float multiLine){
+    void draw(float x, float y, float w, float h, float multiLine, float xOff, float yOff){
         
-        float lineWidth = 2;
+        float lineWidth = 3;
         float lineWidthStrong = 10;
         
         
@@ -76,12 +76,12 @@ public:
                 
                 for(int i = 0; i < multiLine; i++){
                     ofPushStyle();
-                    float tempLw = ofMap(i, 0, multiLine, 5, 2);
-                    ofSetLineWidth(tempLw);
+                        float tempLw = ofMap(i, 0, multiLine, 8, 2);
+                        ofSetLineWidth(tempLw);
                     ofPushMatrix();
-                    ofTranslate(i * (w * 0.15), 0);
-                    ofLine(ptA, ptB);
-                    ofPopMatrix();
+                        ofTranslate(i * (w * 0.25), 0);
+                        ofLine(ptA, ptB);
+                        ofPopMatrix();
                     ofPopStyle();
                 }
                 
@@ -103,7 +103,10 @@ public:
             }
             ofPushStyle();
             ofSetLineWidth(lineWidth);
+            ofPushMatrix();
+            ofTranslate(xOff, yOff);
             line.draw();
+            ofPopMatrix();
             ofPopStyle();
         }
     }
@@ -122,7 +125,7 @@ public:
         for (int i = 0; i < shapes.size(); i++){
             ofPushMatrix();
 //                ofTranslate( i* xOff,i* yOff);
-                shapes[i].draw(x + (w * kerning) + i* xOff,y + i* yOff,w,h, multiLine);
+            shapes[i].draw(x + (w * kerning), y, w, h, multiLine, xOff, yOff);
             ofPopMatrix();
         }
         
