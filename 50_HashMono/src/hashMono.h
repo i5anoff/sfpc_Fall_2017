@@ -71,27 +71,42 @@ public:
                 ofPoint ptA = pts[0].getPointFor(x,y,w,h);
                 ofPoint ptB = pts[1].getPointFor(x,y,w,h);
                 
-
-
+                ofPolyline lineTemp;
+                lineTemp.addVertex( ptA );
+                lineTemp.addVertex( ptB );
+                
+                ofPolyline lineRsTemp = lineTemp.getResampledBySpacing(2);
+                ofPolyline lineRs;
+                
                 if (bIsMultiLine){
-                    
                     for(int i = 0; i < multiLine; i++){
+                        
+                        lineRs.clear();
+                        for (int j = 0; j < lineRsTemp.size(); j++){
+                            
+                            float noise = 0;
+                            if (i > 1)  noise = ofMap(ofNoise(j*0.05, ofGetElapsedTimef()*0.5),
+                                                      0, 1, 0, i*0.25);
+                            lineRs.addVertex(lineRsTemp[j].x + noise, lineRsTemp[j].y);
+                        }
+                
+                        
+                        
                         ofPushStyle();
                             float tempLw = ofMap(i, 0, multiLine, 2, 0.5);
                             ofSetLineWidth(lineWidth);
-                        if (i == 0) ofSetLineWidth(lineWidthStrong);
-                        if (i > 1) ofSetColor(120);
-                            ofPushMatrix();
-                       
-                        ofTranslate(x + w * 0.5 + i * (w * dist), y);
-//                        if (i > 0) ofScale(-i*0.15, -i*0.15);
-                        if (multiLine > 1) ofRotateZ(r*(i*0.5));
-                        ofTranslate(i * (w * dist), 0);
-                        ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
+                            if (i == 0) ofSetLineWidth(lineWidthStrong);
+                            if (i > 1) ofSetColor(120);
                         
-
-                                ofLine(ptA, ptB);
-                            ofPopMatrix();
+                        ofPushMatrix();
+                            ofTranslate(x + w * 0.5 + i * (w * dist), y);
+                            if (multiLine > 1) ofRotateZ(r*(i*0.5));
+                            ofTranslate(i * (w * dist), 0);
+                            ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
+                        
+                        lineRs.draw();
+//                            ofLine(ptA, ptB);
+                        ofPopMatrix();
                         ofPopStyle();
                     }
 
