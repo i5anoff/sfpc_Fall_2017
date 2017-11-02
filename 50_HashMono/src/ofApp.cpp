@@ -54,25 +54,47 @@ void ofApp::update(){
         width.push_back(wTemp);
     }
     
-    rotate.clear();
-    float rTemp = 0;
+//    rotate.clear(); //feathers
+//    float rTemp = 0;
+//    for(int i = 0; i < letters.size(); i++){
+//
+//        if(i % mod3 == 1)          rTemp = -10;
+//        else if(i % mod4 == 1)     rTemp = 10;
+//        else                    rTemp = 360;
+//        rotate.push_back(rTemp);
+//    }
+    
+    //    distance.clear(); // feathers
+    //    float dTemp = 0;
+    //    for(int i = 0; i < letters.size(); i++){
+    //
+    //        if(i % mod3 == 1)          dTemp = 0.01;
+    //        else if(i % mod4 == 1)     dTemp = 0.01;
+    //        else                    dTemp = 0.03593;
+    //        distance.push_back(dTemp);
+    //
+    
+    rotate.clear(); //50s
+    float rTemp = 360;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % mod3 == 1)          rTemp = -10;
-        else if(i % mod4 == 1)     rTemp = 10;
-        else                    rTemp = 360;
+//        if(i % mod3 == 1)          rTemp = -10;
+//        else if(i % mod4 == 1)     rTemp = 10;
+//        else                    rTemp = 360;
         rotate.push_back(rTemp);
     }
     
-    distance.clear();
+    distance.clear(); // 50s
     float dTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % mod3 == 1)          dTemp = 0.01;
-        else if(i % mod4 == 1)     dTemp = 0.01;
-        else                    dTemp = 0.03593;
+        if(i % mod3 == 1)          dTemp = 0.013475;
+        else if(i % mod4 == 1)     dTemp = 0.00699;
+//        else                    dTemp = 0.00599;
         distance.push_back(dTemp);
     }
+    
+
     
     multiLine.clear();
     int multiLineTemp = 1;
@@ -116,16 +138,15 @@ void ofApp::draw(){
     gui.draw();
 
     ofTranslate(padding,padding);
-//    ofRotateZ(-90);
-//    ofTranslate(-ofGetHeight() + padding * 2, 0);
 
-    for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], r, dist);
-    }
-    
 //    for(int i = 0; i < letters.size(); i++){
-//        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
+//        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], r, dist);
 //    }
+    
+    
+    for(int i = 0; i < letters.size(); i++){
+        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
+    }
 }
 
 //--------------------------------------------------------------
