@@ -12,6 +12,9 @@ void ofApp::setup(){
     // type position
     lines.push_back("null");
     
+    // animation
+    patOff = 0;
+    
     //type manipulation
     gui.add(patW1.setup("patW1", 1, 1, 20));
     gui.add(patW2.setup("patW2", 3, 1, 20));
@@ -51,8 +54,8 @@ void ofApp::update(){
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % patW1 == 1)          wTemp = w * 1.61;
-        else if(i % patW2 == 1)     wTemp = w * 2.61;
+        if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
+        else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
         else                    wTemp = w;
         width.push_back(wTemp);
     }
@@ -81,8 +84,8 @@ void ofApp::update(){
     float rTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % patMl1 == 1)          rTemp = 360;
-        else if(i % patMl2 == 1)     rTemp = r;
+        if((i + patOff) % patMl1 == 1)          rTemp = 360;
+        else if((i + patOff) % patMl2 == 1)     rTemp = r;
         else                    rTemp = 3;
         rotate.push_back(rTemp);
     }
@@ -91,7 +94,7 @@ void ofApp::update(){
     float dTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % patMl1 == 1)          dTemp = patMl1dist;
+        if((i + patOff) % patMl1 == 1)          dTemp = patMl1dist;
         else if(i % patMl2 == 1)     dTemp = -patMl2dist;
 //        else                    dTemp = 0.00599;
         distance.push_back(dTemp);
@@ -103,7 +106,7 @@ void ofApp::update(){
     int multiLineTemp = 1;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % patMl1 == 1)          multiLineTemp = 60;
+        if((i + patOff) % patMl1 == 1)          multiLineTemp = 60;
         else if(i % patMl2 == 1)     multiLineTemp = 90;
         else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
@@ -154,6 +157,8 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+    patOff = ofRandom(1,5);
     
     if (key == 127 && letters.size() > 0) { //backspace
         letters.erase(letters.end()-1);

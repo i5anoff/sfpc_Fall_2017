@@ -34,6 +34,8 @@ class ofApp : public ofBaseApp{
     float leading;
     float blank;
     
+    // animation
+    int patOff;
     
     // type manipulation
     ofxIntSlider patW1;
