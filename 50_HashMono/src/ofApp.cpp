@@ -14,12 +14,16 @@ void ofApp::setup(){
     
     // animation
     patOff = 0;
+    startTime = ofGetElapsedTimef();
+    duration = 2;
+    gui.add(amp.setup("amp", 1.1852, 0, 2));
+    gui.add(speed.setup("speed", 0.03, 0.00, 2));
     
     //type manipulation
     gui.add(patW1.setup("patW1", 1, 1, 20));
-    gui.add(patW2.setup("patW2", 3, 1, 20));
+    gui.add(patW2.setup("patW2", 2, 1, 20));
     gui.add(patMl1.setup("patMl1", 2, 1, 20));
-    gui.add(patMl2.setup("patMl2", 1, 1, 20));
+    gui.add(patMl2.setup("patMl2", 5, 1, 20));
     gui.add(patMl1dist.setup("patMl1dist", 0.015, 0.00, 1));
     gui.add(patMl2dist.setup("patMl2dist", 0.015, 0.0000, 1));
 
@@ -29,7 +33,7 @@ void ofApp::setup(){
 
     
     //layout
-    ofSetColor(15);
+//    ofSetColor(15);
     ofSetBackgroundColor(240);
     ofSetLineWidth(2);
     padding = 75;
@@ -47,18 +51,38 @@ void ofApp::update(){
     leading = 3 * unit;
     blank = 14 * unit;
     
+    // animation
+    ////////////////////////////////////////////////////////////
+    elapsedTime = ofGetElapsedTimef() - startTime;
+    pct = elapsedTime / duration;
+    pct = powf(pct, .5);
+    if (pct > 1) pct = 1;
+    
     // type manipulation
     ////////////////////////////////////////////////////////////
+    
     
     width.clear();
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
-        
+        noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)),
+                      0, 1, 0.8, 1.2);
         if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
         else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
         else                    wTemp = w;
-        width.push_back(wTemp);
+        width.push_back(wTemp * noise);
     }
+    
+    
+//    width.clear(); // with animation
+//    float wTemp = w;
+//    for(int i = 0; i < letters.size(); i++){
+//
+//        if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
+//        else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
+//        else                    wTemp = w;
+//        width.push_back((1-pct) * w + pct * wTemp);
+//    }
     
 //    rotate.clear(); //feathers
 //    float rTemp = 0;
@@ -86,7 +110,7 @@ void ofApp::update(){
         
         if((i + patOff) % patMl1 == 1)          rTemp = 360;
         else if((i + patOff) % patMl2 == 1)     rTemp = r;
-        else                    rTemp = 3;
+        else                    rTemp = r;
         rotate.push_back(rTemp);
     }
     
@@ -158,8 +182,12 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-    patOff = ofRandom(1,5);
+    // animation
+    startTime = ofGetElapsedTimef();
+//    patOff = ofRandom(1,5);
     
+    
+    // typing
     if (key == 127 && letters.size() > 0) { //backspace
         letters.erase(letters.end()-1);
         lines.erase(lines.end()-1);

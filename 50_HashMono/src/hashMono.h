@@ -65,6 +65,7 @@ public:
         
         float lineWidth = 1;
         float lineWidthStrong = 15;
+        ofSetColor(15);
         
             if (bIsLine){
                 
@@ -96,8 +97,7 @@ public:
                             float tempLw = ofMap(i, 0, multiLine, 2, 0.5);
                             ofSetLineWidth(lineWidth);
                             if (i == 0) ofSetLineWidth(lineWidthStrong);
-                            if (i > 1) ofSetColor(120);
-                        
+                            if (bIsMultiLine && i > 1) ofSetColor(140);
                         ofPushMatrix();
                             ofTranslate(x + w * 0.5 + i * (w * dist), y);
                             if (multiLine > 1) ofRotateZ(r*(i*0.5));
@@ -105,7 +105,7 @@ public:
                             ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
                         
                         lineRs.draw();
-//                            ofLine(ptA, ptB);
+
                         ofPopMatrix();
                         ofPopStyle();
                     }

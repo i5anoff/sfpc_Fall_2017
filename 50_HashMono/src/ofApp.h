@@ -36,6 +36,14 @@ class ofApp : public ofBaseApp{
     
     // animation
     int patOff;
+    float startTime;
+    float elapsedTime;
+    float duration;
+    float pct;
+    float noise;
+    ofxFloatSlider amp;
+    ofxFloatSlider speed;
+
     
     // type manipulation
     ofxIntSlider patW1;
