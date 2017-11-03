@@ -41,6 +41,7 @@ class ofApp : public ofBaseApp{
     float duration;
     float pct;
     float noise;
+    bool prevUpdate;
     ofxFloatSlider amp;
     ofxFloatSlider speed;
 
