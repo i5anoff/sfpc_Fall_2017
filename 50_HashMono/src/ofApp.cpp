@@ -15,7 +15,7 @@ void ofApp::setup(){
     // animation
     patOff = 0;
     startTime = ofGetElapsedTimef();
-    duration = 2;
+    duration =0.5;
     gui.add(amp.setup("amp", 1.1852, 0, 2));
     gui.add(speed.setup("speed", 0.03, 0.00, 2));
     
@@ -62,16 +62,32 @@ void ofApp::update(){
     ////////////////////////////////////////////////////////////
     
     
+
+    
     width.clear();
+
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
-        noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)),
-                      0, 1, 0.8, 1.2);
+        
         if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
         else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
         else                    wTemp = w;
-        width.push_back(wTemp * noise);
+        
+        width.push_back((1-pct) * widthPrev[i] + pct * wTemp);
     }
+    
+    
+    
+//    width.clear(); // with noise
+//    float wTemp = w;
+//    for(int i = 0; i < letters.size(); i++){
+//        noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)),
+//                      0, 1, 0.8, 1.2);
+//        if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
+//        else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
+//        else                    wTemp = w;
+//        width.push_back(wTemp * noise);
+//    }
     
     
 //    width.clear(); // with animation
@@ -131,7 +147,7 @@ void ofApp::update(){
     for(int i = 0; i < letters.size(); i++){
         
         if((i + patOff) % patMl1 == 1)          multiLineTemp = 60;
-        else if(i % patMl2 == 1)     multiLineTemp = 90;
+        else if(i % patMl2 == 1)     multiLineTemp = 20;
         else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
     }
@@ -161,6 +177,13 @@ void ofApp::update(){
             lines.push_back("newLine");
         }
     }
+    
+    cout <<
+    "width: " <<
+    width.size() <<
+    " width prev: " <<
+    widthPrev.size() <<
+    endl;
 }
 
 //--------------------------------------------------------------
@@ -182,6 +205,7 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
+    
     // animation
     startTime = ofGetElapsedTimef();
     patOff = ofRandom(1,5);
@@ -193,10 +217,21 @@ void ofApp::keyPressed(int key){
         lines.erase(lines.end()-1);
         blanks.erase(blanks.end()-1);
     }
+    
+    if (widthPrev.size() == 0) {
+        widthPrev.push_back(w);
+    }else{
+        widthPrev.clear();
+        
+        for (int i = 0; i < width.size(); i++) {
+            widthPrev.push_back(width[i]);
+        }
+    }
 }
-
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+
+
     
     if (key == 32) {
         blanks.erase(blanks.end()-1);

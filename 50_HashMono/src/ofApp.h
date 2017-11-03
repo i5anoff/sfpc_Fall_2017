@@ -53,6 +53,7 @@ class ofApp : public ofBaseApp{
     ofxIntSlider patMl2;
     ofxFloatSlider patMl2dist;
     vector < float > width;
+    vector < float > widthPrev;
     vector < int > multiLine;
     ofxIntSlider r;
     vector < int > rotate;
