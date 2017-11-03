@@ -6,19 +6,22 @@ void ofApp::setup(){
     t.setup();
     
     // type basics
-    gui.add(unit.setup("unit", 5, 3, 15));
+    gui.add(unit.setup("unit", 7, 3, 15));
 
     
     // type position
     lines.push_back("null");
     
     //type manipulation
-    gui.add(mod1.setup("mod1", 2, 1, 20));
-    gui.add(mod2.setup("mod2", 3, 1, 20));
-    gui.add(mod3.setup("mod3", 3, 1, 20));
-    gui.add(mod4.setup("mod4", 3, 1, 20));
+    gui.add(patW1.setup("patW1", 1, 1, 20));
+    gui.add(patW2.setup("patW2", 3, 1, 20));
+    gui.add(patMl1.setup("patMl1", 2, 1, 20));
+    gui.add(patMl2.setup("patMl2", 1, 1, 20));
+    gui.add(patMl1dist.setup("patMl1dist", 0.015, 0.00, 1));
+    gui.add(patMl2dist.setup("patMl2dist", 0.015, 0.0000, 1));
 
-    gui.add(r.setup("rotate", 7, -360, 360));
+
+    gui.add(r.setup("rotate", 0, -360, 360));
     gui.add(dist.setup("dist", 0.0, 0.001, 0.5));
 
     
@@ -26,7 +29,7 @@ void ofApp::setup(){
     ofSetColor(15);
     ofSetBackgroundColor(240);
     ofSetLineWidth(2);
-    padding = 100;
+    padding = 75;
     
 }
 
@@ -38,7 +41,7 @@ void ofApp::update(){
     w = 14 * unit;
     h = 20 * unit;
     lineHeight = h * 1.5;
-    leading = 3.5 * unit;
+    leading = 3 * unit;
     blank = 14 * unit;
     
     // type manipulation
@@ -48,8 +51,8 @@ void ofApp::update(){
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % mod1 == 1)          wTemp = w * 1.61;
-        else if(i % mod2 == 1)     wTemp = w * 2.61;
+        if(i % patW1 == 1)          wTemp = w * 1.61;
+        else if(i % patW2 == 1)     wTemp = w * 2.61;
         else                    wTemp = w;
         width.push_back(wTemp);
     }
@@ -75,12 +78,12 @@ void ofApp::update(){
     //
     
     rotate.clear(); //50s
-    float rTemp = 360;
+    float rTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-//        if(i % mod3 == 1)          rTemp = -10;
-//        else if(i % mod4 == 1)     rTemp = 10;
-//        else                    rTemp = 360;
+        if(i % patMl1 == 1)          rTemp = 360;
+        else if(i % patMl2 == 1)     rTemp = r;
+        else                    rTemp = 3;
         rotate.push_back(rTemp);
     }
     
@@ -88,8 +91,8 @@ void ofApp::update(){
     float dTemp = 0;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % mod3 == 1)          dTemp = 0.013475;
-        else if(i % mod4 == 1)     dTemp = 0.00699;
+        if(i % patMl1 == 1)          dTemp = patMl1dist;
+        else if(i % patMl2 == 1)     dTemp = -patMl2dist;
 //        else                    dTemp = 0.00599;
         distance.push_back(dTemp);
     }
@@ -100,8 +103,8 @@ void ofApp::update(){
     int multiLineTemp = 1;
     for(int i = 0; i < letters.size(); i++){
         
-        if(i % mod3 == 1)          multiLineTemp = 30;
-        else if(i % mod4 == 1)     multiLineTemp = 15;
+        if(i % patMl1 == 1)          multiLineTemp = 60;
+        else if(i % patMl2 == 1)     multiLineTemp = 90;
         else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
     }

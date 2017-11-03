@@ -36,10 +36,12 @@ class ofApp : public ofBaseApp{
     
     
     // type manipulation
-    ofxIntSlider mod1;
-    ofxIntSlider mod2;
-    ofxIntSlider mod3;
-    ofxIntSlider mod4;
+    ofxIntSlider patW1;
+    ofxIntSlider patW2;
+    ofxIntSlider patMl1;
+    ofxFloatSlider patMl1dist;
+    ofxIntSlider patMl2;
+    ofxFloatSlider patMl2dist;
     vector < float > width;
     vector < int > multiLine;
     ofxIntSlider r;
