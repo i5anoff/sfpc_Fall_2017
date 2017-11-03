@@ -34,7 +34,7 @@ void ofApp::setup(){
     
     //layout
 //    ofSetColor(15);
-    ofSetBackgroundColor(240);
+    ofSetBackgroundColor(15);
     ofSetLineWidth(2);
     padding = 75;
     
@@ -184,7 +184,7 @@ void ofApp::keyPressed(int key){
     
     // animation
     startTime = ofGetElapsedTimef();
-//    patOff = ofRandom(1,5);
+    patOff = ofRandom(1,5);
     
     
     // typing
