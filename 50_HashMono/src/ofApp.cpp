@@ -18,8 +18,8 @@ void ofApp::setup(){
     patOff = 0;
     startTime = ofGetElapsedTimef();
     duration =0.5;
-    gui.add(amp.setup("amp", 1.1852, 0, 2));
-    gui.add(speed.setup("speed", 0.03, 0.00, 2));
+    gui.add(amp.setup("amp", 2, 0, 2));
+    gui.add(speed.setup("speed", 0.08, 0.00, 2));
     
     //type manipulation
     gui.add(patW1.setup("patW1", 1, 1, 20));
@@ -34,7 +34,7 @@ void ofApp::setup(){
     
     //layout
     //    ofSetColor(15);
-    ofSetBackgroundColor(15);
+    ofSetBackgroundColor(30);
     ofSetLineWidth(2);
     padding = 60;
     
@@ -70,17 +70,6 @@ void ofApp::update(){
         width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
 
     }
-
-//        width.clear(); // with noise
-//        float wTemp = w;
-//        for(int i = 0; i < letters.size(); i++){
-//            noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)),
-//                          0, 1, 0.8, 1.2);
-//            if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
-//            else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
-//            else                    wTemp = w;
-//            width.push_back(wTemp * noise);
-//        }
     
     rotate.clear(); //50s
     float rTemp = 0;
