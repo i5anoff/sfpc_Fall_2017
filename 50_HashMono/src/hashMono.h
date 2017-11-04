@@ -76,7 +76,7 @@ public:
                 lineTemp.addVertex( ptA );
                 lineTemp.addVertex( ptB );
                 
-                ofPolyline lineRsTemp = lineTemp.getResampledByCount(10);
+                ofPolyline lineRsTemp = lineTemp.getResampledByCount(15);
                 ofPolyline lineRs;
                 
                 if (bIsMultiLine){
