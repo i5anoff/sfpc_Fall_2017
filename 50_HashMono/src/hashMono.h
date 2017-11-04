@@ -76,7 +76,7 @@ public:
                 lineTemp.addVertex( ptA );
                 lineTemp.addVertex( ptB );
                 
-                ofPolyline lineRsTemp = lineTemp.getResampledBySpacing(2);
+                ofPolyline lineRsTemp = lineTemp.getResampledByCount(10);
                 ofPolyline lineRs;
                 
                 if (bIsMultiLine){
@@ -86,7 +86,7 @@ public:
                         for (int j = 0; j < lineRsTemp.size(); j++){
                             
                             float noise = 0;
-                            if (i > 1)  noise = ofMap(ofNoise(j*0.05, ofGetElapsedTimef()*0.5),
+                            if (i > 1)  noise = ofMap(ofNoise(j*0.5, ofGetElapsedTimef()*0.5),
                                                       0, 1, 0, i*0.25);
                             lineRs.addVertex(lineRsTemp[j].x + noise, lineRsTemp[j].y);
                         }

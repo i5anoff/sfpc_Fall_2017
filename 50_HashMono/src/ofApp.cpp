@@ -7,7 +7,7 @@ void ofApp::setup(){
     
     // type basics
     gui.add(unit.setup("unit", 7, 3, 15));
-    
+
     
     // type position
     lines.push_back("null");
@@ -28,8 +28,6 @@ void ofApp::setup(){
     gui.add(patMl2.setup("patMl2", 5, 1, 20));
     gui.add(patMl1dist.setup("patMl1dist", 0.015, 0.00, 1));
     gui.add(patMl2dist.setup("patMl2dist", 0.015, 0.0000, 1));
-    
-    
     gui.add(r.setup("rotate", 0, -360, 360));
     gui.add(dist.setup("dist", 0.0, 0.001, 0.5));
     
@@ -51,8 +49,7 @@ void ofApp::update(){
     lineHeight = h * 1.5;
     leading = 3 * unit;
     blank = 14 * unit;
-    
-    
+
     // animation
     elapsedTime = ofGetElapsedTimef() - startTime;
     pct = elapsedTime / duration;
@@ -60,30 +57,42 @@ void ofApp::update(){
     if (pct > 1) pct = 1;
     
     // type manipulation
+    
+    if (prevUpdate){
+        
+        widthPrev.clear();
+        for (int i = 0; i < letters.size(); i++) {
+            widthPrev.push_back(width[i]);
+        }
+        
+        
+    }
+    if (widthPrev.size() == 0) {
+        widthPrev.push_back(w);
+        prevUpdate = false;
+    }
 
 
     width.clear();
-
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
-
+        
         if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
         else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
         else                                   wTemp = w;
 
-        width.push_back(wTemp);
-    }
-    
-    if (widthPrev.size() == 0) {
-        width.push_back(w);
+        width.push_back((1-pct) * widthPrev[i] + pct * wTemp);
         
-        widthPrev.push_back(w);
+        cout <<
+        "width: " <<
+        width.size() <<
+        " width prev: " <<
+        widthPrev.size() <<
+        " letter count: " <<
+        letterCount <<
+        endl;
     }
-    
 
-    
-    
-    
 //        width.clear(); // with noise
 //        float wTemp = w;
 //        for(int i = 0; i < letters.size(); i++){
@@ -94,37 +103,6 @@ void ofApp::update(){
 //            else                    wTemp = w;
 //            width.push_back(wTemp * noise);
 //        }
-    
-    
-    //    width.clear(); // with animation
-    //    float wTemp = w;
-    //    for(int i = 0; i < letters.size(); i++){
-    //
-    //        if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
-    //        else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
-    //        else                    wTemp = w;
-    //        width.push_back((1-pct) * w + pct * wTemp);
-    //    }
-    
-    //    rotate.clear(); //feathers
-    //    float rTemp = 0;
-    //    for(int i = 0; i < letters.size(); i++){
-    //
-    //        if(i % mod3 == 1)          rTemp = -10;
-    //        else if(i % mod4 == 1)     rTemp = 10;
-    //        else                    rTemp = 360;
-    //        rotate.push_back(rTemp);
-    //    }
-    
-    //    distance.clear(); // feathers
-    //    float dTemp = 0;
-    //    for(int i = 0; i < letters.size(); i++){
-    //
-    //        if(i % mod3 == 1)          dTemp = 0.01;
-    //        else if(i % mod4 == 1)     dTemp = 0.01;
-    //        else                    dTemp = 0.03593;
-    //        distance.push_back(dTemp);
-    //
     
     rotate.clear(); //50s
     float rTemp = 0;
@@ -161,7 +139,6 @@ void ofApp::update(){
 
     
     // type position
-    ////////////////////////////////////////////////////////////
     
     yPos.clear();
     float yPosTemp = 0;
@@ -187,12 +164,7 @@ void ofApp::update(){
     }
     
     
-    cout <<
-    "width: " <<
-    width.size() <<
-    " width prev: " <<
-    widthPrev.size() <<
-    endl;
+
 }
 
 //--------------------------------------------------------------
@@ -201,30 +173,8 @@ void ofApp::draw(){
     
     ofTranslate(padding,padding);
     
-    //    for(int i = 0; i < letters.size(); i++){
-    //        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], r, dist);
-    //    }
-    
-
-
-    
     for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i],
-               (1-pct) * widthPrev[i] + pct * width[i],
-               h,
-               multiLine[i],
-               rotate[i],
-               distance[i]);
-    }
-    
-    if (prevUpdate){
-        
-        widthPrev.clear();
-        for (int i = 0; i < letters.size(); i++) {
-            widthPrev.push_back(width[i]);
-        }
-        prevUpdate = false;
-        
+        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
     }
     
 }
@@ -235,7 +185,7 @@ void ofApp::keyPressed(int key){
     // animation
     startTime = ofGetElapsedTimef();
     patOff = ofRandom(1,5);
-
+    prevUpdate = true;
     
     // typing
     if (key == 127 && letters.size() > 0) { //backspace
@@ -243,16 +193,12 @@ void ofApp::keyPressed(int key){
         lines.erase(lines.end()-1);
         blanks.erase(blanks.end()-1);
     }
-    
-
-    
-
-    
+ 
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     
-    prevUpdate = true;
+    letterCount += 1;
 
     
     if (key == 32) {

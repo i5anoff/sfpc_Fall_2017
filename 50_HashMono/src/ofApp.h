@@ -64,6 +64,7 @@ class ofApp : public ofBaseApp{
 
 
     // type position
+    int letterCount;
     vector < string > letters;
     vector < string > blanks;
     vector < string > lines;
