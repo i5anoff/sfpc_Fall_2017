@@ -33,14 +33,18 @@ void hashMono::setup(){
 
     letterShape tempA;
     A.kerning = 0;
+    
+    tempA.lineType(true);
         tempA.bIsLine = true; // l vert
         tempA.bIsMultiLine = true;
+
         tempA.pts[0].set(1,0, 1, 0,w7,0, 0,0);
         tempA.pts[1].set(1,0, 1, 0,0,0, 1,0);
         A.shapes.push_back(tempA);
         
         tempA.bIsLine = true; // r ver
         tempA.bIsMultiLine = false;
+
         tempA.pts[0].set(1,0, 1, 0,w7,0, 0,0);
         tempA.pts[1].set(1,0, 1, 0,1,0, 1,0);
         A.shapes.push_back(tempA);
@@ -49,6 +53,7 @@ void hashMono::setup(){
         tempA.pts[0].set(1,0, 1, 0,w2,0, h14,0);
         tempA.pts[1].set(1,0, 1, 0,w12,0, h14,0);
         A.shapes.push_back(tempA);
+
     
     letterShape tempB;
     B.kerning = w1;
@@ -810,7 +815,7 @@ void hashMono::update(){
 
 
 //---------------------------------------------------------------
-void hashMono::draw(string letter, float x, float y, float width, float height, int multiLine, int r, float dist){
+void hashMono::draw(string letter, float x, float y, float width, float height, int multiLine, int r, float dist, bool horAlt){
     if (letter == "A") {
         A.draw(LETTERARGUMENTS);
     }

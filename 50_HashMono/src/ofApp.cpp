@@ -112,9 +112,10 @@ void ofApp::draw(){
     ofTranslate(padding,padding);
     
     for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
+        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i], true);
     }
     
+
     
     cout <<
     " letters: " <<

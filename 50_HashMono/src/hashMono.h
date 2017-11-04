@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#define LETTERARGUMENTS x, y, width, height, multiLine, r, dist
+#define LETTERARGUMENTS x, y, width, height, multiLine, r, dist, horAlt
 
 class letterPoint {
     
@@ -52,7 +52,9 @@ public:
     
     bool bIsLine;
     bool bIsMultiLine;
-    
+    bool bIsHorAlt;
+
+
     // if line!
     letterPoint pts[2];
     
@@ -60,6 +62,11 @@ public:
     letterPoint center;
     float radius;
     float startAngle;
+
+    
+    void lineType(bool HorAlt, bool test = true){
+        bIsHorAlt = HorAlt;
+    }
     
     void draw(float x, float y, float w, float h, float multiLine, int r, float dist){
         
@@ -105,18 +112,39 @@ public:
                                 ofTranslate(i * (w * dist), 0);
                                 ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
                             
-                            lineRs.draw();
+                                lineRs.draw();
 
                             ofPopMatrix();
                             ofPopStyle();
                         }
-                        
                         else {
                             ofLine(ptA, ptB);
                         }
                     }
-
-                }else {
+                }
+                if (bIsHorAlt){
+                    ofPolyline lineTemp;
+                    lineTemp.addVertex( ptA );
+                    lineTemp.addVertex( ptB );
+                    
+                    ofPolyline lineRsTemp = lineTemp.getResampledByCount(15);
+                    ofPolyline lineRs;
+                    
+                    lineRs.clear();
+                    for (int j = 0; j < lineRsTemp.size(); j++){
+                        float noise = 0;
+                        noise = ofMap(ofNoise(j*0.5, ofGetElapsedTimef()*0.5),0, 1, 0, 0.25);
+                        lineRs.addVertex(lineRsTemp[j].x, lineRsTemp[j].y + noise);
+                    }
+                    
+                    ofPushStyle();
+//                    ofSetLineWidth(lineWidthStrong);
+                    ofSetColor(255,0,0);
+                    lineRs.draw();
+                    ofPopStyle();
+                    
+                }
+                else {
                     ofPushStyle();
                         ofSetLineWidth(lineWidth);
                         ofLine(ptA, ptB);
@@ -147,7 +175,7 @@ public:
     
     vector < letterShape > shapes;
     float kerning;
-    void draw( float x, float y, float w, float h, int multiLine, int r, float dist){
+    void draw( float x, float y, float w, float h, int multiLine, int r, float dist, bool horAlt){
         
         
         for (int i = 0; i < shapes.size(); i++){
@@ -170,7 +198,8 @@ public:
               float height,
               int multiLine,
               int r,
-              float dist);
+              float dist,
+              bool horAlt);
     
     letter A;
     letter B;
