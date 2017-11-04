@@ -83,14 +83,7 @@ void ofApp::update(){
 
         width.push_back((1-pct) * widthPrev[i] + pct * wTemp);
         
-        cout <<
-        "width: " <<
-        width.size() <<
-        " width prev: " <<
-        widthPrev.size() <<
-        " letter count: " <<
-        letterCount <<
-        endl;
+
     }
 
 //        width.clear(); // with noise
@@ -177,6 +170,23 @@ void ofApp::draw(){
         t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i]);
     }
     
+    
+    cout <<
+    letterCount <<
+    " letters: " <<
+    letters.size() <<
+    " blanks: " <<
+    blanks.size() <<
+    " lines: " <<
+    lines.size() <<
+    " width: " <<
+    width.size() <<
+    " width prev: " <<
+    widthPrev.size() <<
+    " letter count: " <<
+    endl;
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -195,6 +205,7 @@ void ofApp::keyPressed(int key){
     }
  
 }
+
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     
@@ -211,138 +222,116 @@ void ofApp::keyReleased(int key){
     }
     if (key == 'a') {
         letters.push_back("A");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'b') {
         letters.push_back("B");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'c') {
         letters.push_back("C");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'd') {
         letters.push_back("D");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'e') {
         letters.push_back("E");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'f') {
         letters.push_back("F");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'g') {
         letters.push_back("G");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'h') {
         letters.push_back("H");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'i') {
         letters.push_back("I");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'j') {
         letters.push_back("J");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'k') {
         letters.push_back("K");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'l') {
         letters.push_back("L");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'm') {
         letters.push_back("M");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'n') {
         letters.push_back("N");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'o') {
         letters.push_back("O");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'p') {
         letters.push_back("P");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'q') {
         letters.push_back("Q");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'r') {
         letters.push_back("R");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 's') {
         letters.push_back("S");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 't') {
         letters.push_back("T");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'u') {
         letters.push_back("U");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'v') {
         letters.push_back("V");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'w') {
         letters.push_back("W");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'x') {
         letters.push_back("X");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'y') {
         letters.push_back("Y");
-        lines.push_back("null");
-        blanks.push_back("null");
+        blanksAndLinesNull();
     }
     if (key == 'z') {
         letters.push_back("Z");
-        lines.push_back("null");
-        blanks.push_back("null");
-        
+        blanksAndLinesNull();
     }
     
 }
 
+//--------------------------------------------------------------
+void ofApp::blanksAndLinesNull(){
+    lines.push_back("null");
+    blanks.push_back("null");
+}
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
     
