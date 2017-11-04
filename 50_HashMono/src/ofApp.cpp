@@ -2,18 +2,18 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    gui.setup();
+    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 300);
     t.setup();
     
     // type basics
-    gui.add(unit.setup("unit", 7, 3, 15));
+    gui.add(unit.setup("unit", 5, 3, 15));
 
     
     // type position
     lines.push_back("null");
     
     // animation
-    prevUpdate = false;
+    bIsPrevUpdate = false;
     widthPrev.push_back(50);
     patOff = 0;
     startTime = ofGetElapsedTimef();
@@ -36,7 +36,7 @@ void ofApp::setup(){
     //    ofSetColor(15);
     ofSetBackgroundColor(15);
     ofSetLineWidth(2);
-    padding = 75;
+    padding = 60;
     
 }
 
@@ -51,38 +51,23 @@ void ofApp::update(){
     blank = 14 * unit;
 
     // animation
+    prevUpdate();
     elapsedTime = ofGetElapsedTimef() - startTime;
     pct = elapsedTime / duration;
     pct = powf(pct, .5);
     if (pct > 1) pct = 1;
     
     // type manipulation
-    
-    if (prevUpdate){
-        
-        widthPrev.clear();
-        for (int i = 0; i < letters.size(); i++) {
-            widthPrev.push_back(width[i]);
-        }
-        
-        
-    }
-    if (widthPrev.size() == 0) {
-        widthPrev.push_back(w);
-        prevUpdate = false;
-    }
-
-
     width.clear();
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
-        
+
+        noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)), 0, 1, 0.8, 1.2);
         if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
         else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
         else                                   wTemp = w;
 
-        width.push_back((1-pct) * widthPrev[i] + pct * wTemp);
-        
+        width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
 
     }
 
@@ -100,7 +85,7 @@ void ofApp::update(){
     rotate.clear(); //50s
     float rTemp = 0;
     for(int i = 0; i < letters.size(); i++){
-        
+
         if((i + patOff) % patMl1 == 1)          rTemp = 360;
         else if((i + patOff) % patMl2 == 1)     rTemp = r;
         else                    rTemp = r;
@@ -110,15 +95,13 @@ void ofApp::update(){
     distance.clear(); // 50s
     float dTemp = 0;
     for(int i = 0; i < letters.size(); i++){
-        
+
         if((i + patOff) % patMl1 == 1)          dTemp = patMl1dist;
         else if(i % patMl2 == 1)     dTemp = -patMl2dist;
         //        else                    dTemp = 0.00599;
         distance.push_back(dTemp);
     }
-    
-    
-    
+  
     multiLine.clear();
     int multiLineTemp = 1;
     for(int i = 0; i < letters.size(); i++){
@@ -129,40 +112,13 @@ void ofApp::update(){
         multiLine.push_back(multiLineTemp);
     }
     
-
-    
-    // type position
-    
-    yPos.clear();
-    float yPosTemp = 0;
-    for (int i = 0; i < letters.size(); i++) {
-        
-        if (lines[i] == "newLine")  yPosTemp += lineHeight;
-        yPos.push_back(yPosTemp);
-    }
-    
-    xPos.clear();
-    float xPosTemp = 0;
-    for (int i = 0; i < letters.size(); i++) {
-        
-        if (blanks[i] == "blank")       xPosTemp += leading + blank;
-        if (lines[i+1] == "newLine")    xPosTemp = 0;
-        else                            xPosTemp += width[i] + leading;
-        xPos.push_back(xPosTemp);
-        
-        if (xPosTemp > ofGetWidth() - (padding * 2)){
-            lines.erase(lines.end()-1);
-            lines.push_back("newLine");
-        }
-    }
-    
-    
-
+    xyUpdate();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     gui.draw();
+
     
     ofTranslate(padding,padding);
     
@@ -172,7 +128,6 @@ void ofApp::draw(){
     
     
     cout <<
-    letterCount <<
     " letters: " <<
     letters.size() <<
     " blanks: " <<
@@ -195,7 +150,7 @@ void ofApp::keyPressed(int key){
     // animation
     startTime = ofGetElapsedTimef();
     patOff = ofRandom(1,5);
-    prevUpdate = true;
+    bIsPrevUpdate = true;
     
     // typing
     if (key == 127 && letters.size() > 0) { //backspace
@@ -332,6 +287,46 @@ void ofApp::blanksAndLinesNull(){
     lines.push_back("null");
     blanks.push_back("null");
 }
+//--------------------------------------------------------------
+void ofApp::xyUpdate(){
+
+    yPos.clear();
+    float yPosTemp = 0;
+    for (int i = 0; i < letters.size(); i++) {
+        
+        if (lines[i] == "newLine")  yPosTemp += lineHeight;
+            yPos.push_back(yPosTemp);
+            }
+
+    xPos.clear();
+    float xPosTemp = 0;
+    for (int i = 0; i < letters.size(); i++) {
+        
+        if (blanks[i] == "blank")       xPosTemp += leading + blank;
+            if (lines[i+1] == "newLine")    xPosTemp = 0;
+                else                            xPosTemp += width[i] + leading;
+                    xPos.push_back(xPosTemp);
+        
+                    if (xPosTemp > ofGetWidth() - (padding * 3)){
+                        lines.erase(lines.end()-1);
+                        lines.push_back("newLine");
+                    }
+    }
+}
+//--------------------------------------------------------------
+void ofApp::prevUpdate(){
+    if (bIsPrevUpdate){
+        widthPrev.clear();
+        for (int i = 0; i < letters.size(); i++) {
+            widthPrev.push_back(width[i]);
+        }
+    }
+    if (widthPrev.size() == 0) {
+        widthPrev.push_back(w);
+        bIsPrevUpdate = false;
+    }
+}
+
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
     

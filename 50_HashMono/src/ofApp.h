@@ -12,6 +12,10 @@ class ofApp : public ofBaseApp{
 		void draw();
 
         void blanksAndLinesNull();
+        void xyUpdate();
+        void prevUpdate();
+
+    
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -42,7 +46,7 @@ class ofApp : public ofBaseApp{
     float duration;
     float pct;
     float noise;
-    bool prevUpdate;
+    bool bIsPrevUpdate;
     ofxFloatSlider amp;
     ofxFloatSlider speed;
 
