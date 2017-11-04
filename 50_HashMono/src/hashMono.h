@@ -64,8 +64,10 @@ public:
     float startAngle;
 
     
-    void lineType(bool HorAlt, bool test = true){
-        bIsHorAlt = HorAlt;
+    void lineType(bool line, bool multiLine = false, bool horAlt = false){
+        bIsLine = line;
+        bIsMultiLine = multiLine;
+        bIsHorAlt = horAlt;
     }
     
     void draw(float x, float y, float w, float h, float multiLine, int r, float dist){
