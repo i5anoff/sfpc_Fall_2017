@@ -1,0 +1,6 @@
+ofxGui
+ofxMidi
+ofxOsc
+ofxParameterMidiSync
+ofxTween
+ofxXmlSettings
