@@ -67,7 +67,7 @@ void hashMono::setup(){
         tempB.pts[1].set(1, 0, 1, 0, w12, -r1, 0, 0);
         B.shapes.push_back(tempB);
     
-        tempB.lineType(true); // m hor
+        tempB.lineType(true, false, true); // m hor
         tempB.pts[0].set(1, 0, 1, 0, 0, 0, h10, 0);
         tempB.pts[1].set(1, 0, 1, 0, w12, -r1, h10, 0);
         B.shapes.push_back(tempB);
@@ -193,7 +193,7 @@ void hashMono::setup(){
         tempE.pts[1].set(1,0, 1, 0,w12,0, 0,0);
         E.shapes.push_back(tempE);
     
-        tempE.lineType(true); // m hor
+        tempE.lineType(true, false, true); // m hor
         tempE.pts[0].set(1,0, 1, 0,0,0, h9,0);
         tempE.pts[1].set(1,0, 1, 0,w10,0, h9,0);
         E.shapes.push_back(tempE);
@@ -215,7 +215,7 @@ void hashMono::setup(){
         tempF.pts[1].set(1,0, 1, 0,w12,0, 0,0);
         F.shapes.push_back(tempF);
     
-        tempF.lineType(true); // m hor
+        tempF.lineType(true, false, true); // m hor
         tempF.pts[0].set(1,0, 1, 0,0,0, h9,0);
         tempF.pts[1].set(1,0, 1, 0,w10,0, h9,0);
         F.shapes.push_back(tempF);
@@ -249,7 +249,7 @@ void hashMono::setup(){
         tempG.radius = r1;
         G.shapes.push_back(tempG);
     
-        tempG.lineType(true); // m hor
+        tempG.lineType(true, false, true); // m hor
         tempG.pts[0].set(1, 0, 1, 0, w7, 0, h11, 0);
         tempG.pts[1].set(1, 0, 1, 0, w12, 0, h11, 0);
         G.shapes.push_back(tempG);
@@ -283,7 +283,7 @@ void hashMono::setup(){
         tempH.pts[1].set(1,0, 1, 0,w12,0, 1,0);
         H.shapes.push_back(tempH);
     
-        tempH.lineType(true); // hor
+        tempH.lineType(true, false, true); // hor
         tempH.pts[0].set(1,0, 1, 0,0,0, h10,0);
         tempH.pts[1].set(1,0, 1, 0,w12,0, h10,0);
         H.shapes.push_back(tempH);
@@ -460,7 +460,7 @@ void hashMono::setup(){
         tempP.pts[1].set(1, 0, 1, 0, w12, -r1, 0, 0);
         P.shapes.push_back(tempP);
     
-        tempP.lineType(true); // m hor
+        tempP.lineType(true, false, true); // m hor
         tempP.pts[0].set(1, 0, 1, 0, 0, 0, h11, 0);
         tempP.pts[1].set(1, 0, 1, 0, w12, -r1, h11, 0);
         P.shapes.push_back(tempP);
@@ -545,7 +545,7 @@ void hashMono::setup(){
         tempR.pts[1].set(1, 0, 1, 0, w12, -r1, 0, 0);
         R.shapes.push_back(tempR);
     
-        tempR.lineType(true); // m hor
+        tempR.lineType(true, false, true); // m hor
         tempR.pts[0].set(1, 0, 1, 0, 0, 0, h11, 0);
         tempR.pts[1].set(1, 0, 1, 0, w12, -r1, h11, 0);
         R.shapes.push_back(tempR);
@@ -584,7 +584,7 @@ void hashMono::setup(){
         tempS.pts[1].set(1, 0, 1, 0, w12, -r1, 0, 0);
         S.shapes.push_back(tempS);
     
-        tempS.lineType(true); //m hor
+        tempS.lineType(true, false, true); //m hor
         tempS.pts[0].set(1, r1, 1, 0, 0, 0, h9, 0);
         tempS.pts[1].set(1, 0, 1, 0, w12, -r1, h9, 0);
         S.shapes.push_back(tempS);

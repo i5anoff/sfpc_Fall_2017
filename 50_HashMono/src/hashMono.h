@@ -70,10 +70,11 @@ public:
         bIsHorAlt = horAlt;
     }
     
-    void draw(float x, float y, float w, float h, float multiLine, int r, float dist){
+    void draw(float x, float y, float w, float h, float multiLine, int r, float dist, bool horAltIn){
         
-        float lineWidth = 1;
-        float lineWidthStrong = 15;
+        float lineS = 1;
+        float lineM = 7;
+        float lineL = 15;
         ofSetColor(240);
         
             if (bIsLine){
@@ -98,15 +99,15 @@ public:
                             for (int j = 0; j < lineRsTemp.size(); j++){
                                 
                                 float noise = 0;
-                                if (i > 1)  noise = ofMap(ofNoise(j*0.5, ofGetElapsedTimef()*0.5),
-                                                          0, 1, 0, i*0.25);
+                                if (i > 1)  noise = ofMap(ofNoise(j*0.7, ofGetElapsedTimef()*0.5),
+                                                          0, 1, 0, i*0.35);
                                 lineRs.addVertex(lineRsTemp[j].x + noise, lineRsTemp[j].y);
                             }
                     
                             ofPushStyle();
                                 float tempLw = ofMap(i, 0, multiLine, 2, 0.5);
-                                ofSetLineWidth(lineWidth);
-                                if (i == 0) ofSetLineWidth(lineWidthStrong);
+                                ofSetLineWidth(lineS);
+                                if (i == 0) ofSetLineWidth(lineL);
                                 if (bIsMultiLine && i > 1) ofSetColor(80);
                             ofPushMatrix();
                                 ofTranslate(x + w * 0.5 + i * (w * dist), y);
@@ -124,31 +125,30 @@ public:
                         }
                     }
                 }
-                if (bIsHorAlt){
+                if (bIsHorAlt && horAltIn == true){
                     ofPolyline lineTemp;
                     lineTemp.addVertex( ptA );
                     lineTemp.addVertex( ptB );
                     
-                    ofPolyline lineRsTemp = lineTemp.getResampledByCount(15);
+                    ofPolyline lineRsTemp = lineTemp.getResampledByCount(25);
                     ofPolyline lineRs;
                     
                     lineRs.clear();
-                    for (int j = 0; j < lineRsTemp.size(); j++){
+                    for (int i = 0; i < lineRsTemp.size(); i++){
                         float noise = 0;
-                        noise = ofMap(ofNoise(j*0.5, ofGetElapsedTimef()*0.5),0, 1, 0, 0.25);
-                        lineRs.addVertex(lineRsTemp[j].x, lineRsTemp[j].y + noise);
+                        noise = ofMap(sin((ofGetElapsedTimef() + i * 1.9) * 3.1)*0.25,0, 1, 0, 10);
+                        lineRs.addVertex(lineRsTemp[i].x, lineRsTemp[i].y + noise);
                     }
                     
                     ofPushStyle();
-//                    ofSetLineWidth(lineWidthStrong);
-                    ofSetColor(255,0,0);
+                    ofSetLineWidth(lineS);
                     lineRs.draw();
                     ofPopStyle();
                     
                 }
                 else {
                     ofPushStyle();
-                        ofSetLineWidth(lineWidth);
+                        ofSetLineWidth(lineS);
                         ofLine(ptA, ptB);
                     ofPopStyle();
 
@@ -163,7 +163,7 @@ public:
                     line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
                 }
                 ofPushStyle();
-                    ofSetLineWidth(lineWidth);
+                    ofSetLineWidth(lineS);
                     line.draw();
                 ofPopStyle();
             }
@@ -177,11 +177,11 @@ public:
     
     vector < letterShape > shapes;
     float kerning;
-    void draw( float x, float y, float w, float h, int multiLine, int r, float dist, bool horAlt){
+    void draw( float x, float y, float w, float h, int multiLine, int r, float dist, bool horAltIn){
         
         
         for (int i = 0; i < shapes.size(); i++){
-            shapes[i].draw(x + (w * kerning),y,w,h, multiLine, r, dist);
+            shapes[i].draw(x + (w * kerning),y,w,h, multiLine, r, dist, horAltIn);
         }
         
     }
@@ -201,7 +201,7 @@ public:
               int multiLine,
               int r,
               float dist,
-              bool horAlt);
+              bool horAltIn);
     
     letter A;
     letter B;

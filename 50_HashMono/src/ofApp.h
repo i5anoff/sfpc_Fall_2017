@@ -10,11 +10,6 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-
-        void blanksAndLinesNull();
-        void xyUpdate();
-        void prevUpdate();
-
     
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -49,18 +44,23 @@ class ofApp : public ofBaseApp{
     bool bIsPrevUpdate;
     ofxFloatSlider amp;
     ofxFloatSlider speed;
+    void prevUpdate();
 
     
     // type manipulation
-    ofxIntSlider patW1;
-    ofxIntSlider patW2;
-    ofxIntSlider patMl1;
-    ofxFloatSlider patMl1dist;
-    ofxIntSlider patMl2;
-    ofxFloatSlider patMl2dist;
+    ofxIntSlider mod1;
+    ofxIntSlider mod2;
+    ofxIntSlider mod3;
+    ofxFloatSlider MultiLineADis;
+    ofxIntSlider mod4;
+    ofxFloatSlider MultiLineBDis;
+    ofxIntSlider noMultiLineA;
+    ofxIntSlider noMultiLineB;
+    
     vector < float > width;
     vector < float > widthPrev;
     vector < int > multiLine;
+    vector < bool > horAlt;
     ofxIntSlider r;
     vector < int > rotate;
     vector < float > distance;
@@ -69,12 +69,13 @@ class ofApp : public ofBaseApp{
 
 
     // type position
-    int letterCount;
     vector < string > letters;
     vector < string > blanks;
     vector < string > lines;
     vector < float > xPos;
     vector < float > yPos;
+    void blanksAndLinesNull();
+    void xyUpdate();
     
     //layout
     float padding;

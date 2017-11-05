@@ -2,7 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 300);
+//    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
+    gui.setup();
     t.setup();
     
     // type basics
@@ -18,16 +19,19 @@ void ofApp::setup(){
     patOff = 0;
     startTime = ofGetElapsedTimef();
     duration =0.5;
-    gui.add(amp.setup("amp", 2, 0, 2));
-    gui.add(speed.setup("speed", 0.08, 0.00, 2));
+    gui.add(amp.setup("letter Width Noise Amp", 6.4, 0, 10));
+    gui.add(speed.setup("letter Width Noise Speed", 0.04, 0.00, 2));
     
     //type manipulation
-    gui.add(patW1.setup("patW1", 1, 1, 20));
-    gui.add(patW2.setup("patW2", 2, 1, 20));
-    gui.add(patMl1.setup("patMl1", 2, 1, 20));
-    gui.add(patMl2.setup("patMl2", 5, 1, 20));
-    gui.add(patMl1dist.setup("patMl1dist", 0.015, 0.00, 1));
-    gui.add(patMl2dist.setup("patMl2dist", 0.015, 0.0000, 1));
+    gui.add(mod1.setup("mod1", 1, 1, 20));
+    gui.add(mod2.setup("mod2", 2, 1, 20));
+    gui.add(mod3.setup("mod3", 2, 1, 20));
+    gui.add(mod4.setup("mod4", 5, 1, 20));
+    gui.add(noMultiLineA.setup("Multi Line A: Number", 25, 0, 60));
+    gui.add(MultiLineADis.setup("Multi Line A: Distance", 0.03, 0.00, 1));
+    gui.add(noMultiLineB.setup("Multi Line B: Number", 25, 0, 60));
+    gui.add(MultiLineBDis.setup("Multi Line B: Distance", 0.06, 0.0000, 1));
+
     gui.add(r.setup("rotate", 0, -360, 360));
     gui.add(dist.setup("dist", 0.0, 0.001, 0.5));
     
@@ -51,11 +55,13 @@ void ofApp::update(){
     blank = 14 * unit;
 
     // animation
-    prevUpdate();
     elapsedTime = ofGetElapsedTimef() - startTime;
     pct = elapsedTime / duration;
     pct = powf(pct, .5);
     if (pct > 1) pct = 1;
+    
+    prevUpdate();
+
     
     // type manipulation
     width.clear();
@@ -63,8 +69,8 @@ void ofApp::update(){
     for(int i = 0; i < letters.size(); i++){
 
         noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)), 0, 1, 0.8, 1.2);
-        if((i + patOff) % patW1 == 1)          wTemp = w * 1.61;
-        else if((i + patOff) % patW2 == 1)     wTemp = w * 2.61;
+        if((i + patOff) % mod1 == 1)          wTemp = w * 1.61;
+        else if((i + patOff) % mod2 == 1)     wTemp = w * 2.61;
         else                                   wTemp = w;
 
         width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
@@ -75,30 +81,39 @@ void ofApp::update(){
     float rTemp = 0;
     for(int i = 0; i < letters.size(); i++){
 
-        if((i + patOff) % patMl1 == 1)          rTemp = 360;
-        else if((i + patOff) % patMl2 == 1)     rTemp = r;
+        if((i + patOff) % mod3 == 1)          rTemp = 360;
+        else if((i + patOff) % mod4 == 1)     rTemp = r;
         else                    rTemp = r;
         rotate.push_back(rTemp);
-    }
-    
-    distance.clear(); // 50s
-    float dTemp = 0;
-    for(int i = 0; i < letters.size(); i++){
-
-        if((i + patOff) % patMl1 == 1)          dTemp = patMl1dist;
-        else if(i % patMl2 == 1)     dTemp = -patMl2dist;
-        //        else                    dTemp = 0.00599;
-        distance.push_back(dTemp);
     }
   
     multiLine.clear();
     int multiLineTemp = 1;
     for(int i = 0; i < letters.size(); i++){
 
-        if((i + patOff) % patMl1 == 1)          multiLineTemp = 60;
-        else if(i % patMl2 == 1)     multiLineTemp = 20;
+        if((i + patOff) % mod3 == 1)          multiLineTemp = noMultiLineA;
+        else if(i % mod4 == 1)     multiLineTemp = noMultiLineB;
         else                    multiLineTemp = 1;
         multiLine.push_back(multiLineTemp);
+    }
+    
+    distance.clear(); // 50s
+    float dTemp = 0;
+    for(int i = 0; i < letters.size(); i++){
+        
+        if((i + patOff) % mod3 == 1)          dTemp = MultiLineADis;
+        else if(i % mod4 == 1)     dTemp = -MultiLineBDis;
+        //        else                    dTemp = 0.00599;
+        distance.push_back(dTemp);
+    }
+    
+    horAlt.clear();
+    bool horAltTemp = false;
+    for (int i = 0; i < letters.size(); i++){
+        
+        if ((i + patOff) % mod2 == 1) horAltTemp = true;
+        else horAltTemp = false;
+        horAlt.push_back(horAltTemp);
     }
     
     xyUpdate();
@@ -112,7 +127,13 @@ void ofApp::draw(){
     ofTranslate(padding,padding);
     
     for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i], width[i], h, multiLine[i], rotate[i], distance[i], true);
+        t.draw(letters[i], xPos[i-1], yPos[i],
+               width[i],
+               h,
+               multiLine[i],
+               rotate[i],
+               distance[i],
+               horAlt[i]);
     }
     
 
@@ -153,10 +174,7 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    
-    letterCount += 1;
-
-    
+        
     if (key == 32) {
         blanks.erase(blanks.end()-1);
         blanks.push_back("blank");
