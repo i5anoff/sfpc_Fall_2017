@@ -20,7 +20,6 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-    
    
     int xElements;
     int yElements;
@@ -35,15 +34,6 @@ public:
     float scale[500];
     float totalWidth;
 
-
-
-
-    
-    //float height;
-   // float radius;
-    
-
-    
     float frame;
     float frameWidth;
     float frameHeight;

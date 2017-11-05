@@ -3689,6 +3689,57 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>11F1B625B265D0081F853F56</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasWhitneySineWave.h</string>
+				<key>path</key>
+				<string>src/scenes/niklasWhitneySineWave/niklasWhitneySineWave.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>BF57E2A381C4A63033A52791</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>93CE6D5A4C7FBFAACBF65A16</string>
+					<string>11F1B625B265D0081F853F56</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>niklasWhitneySineWave</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>5DEE3364A6688FB48ED3921B</key>
+			<dict>
+				<key>fileRef</key>
+				<string>93CE6D5A4C7FBFAACBF65A16</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>93CE6D5A4C7FBFAACBF65A16</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasWhitneySineWave.cpp</string>
+				<key>path</key>
+				<string>src/scenes/niklasWhitneySineWave/niklasWhitneySineWave.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>776893F480B879978323A2E1</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -5544,6 +5595,7 @@
 					<string>A805A5EE87B1CD4F7ED875C9</string>
 					<string>EEA79B8669D150AB53A05FB2</string>
 					<string>9C3F5CB926006B525166E4DA</string>
+					<string>BF57E2A381C4A63033A52791</string>
 					<string>47A8BC3A7B10FF4EB3107CFF</string>
 					<string>4AA508C4F30F7244C384A77A</string>
 					<string>F353D5FC63A11014EF31D17C</string>
@@ -5850,6 +5902,7 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
 						<string>src/scenes/rachelScene</string>
@@ -5983,6 +6036,7 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
 						<string>src/scenes/rachelScene</string>
@@ -6118,6 +6172,7 @@
 					<string>310ED8BB549B244C0DFB0FA1</string>
 					<string>203D9685D89D8A6D42285C68</string>
 					<string>08E30F8D5828117E48A7E046</string>
+					<string>5DEE3364A6688FB48ED3921B</string>
 					<string>35CC617D57D0561A1F39D1C5</string>
 					<string>B51874662BB53B0705173C5D</string>
 					<string>F753936E1839675677ED495E</string>
@@ -6314,6 +6369,7 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
 						<string>src/scenes/rachelScene</string>
@@ -6438,6 +6494,7 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
 						<string>src/scenes/rachelScene</string>

@@ -8,7 +8,7 @@ void interactionManager::setup()
     bInteracting = false;
 
     serial.listDevices();
-    serial.setup(0, 57600);
+    serial.setup(1, 57600);
 }
 
 void interactionManager::update()

@@ -13,9 +13,6 @@ float ofApp::drawElement(float xIn, float yIn, float hIn, float scaleIn){
     ofPushMatrix();
     
         ofTranslate(xIn, yIn);
-//        ofRotateZ(ofGetElapsedTimef() *  80 + 360);
-//        ofRotateZ(ofGetElapsedTimef() *  80 + 360 + ofMap(yIn, 0, ofGetWidth(), 0, 1 * 360));
-//        ofRotateZ(ofGetElapsedTimef() *  50 + 360 * ofSignedNoise(0.01 * xIn, 0.001 * yIn));
         ofTranslate(-xIn - (hIn *0.5), -yIn - (hIn * 0.5));
 
         ofDrawTriangle(containerElement.getX(),
