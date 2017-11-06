@@ -60,7 +60,7 @@ void ofApp::update(){
     pct = powf(pct, .5);
     if (pct > 1) pct = 1;
     
-    if (letters.size() > 0) prevUpdate();
+    prevUpdate();
 
     
     
@@ -199,18 +199,20 @@ void ofApp::xyUpdate(){
 void ofApp::prevUpdate(){
     if (bIsPrevUpdate){
         widthPrev.clear();
-        
-        cout << letters.size() << " " << width.size() << endl;
-        
-        
-        for (int i = 0; i < letters.size(); i++) {
-            widthPrev.push_back(width[i]);
+       
+        if(letters.size() > 0){
+            for (int i = 0; i < letters.size(); i++) {
+                widthPrev.push_back(width[i]);
+            }
+            }
+            if (widthPrev.size() == 0) {
+                widthPrev.push_back(w);
+                bIsPrevUpdate = false;
+            }
         }
-    }
-    if (widthPrev.size() == 0) {
-        widthPrev.push_back(w);
-        bIsPrevUpdate = false;
-    }
+        
+        
+  
 }
 
 //--------------------------------------------------------------
