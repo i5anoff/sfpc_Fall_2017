@@ -60,7 +60,8 @@ void ofApp::update(){
     pct = powf(pct, .5);
     if (pct > 1) pct = 1;
     
-    prevUpdate();
+    if (letters.size() > 0) prevUpdate();
+
     
     
     // type manipulation
@@ -162,6 +163,54 @@ void ofApp::draw(){
     endl;
     
     
+}
+//--------------------------------------------------------------
+void ofApp::blanksAndLinesNull(){
+    lines.push_back("null");
+    blanks.push_back("null");
+}
+//--------------------------------------------------------------
+void ofApp::xyUpdate(){
+    
+    yPos.clear();
+    float yPosTemp = 0;
+    for (int i = 0; i < letters.size(); i++) {
+        
+        if (lines[i] == "newLine")  yPosTemp += lineHeight;
+        yPos.push_back(yPosTemp);
+    }
+    
+    xPos.clear();
+    float xPosTemp = 0;
+    for (int i = 0; i < letters.size(); i++) {
+        
+        if (blanks[i] == "blank")       xPosTemp += leading + blank;
+        if (lines[i+1] == "newLine")    xPosTemp = 0;
+        else                            xPosTemp += width[i] + leading;
+        xPos.push_back(xPosTemp);
+        
+        if (xPosTemp > ofGetWidth() - (padding)){
+            lines.erase(lines.end()-1);
+            lines.push_back("newLine");
+        }
+    }
+}
+//--------------------------------------------------------------
+void ofApp::prevUpdate(){
+    if (bIsPrevUpdate){
+        widthPrev.clear();
+        
+        cout << letters.size() << " " << width.size() << endl;
+        
+        
+        for (int i = 0; i < letters.size(); i++) {
+            widthPrev.push_back(width[i]);
+        }
+    }
+    if (widthPrev.size() == 0) {
+        widthPrev.push_back(w);
+        bIsPrevUpdate = false;
+    }
 }
 
 //--------------------------------------------------------------
@@ -297,55 +346,6 @@ void ofApp::keyReleased(int key){
         blanksAndLinesNull();
     }
     
-}
-
-//--------------------------------------------------------------
-void ofApp::blanksAndLinesNull(){
-    lines.push_back("null");
-    blanks.push_back("null");
-}
-//--------------------------------------------------------------
-void ofApp::xyUpdate(){
-    
-    yPos.clear();
-    float yPosTemp = 0;
-    for (int i = 0; i < letters.size(); i++) {
-        
-        if (lines[i] == "newLine")  yPosTemp += lineHeight;
-        yPos.push_back(yPosTemp);
-    }
-    
-    xPos.clear();
-    float xPosTemp = 0;
-    for (int i = 0; i < letters.size(); i++) {
-        
-        if (blanks[i] == "blank")       xPosTemp += leading + blank;
-        if (lines[i+1] == "newLine")    xPosTemp = 0;
-        else                            xPosTemp += width[i] + leading;
-        xPos.push_back(xPosTemp);
-        
-        if (xPosTemp > ofGetWidth() - (padding)){
-            lines.erase(lines.end()-1);
-            lines.push_back("newLine");
-        }
-    }
-}
-//--------------------------------------------------------------
-void ofApp::prevUpdate(){
-    if (bIsPrevUpdate){
-        widthPrev.clear();
-        
-        cout << letters.size() << " " << width.size() << endl;
-        
-        
-        for (int i = 0; i < letters.size(); i++) {
-            widthPrev.push_back(width[i]);
-        }
-    }
-    if (widthPrev.size() == 0) {
-        widthPrev.push_back(w);
-        bIsPrevUpdate = false;
-    }
 }
 
 //--------------------------------------------------------------
