@@ -4,10 +4,10 @@
 void niklasWhitneySineWave::setup(){
   
 // setup pramaters
-    xElements.set("xElementNum", 20, 4, 300);
+    xElements.set("xElementNum", 30, 4, 300);
     parameters.add(xElements);
 
-    yElements.set("yElementNum", 30, 3, 400);
+    yElements.set("yElementNum", 15, 3, 400);
     parameters.add(yElements);
 
     setAuthor("Niklas May");
@@ -62,9 +62,6 @@ float niklasWhitneySineWave::drawYElements(float xIn, float yIn, float wIn, floa
 void niklasWhitneySineWave::update(){
     frame = .6;
     frameHeight = VISUALS_HEIGHT * frame;
-    
-//    xElements = ofMap(ofGetMouseX(), 0, VISUALS_WIDTH, 4, 400);
-//    yElements = ofMap(ofGetMouseY(), 0, VISUALS_HEIGHT, 3, 300);
     
     x[0] = 0;
     

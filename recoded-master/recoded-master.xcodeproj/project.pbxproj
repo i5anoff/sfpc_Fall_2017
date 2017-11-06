@@ -3740,6 +3740,108 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>16CB84CA9ADE29AE23401778</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasMolnar.h</string>
+				<key>path</key>
+				<string>src/scenes/niklasMolnar/niklasMolnar.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>EACABBC2767221917E2F3757</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>C644E24CAED2670E6005ADC9</string>
+					<string>16CB84CA9ADE29AE23401778</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>niklasMolnar</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>AD159DB2DCE91BE9E3D73AF8</key>
+			<dict>
+				<key>fileRef</key>
+				<string>C644E24CAED2670E6005ADC9</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>C644E24CAED2670E6005ADC9</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasMolnar.cpp</string>
+				<key>path</key>
+				<string>src/scenes/niklasMolnar/niklasMolnar.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>90F9827ECBA561F3D00A4EC9</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklas144Trapzes.h</string>
+				<key>path</key>
+				<string>src/scenes/niklas144Trapzes/niklas144Trapzes.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>AD7A5CD273D9677A89AFFEE3</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>95068F704DF21B6529FF5064</string>
+					<string>90F9827ECBA561F3D00A4EC9</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>niklas144Trapzes</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>0C7474F29FC7269C37053C38</key>
+			<dict>
+				<key>fileRef</key>
+				<string>95068F704DF21B6529FF5064</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>95068F704DF21B6529FF5064</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklas144Trapzes.cpp</string>
+				<key>path</key>
+				<string>src/scenes/niklas144Trapzes/niklas144Trapzes.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>776893F480B879978323A2E1</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -5595,6 +5697,8 @@
 					<string>A805A5EE87B1CD4F7ED875C9</string>
 					<string>EEA79B8669D150AB53A05FB2</string>
 					<string>9C3F5CB926006B525166E4DA</string>
+					<string>AD7A5CD273D9677A89AFFEE3</string>
+					<string>EACABBC2767221917E2F3757</string>
 					<string>BF57E2A381C4A63033A52791</string>
 					<string>47A8BC3A7B10FF4EB3107CFF</string>
 					<string>4AA508C4F30F7244C384A77A</string>
@@ -5902,6 +6006,8 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
@@ -6036,6 +6142,8 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
@@ -6172,6 +6280,8 @@
 					<string>310ED8BB549B244C0DFB0FA1</string>
 					<string>203D9685D89D8A6D42285C68</string>
 					<string>08E30F8D5828117E48A7E046</string>
+					<string>0C7474F29FC7269C37053C38</string>
+					<string>AD159DB2DCE91BE9E3D73AF8</string>
 					<string>5DEE3364A6688FB48ED3921B</string>
 					<string>35CC617D57D0561A1F39D1C5</string>
 					<string>B51874662BB53B0705173C5D</string>
@@ -6369,6 +6479,8 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
@@ -6494,6 +6606,8 @@
 						<string>src/scenes/mgsVeraMolnarLineStudy</string>
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
+						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>

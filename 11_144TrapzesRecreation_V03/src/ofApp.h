@@ -33,13 +33,15 @@ class ofApp : public ofBaseApp{
         ofxFloatSlider rectCopy;
         float rectCopyScaleX;
         float rectCopyScaleY;
-        ofxFloatSlider rectSizeX;
-        ofxFloatSlider rectSizeY;
+        float scale;
+        float rectSizeX;
+        float rectSizeY;
 
         ofxFloatSlider randMin;
         ofxFloatSlider randMax;
-        float random;
-        bool  printSVG;
+        int random;
+    
+    float timeStamp;
     
         ofxPanel gui;
 };

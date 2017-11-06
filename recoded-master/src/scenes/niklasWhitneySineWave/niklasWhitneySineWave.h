@@ -14,8 +14,6 @@ public:
     ofParameter< int >  xElements;
     ofParameter< int >  yElements;
 
-//    int xElements;
-//    int yElements;
     float drawElement(float xIn, float yIn, float hIn, float scaleIn);
     ofRectangle containerElement;
     

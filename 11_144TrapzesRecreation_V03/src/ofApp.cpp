@@ -3,25 +3,51 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     random = 0;
-    printSVG = false;
     
     gui.setup();
-    gui.add(framePad.setup("frame", 0.86, .1, 1));
+    
+    scale =  0.613;
+    framePad = 0.82;
+
     gui.add(grid.setup("number elements", 3, 1, 50));
-    gui.add(rectSizeX.setup("element size x", 0.62, .1, 1));
-    gui.add(rectSizeY.setup("element size y", 0.62, .1, 1));
+
     gui.add(rectCopy.setup("inner copys", 32, 1, 100));
     gui.add(randMin.setup("distortion max value", 200, 0, 200));
     gui.add(randMax.setup("distortion min value", -35, 0, -200));
+    
+    timeStamp = ofGetElapsedTimef();
+    
+
     
 }
 //--------------------------------------------------------------
 void ofApp::update(){
 
+
+    
+    rectSizeX = scale;
+    rectSizeY = scale * 1.25;
     gridW = grid;
     gridH = grid;
     gridUnitW = ofGetWidth() * framePad / (gridW);
     gridUnitH = ofGetHeight() * framePad / (gridH);
+    
+    if (random % 3 == 0) {
+        if (ofGetElapsedTimef() - timeStamp > 0.5){
+            random += 1;
+            timeStamp = ofGetElapsedTimef();
+        }
+    }else {
+        if (ofGetElapsedTimef() - timeStamp > 0.25){
+            random += 1;
+            timeStamp = ofGetElapsedTimef();
+        }
+        
+    }
+    
+
+    
+    
 }
 
 void ofApp::drawRectangle( ofPoint a, ofPoint b, ofPoint c, ofPoint d){
@@ -57,14 +83,9 @@ void ofApp::draw(){
     
     gui.draw();
     
-    cout << printSVG << endl;
-
-    if(printSVG == true){
-        ofBeginSaveScreenAsSVG("screenshot-"+ofGetTimestampString()+".svg");
-    }
     
-    ofSetBackgroundColor(240);
-    ofSetColor(15);
+    ofSetBackgroundColor(15);
+    ofSetColor(240);
     
     ofSeedRandom(random);
     
@@ -93,24 +114,11 @@ void ofApp::draw(){
     }
     
     
-    if (printSVG == true) {
-        ofEndSaveScreenAsSVG();
-        printSVG = false;
-    }
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-    if(key =='r'){
-        random += 1;
-    }
-    
-    if (key =='p'){
-        printSVG = true;
-    }
-
 }
 
 //--------------------------------------------------------------
