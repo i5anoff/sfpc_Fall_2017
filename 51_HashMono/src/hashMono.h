@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#define LETTERARGUMENTS x, y, letterCount, width, height, downStrokeAlt, horAlt
+#define LETTERARGUMENTS x, y, letterCount, width, height, downStrokeAlt, horAlt, cirAlt
 
 class letterPoint {
     
@@ -53,7 +53,8 @@ public:
     bool bIsLine;
     bool bIsDownStrokAlt;
     bool bIsHorAlt;
-    
+    bool bIsCirAlt;
+
     
     // if line!
     letterPoint pts[2];
@@ -64,19 +65,21 @@ public:
     float startAngle;
     
     
-    void lineType(bool line, bool downStrokAlt = false, bool horAlt = false){
+    void lineType(bool line, bool downStrokAlt = false, bool horAlt = false, bool cirAlt = false){
         bIsLine = line;
         bIsHorAlt = horAlt;
         bIsDownStrokAlt = downStrokAlt;
+        bIsCirAlt = cirAlt;
     }
     
-    void draw( float x, float y, int letterCount, float w, float h, bool downStrokAlt, bool horAlt) {
+    void draw( float x, float y, int letterCount, float w, float h, bool downStrokAlt, bool horAlt, bool cirAlt) {
         
         float lineS = 2;
         float lineL = 8;
         ofColor c1 = ofColor(0, 0, 0);
         ofColor c2 = ofColor(230, 1, 16);
-    
+        ofColor c3 = ofColor(0, 131, 206);
+
         ofSetLineWidth(lineS);
         ofSetColor(c1);
         
@@ -87,17 +90,16 @@ public:
             
             if (bIsDownStrokAlt){
                 ofPushStyle();
-                    if(downStrokAlt) ofSetLineWidth(lineL);
-                    if(letterCount % 3 == 0) ofSetColor(c2);
-                
-                if(downStrokAlt) {
-                    for (int i = 0; i < 2; i++){
-                        ofPushMatrix();
-                            ofTranslate(i * (lineL * 0.9), 0);
-                            ofLine(ptA, ptB);
-                        ofPopMatrix();
+                    if(downStrokAlt) {
+                        ofSetLineWidth(lineL);
+                        if (letterCount % 3 == 0) ofSetColor(c2);
+                        for (int i = 0; i < 2; i++){
+                            ofPushMatrix();
+                                ofTranslate(i * (lineL * 0.9), 0);
+                                ofLine(ptA, ptB);
+                            ofPopMatrix();
+                        }
                     }
-                }
                     else ofLine(ptA, ptB);
                 ofPopStyle();
             }
@@ -116,32 +118,40 @@ public:
                     noise = ofMap(sin((ofGetElapsedTimef() + i * 1.9) * 3.1)*0.25,0, 1, 0, 10);
                     lineRs.addVertex(lineRsTemp[i].x, lineRsTemp[i].y + noise);
                 }
-                
-                ofPushStyle();
-                    ofSetLineWidth(lineS);
                     lineRs.draw();
-                ofPopStyle();
             }
             
             if (bIsHorAlt == false &&  bIsDownStrokAlt == false){
-                ofPushStyle();
-                    ofSetLineWidth(lineS);
                     ofLine(ptA, ptB);
-                ofPopStyle();
             }
         }
         
         if (bIsLine == false){
+            
             ofPoint pt = center.getPointFor(x,y,w,h);
             ofPolyline line;
             for (int i = 0; i < 30; i++){
                 float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
                 line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
             }
-            ofPushStyle();
-            ofSetLineWidth(lineS);
-            line.draw();
-            ofPopStyle();
+            
+            if(bIsCirAlt && cirAlt){
+                ofPushStyle();
+                    ofSetColor(c3);
+                    ofSetLineWidth(lineL);
+                    for (int i = 0; i < 1; i++){
+                        ofPushMatrix();
+                            ofTranslate(i * (lineL * 0.9), i * -(lineL * 0.9));
+                            line.draw();
+                        ofPopMatrix();
+                    }
+                ofPopStyle();
+
+            }else{
+                ofPushStyle();
+                    ofSetColor(c1);
+                    line.draw();
+                ofPopStyle();            }
         }
     }
     
@@ -153,11 +163,11 @@ public:
     
     vector < letterShape > shapes;
     float kerning;
-    void draw( float x, float y, int letterCount, float w, float h, bool downStrokeAlt, bool horAlt){
+    void draw( float x, float y, int letterCount, float w, float h, bool downStrokeAlt, bool horAlt, bool cirAlt){
         
         
         for (int i = 0; i < shapes.size(); i++){
-            shapes[i].draw(x + (w * kerning), y, letterCount, w, h, downStrokeAlt, horAlt);
+            shapes[i].draw(x + (w * kerning), y, letterCount, w, h, downStrokeAlt, horAlt, cirAlt);
         }
         
     }
@@ -176,7 +186,8 @@ public:
               float width,
               float height,
               bool downStrokeAlt,
-              bool horAlt);
+              bool horAlt,
+              bool cirAlt);
 
     
     letter A;

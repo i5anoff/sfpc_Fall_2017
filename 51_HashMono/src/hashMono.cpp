@@ -72,34 +72,34 @@ void hashMono::setup(){
         tempB.pts[1].set(1, 0, 1, 0, w12, -r1, h10, 0);
         B.shapes.push_back(tempB);
     
-        tempB.lineType(false); // tr
+        tempB.lineType(false, false, false, false); // tr
         tempB.center.set(1,0, 1, r1, w12,-r1, 0,0);
         tempB.startAngle = 3*PI/2.0;
         tempB.radius = r1;
         B.shapes.push_back(tempB);
     
-        tempB.lineType(false); // mr
+        tempB.lineType(false, false, false, true); // mr
         tempB.center.set(1,0, 1, -r1, w12, -r1, h10, 0);
         tempB.startAngle = 0;
         tempB.radius = r1;
         B.shapes.push_back(tempB);
     
-        tempB.lineType(false); // mr2
-        tempB.center.set(1,0, 1, r1, w12,-r1, h10,0);
-        tempB.startAngle = 3*PI/2.0;
-        tempB.radius = r1;
-        B.shapes.push_back(tempB);
+//        tempB.lineType(false); // mr2
+//        tempB.center.set(1,0, 1, r1, w12,-r1, h10,0);
+//        tempB.startAngle = 3*PI/2.0;
+//        tempB.radius = r1;
+//        B.shapes.push_back(tempB);
     
         tempB.lineType(true); // r vert2
         tempB.pts[0].set(1,0, 1, 0,w12,0, h10,r1);
         tempB.pts[1].set(1,0, 1, 0,w12,0, 1,-r1);
         B.shapes.push_back(tempB);
     
-        tempB.lineType(false); // mr
-        tempB.center.set(1,0, 1, -r1, w12, -r1, 1, 0);
-        tempB.startAngle = 0;
-        tempB.radius = r1;
-        B.shapes.push_back(tempB);
+//        tempB.lineType(false); // mr
+//        tempB.center.set(1,0, 1, -r1, w12, -r1, 1, 0);
+//        tempB.startAngle = 0;
+//        tempB.radius = r1;
+//        B.shapes.push_back(tempB);
     
         tempB.lineType(true); // b hor
         tempB.pts[0].set(1, 0, 1, 0, 0, 0, 1, 0);
@@ -767,7 +767,8 @@ void hashMono::draw(string letter,
                     float width,
                     float height,
                     bool downStrokeAlt,
-                    bool horAlt){
+                    bool horAlt,
+                    bool cirAlt){
     if (letter == "A") {
         A.draw(LETTERARGUMENTS);
     }

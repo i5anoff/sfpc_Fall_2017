@@ -61,6 +61,7 @@ class ofApp : public ofBaseApp{
     vector < float > width;
     vector < bool > horAlt;
     vector < bool > downStrokeAlt;
+    vector < bool > cirAlt;
 
     
     

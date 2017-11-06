@@ -98,6 +98,16 @@ void ofApp::update(){
         cout << downStrokeAltTemp << endl;
     }
     
+    cirAlt.clear();
+    bool dcirAltTemp = false;
+    for (int i = 0; i < letters.size(); i++){
+        
+        if ((i + patOff) % mod3 == 1) dcirAltTemp = true;
+        else dcirAltTemp = false;
+        cirAlt.push_back(dcirAltTemp);
+        
+    }
+    
 
 
     
@@ -127,7 +137,8 @@ void ofApp::draw(){
                width[i],
                h,
                downStrokeAlt[i],
-               horAlt[i]);
+               horAlt[i],
+               cirAlt[i]);
     }
     
     
