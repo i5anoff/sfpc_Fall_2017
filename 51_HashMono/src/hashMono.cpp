@@ -760,7 +760,14 @@ void hashMono::update(){
 
 
 //---------------------------------------------------------------
-void hashMono::draw(string letter, float x, float y, float width, float height, int multiLine, int r, float dist, bool horAlt){
+void hashMono::draw(string letter,
+                    float x,
+                    float y,
+                    int letterCount,
+                    float width,
+                    float height,
+                    bool downStrokeAlt,
+                    bool horAlt){
     if (letter == "A") {
         A.draw(LETTERARGUMENTS);
     }

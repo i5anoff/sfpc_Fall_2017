@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#define LETTERARGUMENTS x, y, width, height, multiLine, r, dist, horAlt
+#define LETTERARGUMENTS x, y, letterCount, width, height, downStrokeAlt, horAlt
 
 class letterPoint {
     
@@ -51,7 +51,7 @@ class letterShape {
 public:
     
     bool bIsLine;
-    bool bIsMultiLine;
+    bool bIsDownStrokAlt;
     bool bIsHorAlt;
     
     
@@ -64,68 +64,45 @@ public:
     float startAngle;
     
     
-    void lineType(bool line, bool multiLine = false, bool horAlt = false){
+    void lineType(bool line, bool downStrokAlt = false, bool horAlt = false){
         bIsLine = line;
-        bIsMultiLine = multiLine;
         bIsHorAlt = horAlt;
+        bIsDownStrokAlt = downStrokAlt;
     }
     
-    void draw(float x, float y, float w, float h, float multiLine, int r, float dist, bool horAltIn){
+    void draw( float x, float y, int letterCount, float w, float h, bool downStrokAlt, bool horAlt) {
         
-        float lineS = 1;
-        float lineM = 7;
-        float lineL = 15;
-        ofSetColor(240);
+        float lineS = 2;
+        float lineL = 8;
+        ofColor c1 = ofColor(0, 0, 0);
+        ofColor c2 = ofColor(230, 1, 16);
+    
+        ofSetLineWidth(lineS);
+        ofSetColor(c1);
         
         if (bIsLine){
             
             ofPoint ptA = pts[0].getPointFor(x,y,w,h);
             ofPoint ptB = pts[1].getPointFor(x,y,w,h);
             
-            if (bIsMultiLine){
-                for(int i = 0; i < multiLine; i++){
-                    
-                    if ( multiLine > 1){
-                        
-                        ofPolyline lineTemp;
-                        lineTemp.addVertex( ptA );
-                        lineTemp.addVertex( ptB );
-                        
-                        ofPolyline lineRsTemp = lineTemp.getResampledByCount(15);
-                        ofPolyline lineRs;
-                        
-                        
-                        lineRs.clear();
-                        for (int j = 0; j < lineRsTemp.size(); j++){
-                            
-                            float noise = 0;
-                            if (i > 1)  noise = ofMap(ofNoise(j*0.7, ofGetElapsedTimef()*0.5),
-                                                      0, 1, 0, i*0.35);
-                            lineRs.addVertex(lineRsTemp[j].x + noise, lineRsTemp[j].y);
-                        }
-                        
-                        ofPushStyle();
-                        float tempLw = ofMap(i, 0, multiLine, 2, 0.5);
-                        ofSetLineWidth(lineS);
-                        if (i == 0) ofSetLineWidth(lineL);
-                        if (bIsMultiLine && i > 1) ofSetColor(80);
+            if (bIsDownStrokAlt){
+                ofPushStyle();
+                    if(downStrokAlt) ofSetLineWidth(lineL);
+                    if(letterCount % 3 == 0) ofSetColor(c2);
+                
+                if(downStrokAlt) {
+                    for (int i = 0; i < 2; i++){
                         ofPushMatrix();
-                        ofTranslate(x + w * 0.5 + i * (w * dist), y);
-                        if (multiLine > 1) ofRotateZ(r*(i*0.5));
-                        ofTranslate(i * (w * dist), 0);
-                        ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
-                        
-                        lineRs.draw();
-                        
+                            ofTranslate(i * (lineL * 0.9), 0);
+                            ofLine(ptA, ptB);
                         ofPopMatrix();
-                        ofPopStyle();
-                    }
-                    else {
-                        ofLine(ptA, ptB);
                     }
                 }
+                    else ofLine(ptA, ptB);
+                ofPopStyle();
             }
-            if (bIsHorAlt && horAltIn == true){
+            
+            if (bIsHorAlt){
                 ofPolyline lineTemp;
                 lineTemp.addVertex( ptA );
                 lineTemp.addVertex( ptB );
@@ -141,21 +118,20 @@ public:
                 }
                 
                 ofPushStyle();
-                ofSetLineWidth(lineS);
-                lineRs.draw();
+                    ofSetLineWidth(lineS);
+                    lineRs.draw();
                 ofPopStyle();
-                
             }
-            else {
+            
+            if (bIsHorAlt == false &&  bIsDownStrokAlt == false){
                 ofPushStyle();
-                ofSetLineWidth(lineS);
-                ofLine(ptA, ptB);
+                    ofSetLineWidth(lineS);
+                    ofLine(ptA, ptB);
                 ofPopStyle();
-                
             }
         }
         
-        else {
+        if (bIsLine == false){
             ofPoint pt = center.getPointFor(x,y,w,h);
             ofPolyline line;
             for (int i = 0; i < 30; i++){
@@ -177,11 +153,11 @@ public:
     
     vector < letterShape > shapes;
     float kerning;
-    void draw( float x, float y, float w, float h, int multiLine, int r, float dist, bool horAltIn){
+    void draw( float x, float y, int letterCount, float w, float h, bool downStrokeAlt, bool horAlt){
         
         
         for (int i = 0; i < shapes.size(); i++){
-            shapes[i].draw(x + (w * kerning),y,w,h, multiLine, r, dist, horAltIn);
+            shapes[i].draw(x + (w * kerning), y, letterCount, w, h, downStrokeAlt, horAlt);
         }
         
     }
@@ -196,12 +172,12 @@ public:
     void draw(string letter,
               float x,
               float y,
+              int letterCount,
               float width,
               float height,
-              int multiLine,
-              int r,
-              float dist,
-              bool horAltIn);
+              bool downStrokeAlt,
+              bool horAlt);
+
     
     letter A;
     letter B;

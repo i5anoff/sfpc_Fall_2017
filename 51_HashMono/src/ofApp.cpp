@@ -2,12 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-//        gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
-    gui.setup();
+        gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
+//    gui.setup();
     t.setup();
     
     // type basics
-    gui.add(unit.setup("unit", 3, 3, 15));
+    gui.add(unit.setup("unit", 5, 3, 15));
     
     
     // type position
@@ -25,7 +25,7 @@ void ofApp::setup(){
     //type manipulation
     gui.add(mod1.setup("mod1", 6, 1, 20));
     gui.add(mod2.setup("mod2", 4, 1, 20));
-    gui.add(mod3.setup("mod3", 4, 1, 20));
+    gui.add(mod3.setup("mod3", 2, 1, 20));
     gui.add(mod4.setup("mod4", 3, 1, 20));
     gui.add(noMultiLineA.setup("Ml A: Num", 25, 0, 60));
     gui.add(MultiLineADis.setup("Ml A: dis", 0.035, 0.00, 1));
@@ -38,8 +38,8 @@ void ofApp::setup(){
     
     //layout
     //    ofSetColor(15);
-    ofSetBackgroundColor(30);
-    ofSetLineWidth(2);
+    ofSetBackgroundColor(244);
+//    ofSetLineWidth(2);
     padding = 60;
     
 }
@@ -61,10 +61,11 @@ void ofApp::update(){
     if (pct > 1) pct = 1;
     
     prevUpdate();
-
-    
     
     // type manipulation
+    
+    letterCount = letters.size();
+    
     width.clear();
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
@@ -75,37 +76,6 @@ void ofApp::update(){
         else                                   wTemp = w;
         
         width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
-        
-    }
-    
-    rotate.clear(); //50s
-    float rTemp = 0;
-    for(int i = 0; i < letters.size(); i++){
-        
-        if((i + patOff) % mod3 == 1)          rTemp = 360;
-        else if((i + patOff) % mod4 == 1)     rTemp = r;
-        else                    rTemp = r;
-        rotate.push_back(rTemp);
-    }
-    
-    multiLine.clear();
-    int multiLineTemp = 1;
-    for(int i = 0; i < letters.size(); i++){
-        
-        if((i + patOff) % mod3 == 1)          multiLineTemp = noMultiLineA;
-        else if((i + patOff) % mod4 == 1)     multiLineTemp = noMultiLineB;
-        else                    multiLineTemp = 1;
-        multiLine.push_back(multiLineTemp);
-    }
-    
-    distance.clear(); // 50s
-    float dTemp = 0;
-    for(int i = 0; i < letters.size(); i++){
-        
-        if((i + patOff) % mod3 == 1)          dTemp = MultiLineADis;
-        else if((i + patOff) % mod4 == 1)     dTemp = -MultiLineBDis;
-        //        else                    dTemp = 0.00599;
-        distance.push_back(dTemp);
     }
     
     horAlt.clear();
@@ -117,6 +87,20 @@ void ofApp::update(){
         horAlt.push_back(horAltTemp);
     }
     
+    downStrokeAlt.clear();
+    bool downStrokeAltTemp = false;
+    for (int i = 0; i < letters.size(); i++){
+        
+        if ((i + patOff) % mod3 == 1) downStrokeAltTemp = true;
+        else downStrokeAltTemp = false;
+        downStrokeAlt.push_back(downStrokeAltTemp);
+        
+        cout << downStrokeAltTemp << endl;
+    }
+    
+
+
+    
     xyUpdate();
 }
 
@@ -127,25 +111,24 @@ void ofApp::draw(){
     
     ofTranslate(padding,padding);
     
-    for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i],
-               width[i],
-               h,
-               multiLine[i],
-               rotate[i],
-               distance[i],
-               horAlt[i]);
-    }
-    
 //    for(int i = 0; i < letters.size(); i++){
 //        t.draw(letters[i], xPos[i-1], yPos[i],
 //               width[i],
 //               h,
-//               2,
+//               multiLine[i],
 //               rotate[i],
 //               distance[i],
 //               horAlt[i]);
 //    }
+    
+    for(int i = 0; i < letters.size(); i++){
+        t.draw(letters[i], xPos[i-1], yPos[i],
+               i,
+               width[i],
+               h,
+               downStrokeAlt[i],
+               horAlt[i]);
+    }
     
     
     cout <<
@@ -200,17 +183,17 @@ void ofApp::prevUpdate(){
     if (bIsPrevUpdate){
         widthPrev.clear();
        
-        if(letters.size() > 0){
+        if(letters.size() > 1){
             for (int i = 0; i < letters.size(); i++) {
                 widthPrev.push_back(width[i]);
             }
-            }
-            if (widthPrev.size() == 0) {
-                widthPrev.push_back(w);
-                bIsPrevUpdate = false;
-            }
         }
-        
+    } else{
+            widthPrev.push_back(w);
+            bIsPrevUpdate = false;
+    }
+    
+    
         
   
 }

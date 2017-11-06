@@ -57,10 +57,16 @@ class ofApp : public ofBaseApp{
     ofxIntSlider noMultiLineA;
     ofxIntSlider noMultiLineB;
     
+    int letterCount;
     vector < float > width;
+    vector < bool > horAlt;
+    vector < bool > downStrokeAlt;
+
+    
+    
+    
     vector < float > widthPrev;
     vector < int > multiLine;
-    vector < bool > horAlt;
     ofxIntSlider r;
     vector < int > rotate;
     vector < float > distance;
