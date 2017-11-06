@@ -53,8 +53,8 @@ public:
     bool bIsLine;
     bool bIsMultiLine;
     bool bIsHorAlt;
-
-
+    
+    
     // if line!
     letterPoint pts[2];
     
@@ -62,7 +62,7 @@ public:
     letterPoint center;
     float radius;
     float startAngle;
-
+    
     
     void lineType(bool line, bool multiLine = false, bool horAlt = false){
         bIsLine = line;
@@ -77,96 +77,96 @@ public:
         float lineL = 15;
         ofSetColor(240);
         
-            if (bIsLine){
-                
-                ofPoint ptA = pts[0].getPointFor(x,y,w,h);
-                ofPoint ptB = pts[1].getPointFor(x,y,w,h);
-                
-                if (bIsMultiLine){
-                    for(int i = 0; i < multiLine; i++){
+        if (bIsLine){
+            
+            ofPoint ptA = pts[0].getPointFor(x,y,w,h);
+            ofPoint ptB = pts[1].getPointFor(x,y,w,h);
+            
+            if (bIsMultiLine){
+                for(int i = 0; i < multiLine; i++){
+                    
+                    if ( multiLine > 1){
                         
-                        if ( multiLine > 1){
+                        ofPolyline lineTemp;
+                        lineTemp.addVertex( ptA );
+                        lineTemp.addVertex( ptB );
+                        
+                        ofPolyline lineRsTemp = lineTemp.getResampledByCount(15);
+                        ofPolyline lineRs;
+                        
+                        
+                        lineRs.clear();
+                        for (int j = 0; j < lineRsTemp.size(); j++){
                             
-                            ofPolyline lineTemp;
-                            lineTemp.addVertex( ptA );
-                            lineTemp.addVertex( ptB );
-                            
-                            ofPolyline lineRsTemp = lineTemp.getResampledByCount(15);
-                            ofPolyline lineRs;
-                            
-                            
-                            lineRs.clear();
-                            for (int j = 0; j < lineRsTemp.size(); j++){
-                                
-                                float noise = 0;
-                                if (i > 1)  noise = ofMap(ofNoise(j*0.7, ofGetElapsedTimef()*0.5),
-                                                          0, 1, 0, i*0.35);
-                                lineRs.addVertex(lineRsTemp[j].x + noise, lineRsTemp[j].y);
-                            }
-                    
-                            ofPushStyle();
-                                float tempLw = ofMap(i, 0, multiLine, 2, 0.5);
-                                ofSetLineWidth(lineS);
-                                if (i == 0) ofSetLineWidth(lineL);
-                                if (bIsMultiLine && i > 1) ofSetColor(80);
-                            ofPushMatrix();
-                                ofTranslate(x + w * 0.5 + i * (w * dist), y);
-                                if (multiLine > 1) ofRotateZ(r*(i*0.5));
-                                ofTranslate(i * (w * dist), 0);
-                                ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
-                            
-                                lineRs.draw();
-
-                            ofPopMatrix();
-                            ofPopStyle();
+                            float noise = 0;
+                            if (i > 1)  noise = ofMap(ofNoise(j*0.7, ofGetElapsedTimef()*0.5),
+                                                      0, 1, 0, i*0.35);
+                            lineRs.addVertex(lineRsTemp[j].x + noise, lineRsTemp[j].y);
                         }
-                        else {
-                            ofLine(ptA, ptB);
-                        }
-                    }
-                }
-                if (bIsHorAlt && horAltIn == true){
-                    ofPolyline lineTemp;
-                    lineTemp.addVertex( ptA );
-                    lineTemp.addVertex( ptB );
-                    
-                    ofPolyline lineRsTemp = lineTemp.getResampledByCount(25);
-                    ofPolyline lineRs;
-                    
-                    lineRs.clear();
-                    for (int i = 0; i < lineRsTemp.size(); i++){
-                        float noise = 0;
-                        noise = ofMap(sin((ofGetElapsedTimef() + i * 1.9) * 3.1)*0.25,0, 1, 0, 10);
-                        lineRs.addVertex(lineRsTemp[i].x, lineRsTemp[i].y + noise);
-                    }
-                    
-                    ofPushStyle();
-                    ofSetLineWidth(lineS);
-                    lineRs.draw();
-                    ofPopStyle();
-                    
-                }
-                else {
-                    ofPushStyle();
+                        
+                        ofPushStyle();
+                        float tempLw = ofMap(i, 0, multiLine, 2, 0.5);
                         ofSetLineWidth(lineS);
+                        if (i == 0) ofSetLineWidth(lineL);
+                        if (bIsMultiLine && i > 1) ofSetColor(80);
+                        ofPushMatrix();
+                        ofTranslate(x + w * 0.5 + i * (w * dist), y);
+                        if (multiLine > 1) ofRotateZ(r*(i*0.5));
+                        ofTranslate(i * (w * dist), 0);
+                        ofTranslate(-x - (w * 0.5) - i * (w * dist),-y);
+                        
+                        lineRs.draw();
+                        
+                        ofPopMatrix();
+                        ofPopStyle();
+                    }
+                    else {
                         ofLine(ptA, ptB);
-                    ofPopStyle();
-
+                    }
                 }
             }
-
-            else {
-                ofPoint pt = center.getPointFor(x,y,w,h);
-                ofPolyline line;
-                for (int i = 0; i < 30; i++){
-                    float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
-                    line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
+            if (bIsHorAlt && horAltIn == true){
+                ofPolyline lineTemp;
+                lineTemp.addVertex( ptA );
+                lineTemp.addVertex( ptB );
+                
+                ofPolyline lineRsTemp = lineTemp.getResampledByCount(25);
+                ofPolyline lineRs;
+                
+                lineRs.clear();
+                for (int i = 0; i < lineRsTemp.size(); i++){
+                    float noise = 0;
+                    noise = ofMap(sin((ofGetElapsedTimef() + i * 1.9) * 3.1)*0.25,0, 1, 0, 10);
+                    lineRs.addVertex(lineRsTemp[i].x, lineRsTemp[i].y + noise);
                 }
+                
                 ofPushStyle();
-                    ofSetLineWidth(lineS);
-                    line.draw();
+                ofSetLineWidth(lineS);
+                lineRs.draw();
                 ofPopStyle();
+                
             }
+            else {
+                ofPushStyle();
+                ofSetLineWidth(lineS);
+                ofLine(ptA, ptB);
+                ofPopStyle();
+                
+            }
+        }
+        
+        else {
+            ofPoint pt = center.getPointFor(x,y,w,h);
+            ofPolyline line;
+            for (int i = 0; i < 30; i++){
+                float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
+                line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
+            }
+            ofPushStyle();
+            ofSetLineWidth(lineS);
+            line.draw();
+            ofPopStyle();
+        }
     }
     
 };
@@ -232,4 +232,3 @@ public:
     
     
 };
-

@@ -2,13 +2,13 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-//    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
-    gui.setup();
+        gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
+//    gui.setup();
     t.setup();
     
     // type basics
     gui.add(unit.setup("unit", 5, 3, 15));
-
+    
     
     // type position
     lines.push_back("null");
@@ -31,7 +31,7 @@ void ofApp::setup(){
     gui.add(MultiLineADis.setup("Multi Line A: Distance", 0.03, 0.00, 1));
     gui.add(noMultiLineB.setup("Multi Line B: Number", 25, 0, 60));
     gui.add(MultiLineBDis.setup("Multi Line B: Distance", 0.06, 0.0000, 1));
-
+    
     gui.add(r.setup("rotate", 0, -360, 360));
     gui.add(dist.setup("dist", 0.0, 0.001, 0.5));
     
@@ -46,14 +46,14 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-        
+    
     // type basics
     w = 14 * unit;
     h = 20 * unit;
     lineHeight = h * 1.5;
     leading = 3 * unit;
     blank = 14 * unit;
-
+    
     // animation
     elapsedTime = ofGetElapsedTimef() - startTime;
     pct = elapsedTime / duration;
@@ -61,36 +61,36 @@ void ofApp::update(){
     if (pct > 1) pct = 1;
     
     prevUpdate();
-
+    
     
     // type manipulation
     width.clear();
     float wTemp = w;
     for(int i = 0; i < letters.size(); i++){
-
+        
         noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)), 0, 1, 0.8, 1.2);
         if((i + patOff) % mod1 == 1)          wTemp = w * 1.61;
         else if((i + patOff) % mod2 == 1)     wTemp = w * 2.61;
         else                                   wTemp = w;
-
+        
         width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
-
+        
     }
     
     rotate.clear(); //50s
     float rTemp = 0;
     for(int i = 0; i < letters.size(); i++){
-
+        
         if((i + patOff) % mod3 == 1)          rTemp = 360;
         else if((i + patOff) % mod4 == 1)     rTemp = r;
         else                    rTemp = r;
         rotate.push_back(rTemp);
     }
-  
+    
     multiLine.clear();
     int multiLineTemp = 1;
     for(int i = 0; i < letters.size(); i++){
-
+        
         if((i + patOff) % mod3 == 1)          multiLineTemp = noMultiLineA;
         else if(i % mod4 == 1)     multiLineTemp = noMultiLineB;
         else                    multiLineTemp = 1;
@@ -122,7 +122,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     gui.draw();
-
+    
     
     ofTranslate(padding,padding);
     
@@ -136,7 +136,7 @@ void ofApp::draw(){
                horAlt[i]);
     }
     
-
+    
     
     cout <<
     " letters: " <<
@@ -169,12 +169,12 @@ void ofApp::keyPressed(int key){
         lines.erase(lines.end()-1);
         blanks.erase(blanks.end()-1);
     }
- 
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-        
+    
     if (key == 32) {
         blanks.erase(blanks.end()-1);
         blanks.push_back("blank");
@@ -297,28 +297,28 @@ void ofApp::blanksAndLinesNull(){
 }
 //--------------------------------------------------------------
 void ofApp::xyUpdate(){
-
+    
     yPos.clear();
     float yPosTemp = 0;
     for (int i = 0; i < letters.size(); i++) {
         
         if (lines[i] == "newLine")  yPosTemp += lineHeight;
-            yPos.push_back(yPosTemp);
-            }
-
+        yPos.push_back(yPosTemp);
+    }
+    
     xPos.clear();
     float xPosTemp = 0;
     for (int i = 0; i < letters.size(); i++) {
         
         if (blanks[i] == "blank")       xPosTemp += leading + blank;
-            if (lines[i+1] == "newLine")    xPosTemp = 0;
-                else                            xPosTemp += width[i] + leading;
-                    xPos.push_back(xPosTemp);
+        if (lines[i+1] == "newLine")    xPosTemp = 0;
+        else                            xPosTemp += width[i] + leading;
+        xPos.push_back(xPosTemp);
         
-                    if (xPosTemp > ofGetWidth() - (padding * 3)){
-                        lines.erase(lines.end()-1);
-                        lines.push_back("newLine");
-                    }
+        if (xPosTemp > ofGetWidth() - (padding * 3)){
+            lines.erase(lines.end()-1);
+            lines.push_back("newLine");
+        }
     }
 }
 //--------------------------------------------------------------
