@@ -2,8 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-        gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
-//    gui.setup();
+    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
+    //    gui.setup();
     t.setup();
     
     // type basics
@@ -27,7 +27,6 @@ void ofApp::setup(){
     gui.add(mod2.setup("mod2", 4, 1, 20));
     gui.add(mod3.setup("mod3", 2, 1, 20));
     gui.add(mod4.setup("mod4", 3, 1, 20));
-    gui.add(mod5.setup("mod5", 7, 1, 20));
     gui.add(noMultiLineA.setup("Ml A: Num", 25, 0, 60));
     gui.add(MultiLineADis.setup("Ml A: dis", 0.035, 0.00, 1));
     gui.add(noMultiLineB.setup("Ml B: num", 12, 0, 60));
@@ -40,7 +39,7 @@ void ofApp::setup(){
     //layout
     //    ofSetColor(15);
     ofSetBackgroundColor(244);
-//    ofSetLineWidth(2);
+    //    ofSetLineWidth(2);
     padding = 60;
     
 }
@@ -51,7 +50,7 @@ void ofApp::update(){
     // type basics
     w = 14 * unit;
     h = 20 * unit;
-    lineHeight = h * 1.35;
+    lineHeight = h * 1.5;
     leading = 3 * unit;
     blank = 14 * unit;
     
@@ -83,7 +82,7 @@ void ofApp::update(){
     bool horAltTemp = false;
     for (int i = 0; i < letters.size(); i++){
         
-        if ((i + patOff) % mod5 == 1) horAltTemp = true;
+        if ((i + patOff) % mod2 == 1) horAltTemp = true;
         else horAltTemp = false;
         horAlt.push_back(horAltTemp);
     }
@@ -96,21 +95,20 @@ void ofApp::update(){
         else downStrokeAltTemp = false;
         downStrokeAlt.push_back(downStrokeAltTemp);
         
-        cout << downStrokeAltTemp << endl;
     }
     
     cirAlt.clear();
     bool dcirAltTemp = false;
     for (int i = 0; i < letters.size(); i++){
         
-        if ((i + patOff) % mod4 == 1) dcirAltTemp = true;
+        if ((i + patOff) % mod3 == 1) dcirAltTemp = true;
         else dcirAltTemp = false;
         cirAlt.push_back(dcirAltTemp);
         
     }
     
-
-
+    
+    
     
     xyUpdate();
 }
@@ -122,15 +120,15 @@ void ofApp::draw(){
     
     ofTranslate(padding,padding);
     
-//    for(int i = 0; i < letters.size(); i++){
-//        t.draw(letters[i], xPos[i-1], yPos[i],
-//               width[i],
-//               h,
-//               multiLine[i],
-//               rotate[i],
-//               distance[i],
-//               horAlt[i]);
-//    }
+    //    for(int i = 0; i < letters.size(); i++){
+    //        t.draw(letters[i], xPos[i-1], yPos[i],
+    //               width[i],
+    //               h,
+    //               multiLine[i],
+    //               rotate[i],
+    //               distance[i],
+    //               horAlt[i]);
+    //    }
     
     for(int i = 0; i < letters.size(); i++){
         t.draw(letters[i], xPos[i-1], yPos[i],
@@ -194,20 +192,20 @@ void ofApp::xyUpdate(){
 void ofApp::prevUpdate(){
     if (bIsPrevUpdate){
         widthPrev.clear();
-       
+        
         if(letters.size() > 1){
             for (int i = 0; i < letters.size(); i++) {
                 widthPrev.push_back(width[i]);
             }
         }
     } else{
-            widthPrev.push_back(w);
-            bIsPrevUpdate = false;
+        widthPrev.push_back(w);
+        bIsPrevUpdate = false;
     }
     
     
-        
-  
+    
+    
 }
 
 //--------------------------------------------------------------
