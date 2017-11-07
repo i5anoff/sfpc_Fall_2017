@@ -74,7 +74,7 @@ public:
     
     void draw( float x, float y, int letterCount, float w, float h, bool downStrokAlt, bool horAlt, bool cirAlt) {
         
-        float lineS = 2;
+        float lineS = 2.5;
         float lineL = 8;
         ofColor c1 = ofColor(0, 0, 0);
         ofColor c2 = ofColor(230, 1, 16);
@@ -105,20 +105,25 @@ public:
             }
             
             if (bIsHorAlt){
-                ofPolyline lineTemp;
-                lineTemp.addVertex( ptA );
-                lineTemp.addVertex( ptB );
-                
-                ofPolyline lineRsTemp = lineTemp.getResampledByCount(25);
-                ofPolyline lineRs;
-                
-                lineRs.clear();
-                for (int i = 0; i < lineRsTemp.size(); i++){
-                    float noise = 0;
-                    noise = ofMap(sin((ofGetElapsedTimef() + i * 1.9) * 3.1)*0.25,0, 1, 0, 10);
-                    lineRs.addVertex(lineRsTemp[i].x, lineRsTemp[i].y + noise);
-                }
+                if(horAlt){
+                    ofPolyline lineTemp;
+                    lineTemp.addVertex( ptA );
+                    lineTemp.addVertex( ptB );
+                    
+                    ofPolyline lineRsTemp = lineTemp.getResampledByCount(25);
+                    ofPolyline lineRs;
+                    
+                    lineRs.clear();
+                    for (int i = 0; i < lineRsTemp.size(); i++){
+                        float noise = 0;
+                        noise = ofMap(sin((ofGetElapsedTimef() + i * 1.9) * 3.1)*0.25,0, 1, 0, 10);
+                        lineRs.addVertex(lineRsTemp[i].x, lineRsTemp[i].y + noise);
+                    }
                     lineRs.draw();
+                }else{
+                    ofLine(ptA, ptB);
+                }
+          
             }
             
             if (bIsHorAlt == false &&  bIsDownStrokAlt == false){
@@ -128,32 +133,41 @@ public:
         
         if (bIsLine == false){
             
+            
             ofPoint pt = center.getPointFor(x,y,w,h);
             ofPolyline line;
             for (int i = 0; i < 30; i++){
                 float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
-                line.addVertex( pt + radius * ofPoint(cos(angle), sin(angle)));
+                line.addVertex( pt + (radius) * ofPoint(cos(angle), sin(angle)));
             }
-            
             if(bIsCirAlt && cirAlt){
                 ofPushStyle();
                     ofSetColor(c3);
                     ofSetLineWidth(lineL);
-                    for (int i = 0; i < 1; i++){
-                        ofPushMatrix();
-                            ofTranslate(i * (lineL * 0.9), i * -(lineL * 0.9));
-                            line.draw();
-                        ofPopMatrix();
+                    line.clear();
+                    for (int i = 0; i < 30; i++){
+                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
+                        line.addVertex( pt + (radius + (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
                     }
+                    line.draw();
+                    line.clear();
+                    for (int i = 0; i < 30; i++){
+                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
+                        line.addVertex( pt + (radius - (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
+                        ofSetColor(c3);
+                        ofSetLineWidth(lineL);
+                    line.draw();
                 ofPopStyle();
-
+                }
             }else{
                 ofPushStyle();
-                    ofSetColor(c1);
-                    line.draw();
-                ofPopStyle();            }
+                ofSetColor(c1);
+                line.draw();
+                ofPopStyle();
+            }
         }
-    }
+        
+        }
     
 };
 

@@ -27,6 +27,7 @@ void ofApp::setup(){
     gui.add(mod2.setup("mod2", 4, 1, 20));
     gui.add(mod3.setup("mod3", 2, 1, 20));
     gui.add(mod4.setup("mod4", 3, 1, 20));
+    gui.add(mod5.setup("mod5", 7, 1, 20));
     gui.add(noMultiLineA.setup("Ml A: Num", 25, 0, 60));
     gui.add(MultiLineADis.setup("Ml A: dis", 0.035, 0.00, 1));
     gui.add(noMultiLineB.setup("Ml B: num", 12, 0, 60));
@@ -50,7 +51,7 @@ void ofApp::update(){
     // type basics
     w = 14 * unit;
     h = 20 * unit;
-    lineHeight = h * 1.5;
+    lineHeight = h * 1.35;
     leading = 3 * unit;
     blank = 14 * unit;
     
@@ -82,7 +83,7 @@ void ofApp::update(){
     bool horAltTemp = false;
     for (int i = 0; i < letters.size(); i++){
         
-        if ((i + patOff) % mod2 == 1) horAltTemp = true;
+        if ((i + patOff) % mod5 == 1) horAltTemp = true;
         else horAltTemp = false;
         horAlt.push_back(horAltTemp);
     }
@@ -102,7 +103,7 @@ void ofApp::update(){
     bool dcirAltTemp = false;
     for (int i = 0; i < letters.size(); i++){
         
-        if ((i + patOff) % mod3 == 1) dcirAltTemp = true;
+        if ((i + patOff) % mod4 == 1) dcirAltTemp = true;
         else dcirAltTemp = false;
         cirAlt.push_back(dcirAltTemp);
         

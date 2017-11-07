@@ -51,6 +51,7 @@ class ofApp : public ofBaseApp{
     ofxIntSlider mod1;
     ofxIntSlider mod2;
     ofxIntSlider mod3;
+    ofxIntSlider mod5;
     ofxFloatSlider MultiLineADis;
     ofxIntSlider mod4;
     ofxFloatSlider MultiLineBDis;
