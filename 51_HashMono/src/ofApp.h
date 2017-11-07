@@ -46,33 +46,28 @@ public:
     ofxFloatSlider speed;
     void prevUpdate();
     
+    void inActiveAnimation();
+    bool bIsInactive;
+    float inactStartTime;
+    float inactElapsedTime;
+    float inactPct;
+    int modInact;
+
     
     // type manipulation
     ofxIntSlider mod1;
     ofxIntSlider mod2;
     ofxIntSlider mod3;
-    ofxFloatSlider MultiLineADis;
     ofxIntSlider mod4;
-    ofxFloatSlider MultiLineBDis;
-    ofxIntSlider noMultiLineA;
-    ofxIntSlider noMultiLineB;
-    
-    int letterCount;
+    ofxIntSlider mod5;
+
     vector < float > width;
     vector < bool > horAlt;
     vector < bool > downStrokeAlt;
     vector < bool > cirAlt;
     
-    
-    
-    
     vector < float > widthPrev;
-    vector < int > multiLine;
-    ofxIntSlider r;
-    vector < int > rotate;
-    vector < float > distance;
-    
-    ofxFloatSlider dist;
+
     
     
     // type position
