@@ -1,5 +1,6 @@
 #pragma once
 
+#define SPEED 0.3
 
 #include "ofMain.h"
 

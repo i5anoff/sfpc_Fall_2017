@@ -9,6 +9,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    myText.update();
 }
 
 //--------------------------------------------------------------
@@ -39,6 +40,7 @@ void ofApp::draw(){
         float scale = grid / myText.bound1.getWidth();
        
         float x = 0;
+        
         for (int j = 0; j < numElements; j++) {
             counter += 1;
 
@@ -56,7 +58,6 @@ void ofApp::draw(){
 
             if (counter % 2 == 1) {
                 myText.draw(+1);
-                ofDrawRectangle(myText.bound1.getX(), myText.bound1.getY(), myText.bound1.getWidth(), myText.bound1.getHeight());
             }
 
             ofPopMatrix();

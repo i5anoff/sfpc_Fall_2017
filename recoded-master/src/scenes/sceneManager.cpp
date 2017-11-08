@@ -11,6 +11,7 @@
 
 
 //sketches niklas
+#include "niklasMorisawa.h"
 #include "niklasMolnar.h"
 #include "niklasWhitneySineWave.h"
 #include "niklasLissajous.h"
@@ -79,6 +80,7 @@ void sceneManager::setup(){
     font.load("fonts/ProggySmall.fon", 8, false ,false, false, 0, 96);
 
     //sketches niklas
+    scenes.push_back(new niklasMorisawa());
     scenes.push_back(new niklasLissajous());
     scenes.push_back(new niklasMolnar());
     scenes.push_back(new niklasWhitneySineWave());

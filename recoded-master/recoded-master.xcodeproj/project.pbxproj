@@ -3740,6 +3740,57 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>FF4A2E493B97C6C6822E91AD</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasMorisawa.h</string>
+				<key>path</key>
+				<string>src/scenes/niklasMorisawa/niklasMorisawa.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>91A1FE55A5C7E160DF379BB0</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>BBA0B2C447ED9151EA411688</string>
+					<string>FF4A2E493B97C6C6822E91AD</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>niklasMorisawa</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>F21C08D1EF7D2CB6F2CEDFBB</key>
+			<dict>
+				<key>fileRef</key>
+				<string>BBA0B2C447ED9151EA411688</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>BBA0B2C447ED9151EA411688</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasMorisawa.cpp</string>
+				<key>path</key>
+				<string>src/scenes/niklasMorisawa/niklasMorisawa.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>16CB84CA9ADE29AE23401778</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -5751,6 +5802,7 @@
 					<string>AD7A5CD273D9677A89AFFEE3</string>
 					<string>86BC8F0D15B8E14DF4F71111</string>
 					<string>EACABBC2767221917E2F3757</string>
+					<string>91A1FE55A5C7E160DF379BB0</string>
 					<string>BF57E2A381C4A63033A52791</string>
 					<string>47A8BC3A7B10FF4EB3107CFF</string>
 					<string>4AA508C4F30F7244C384A77A</string>
@@ -6061,6 +6113,7 @@
 						<string>src/scenes/niklas144Trapzes</string>
 						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
+						<string>src/scenes/niklasMorisawa</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
@@ -6198,6 +6251,7 @@
 						<string>src/scenes/niklas144Trapzes</string>
 						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
+						<string>src/scenes/niklasMorisawa</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
@@ -6337,6 +6391,7 @@
 					<string>0C7474F29FC7269C37053C38</string>
 					<string>BA59F0A05B25509E8DEE19BF</string>
 					<string>AD159DB2DCE91BE9E3D73AF8</string>
+					<string>F21C08D1EF7D2CB6F2CEDFBB</string>
 					<string>5DEE3364A6688FB48ED3921B</string>
 					<string>35CC617D57D0561A1F39D1C5</string>
 					<string>B51874662BB53B0705173C5D</string>
@@ -6537,6 +6592,7 @@
 						<string>src/scenes/niklas144Trapzes</string>
 						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
+						<string>src/scenes/niklasMorisawa</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>
@@ -6665,6 +6721,7 @@
 						<string>src/scenes/niklas144Trapzes</string>
 						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
+						<string>src/scenes/niklasMorisawa</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
 						<string>src/scenes/olegVeraV</string>

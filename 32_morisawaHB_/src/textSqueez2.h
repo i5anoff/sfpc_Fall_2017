@@ -1,9 +1,10 @@
 #pragma once
 
+#define SPEED 0.3
 
 #include "ofMain.h"
 
-class textSqueez{
+class textSqueez2{
     
 public:
     
@@ -28,8 +29,5 @@ public:
     float scaleA2;
     float scaleB1;
     float scaleB2;
-    
-    vector <ofMesh> word1;
-    vector <ofMesh> word2;
 };
 
