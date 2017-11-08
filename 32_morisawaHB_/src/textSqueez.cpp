@@ -56,30 +56,30 @@ void textSqueez::setup(){
 void textSqueez::update(){
     
     
-    float elapsedTime = ofGetElapsedTimef() - startTime;
-    float  pctS = elapsedTime / durationS;
-    pctS = powf(pctS, .5);
-    if(pctS > 0.99){
-        startTime = ofGetElapsedTimef();
-        counter += 1;
-        pctS = 0;
-    }
-    cout << pctS << endl;
-    
-    if(pctS > 0.99){
-        startTime = ofGetElapsedTimef();
-        counter += 1;
-        pctS = 0;
-    }
-    
 //    float elapsedTime = ofGetElapsedTimef() - startTime;
-//    float  pctS = function_DoubleExponentialSigmoid(elapsedTime / durationS, 0.85);
+//    float  pctS = elapsedTime / durationS;
+//    pctS = powf(pctS, .5);
+//    if(pctS > 0.99){
+//        startTime = ofGetElapsedTimef();
+//        counter += 1;
+//        pctS = 0;
+//    }
+//    cout << pctS << endl;
 //
 //    if(pctS > 0.99){
 //        startTime = ofGetElapsedTimef();
 //        counter += 1;
 //        pctS = 0;
 //    }
+    
+    float elapsedTime = ofGetElapsedTimef() - startTime;
+    float  pctS = function_DoubleExponentialSigmoid(elapsedTime / durationS, 0.85);
+
+    if(pctS > 0.99){
+        startTime = ofGetElapsedTimef();
+        counter += 1;
+        pctS = 0;
+    }
     
     bound1.set(myType.getStringBoundingBox("HUMAN", 0, 0));
     bound2.set(myType.getStringBoundingBox("BEING", 0, 0));
@@ -145,4 +145,5 @@ void textSqueez::draw(int counterIn){
     }
     
 }
+
 

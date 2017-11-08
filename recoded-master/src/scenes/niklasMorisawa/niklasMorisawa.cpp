@@ -4,14 +4,16 @@
 void niklasMorisawa::setup(){
     
     
-    setAuthor("Your Name");
-    setOriginalArtist("ArtistName");
+    setAuthor("Niklas May");
+    setOriginalArtist("John Maeda");
     loadCode("scenes/yourProjectName/exampleCode.cpp");
     
+    pattern.set("Pattern", 2, 1, 10);
+        parameters.add(pattern);
     
     myRect.set(0, 0, 300, 100);
     myText.setup();
-     myText.update();
+    myText.update();
 
 }
 
@@ -27,9 +29,9 @@ void niklasMorisawa::draw(){
     
     
     ofPushStyle();
-    ofSetColor(240);
-    ofFill();
-    ofDrawRectangle(dimensions);
+        ofSetColor(240);
+        ofFill();
+        ofDrawRectangle(dimensions);
     ofPopStyle();
     
     float frame = 0.95;
@@ -71,7 +73,7 @@ void niklasMorisawa::draw(){
             ofScale(scale, scale);
             ofTranslate(-myText.bound1.getWidth() * 0.5, -(myText.bound1.getHeight()*1.1) * 0.5);
             
-            if (counter % 2 == 1) {
+            if (counter % pattern == 1) {
                 myText.draw(+1);
             }
             

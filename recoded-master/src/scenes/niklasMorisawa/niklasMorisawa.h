@@ -44,6 +44,8 @@ public:
     void draw();
     
     ofTrueTypeFont myFont;
+    ofParameter<int> pattern;
+
     
     ofRectangle myRect;
     textSqueez myText;
