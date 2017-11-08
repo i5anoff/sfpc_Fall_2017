@@ -3791,6 +3791,57 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>EF1D07A31474981C9DB30260</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasLissajous.h</string>
+				<key>path</key>
+				<string>src/scenes/niklasLissajous/niklasLissajous.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>86BC8F0D15B8E14DF4F71111</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>65B7AAFBB9295603144D50D5</string>
+					<string>EF1D07A31474981C9DB30260</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>niklasLissajous</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>BA59F0A05B25509E8DEE19BF</key>
+			<dict>
+				<key>fileRef</key>
+				<string>65B7AAFBB9295603144D50D5</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>65B7AAFBB9295603144D50D5</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>niklasLissajous.cpp</string>
+				<key>path</key>
+				<string>src/scenes/niklasLissajous/niklasLissajous.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>90F9827ECBA561F3D00A4EC9</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -5698,6 +5749,7 @@
 					<string>EEA79B8669D150AB53A05FB2</string>
 					<string>9C3F5CB926006B525166E4DA</string>
 					<string>AD7A5CD273D9677A89AFFEE3</string>
+					<string>86BC8F0D15B8E14DF4F71111</string>
 					<string>EACABBC2767221917E2F3757</string>
 					<string>BF57E2A381C4A63033A52791</string>
 					<string>47A8BC3A7B10FF4EB3107CFF</string>
@@ -6007,6 +6059,7 @@
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
 						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
@@ -6143,6 +6196,7 @@
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
 						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
@@ -6281,6 +6335,7 @@
 					<string>203D9685D89D8A6D42285C68</string>
 					<string>08E30F8D5828117E48A7E046</string>
 					<string>0C7474F29FC7269C37053C38</string>
+					<string>BA59F0A05B25509E8DEE19BF</string>
 					<string>AD159DB2DCE91BE9E3D73AF8</string>
 					<string>5DEE3364A6688FB48ED3921B</string>
 					<string>35CC617D57D0561A1F39D1C5</string>
@@ -6480,6 +6535,7 @@
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
 						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>
@@ -6607,6 +6663,7 @@
 						<string>src/scenes/mgsVeraMolnarPseudo</string>
 						<string>src/scenes/mwalczykVeraSquares</string>
 						<string>src/scenes/niklas144Trapzes</string>
+						<string>src/scenes/niklasLissajous</string>
 						<string>src/scenes/niklasMolnar</string>
 						<string>src/scenes/niklasWhitneySineWave</string>
 						<string>src/scenes/ofxDataBender</string>

@@ -2,12 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
-    //    gui.setup();
+//    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
+        gui.setup();
     t.setup();
     
     // type basics
-    gui.add(unit.setup("unit", 5, 3, 15));
+    gui.add(unit.setup("unit", 1, 3, 15));
     
     
     // type position
@@ -34,7 +34,13 @@ void ofApp::setup(){
 
     //layout
     ofSetBackgroundColor(244);
-    padding = 60;
+    padding = 80;
+    
+    
+    
+    
+    
+    
     
 }
 
@@ -46,7 +52,7 @@ void ofApp::update(){
     h = 20 * unit;
     lineHeight = h * 1.35;
     leading = 3 * unit;
-    blank = 14 * unit;
+    blank = 7 * unit;
     
     // animation
     elapsedTime = ofGetElapsedTimef() - startTime;
@@ -107,7 +113,7 @@ void ofApp::draw(){
     
     
     ofTranslate(padding,padding);
-    
+//    ofScale(0.5, 0.5);
     
     for(int i = 0; i < letters.size(); i++){
         t.draw(letters[i], xPos[i-1], yPos[i],
@@ -164,7 +170,7 @@ void ofApp::inActiveAnimation(){
     if(bIsInactive){
         inactElapsedTime = ofGetElapsedTimef() - inactStartTime;
         inactPct = inactElapsedTime / 20;
-        inactPct = powf(inactPct, .5);
+        inactPct = powf(inactPct, .8);
         
         if (inactPct > 1) inactPct = 1;
             modInact = (1-inactPct) * 0 + inactPct * 60;
@@ -198,10 +204,10 @@ void ofApp::xyUpdate(){
         else                            xPosTemp += width[i] + leading;
         xPos.push_back(xPosTemp);
         
-        if (xPosTemp > ofGetWidth() - (padding)){
-            lines.erase(lines.end()-1);
-            lines.push_back("newLine");
-        }
+//        if (xPosTemp > ofGetWidth() - (padding)){
+//            lines.erase(lines.end()-1);
+//            lines.push_back("newLine");
+//        }
     }
 }
 //--------------------------------------------------------------

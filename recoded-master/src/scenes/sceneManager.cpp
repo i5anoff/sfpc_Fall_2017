@@ -13,6 +13,7 @@
 //sketches niklas
 #include "niklasMolnar.h"
 #include "niklasWhitneySineWave.h"
+#include "niklasLissajous.h"
 
 #include "exampleScene.h"
 #include "triangleScene.h"
@@ -78,8 +79,10 @@ void sceneManager::setup(){
     font.load("fonts/ProggySmall.fon", 8, false ,false, false, 0, 96);
 
     //sketches niklas
+    scenes.push_back(new niklasLissajous());
     scenes.push_back(new niklasMolnar());
     scenes.push_back(new niklasWhitneySineWave());
+
 
 
     scenes.push_back(new zachTest());
