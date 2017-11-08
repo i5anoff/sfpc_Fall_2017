@@ -151,7 +151,7 @@ void textSqueez::update(){
         pctS = 0;
     }
 
-    
+    cout << pctS << endl;
     if(pctS > 0.99){
         startTime = ofGetElapsedTimef();
         counter += 1;
