@@ -8,8 +8,10 @@ void niklasMorisawa::setup(){
     setOriginalArtist("John Maeda");
     loadCode("scenes/yourProjectName/exampleCode.cpp");
     
-    pattern.set("Pattern", 2, 1, 10);
+    pattern.set("Mod", 2, 1, 10);
         parameters.add(pattern);
+    remainder.set("Remainder", 1, 0, 1);
+//        parameters.add(remainder);
     
     myRect.set(0, 0, 300, 100);
     myText.setup();
@@ -45,6 +47,7 @@ void niklasMorisawa::draw(){
     float y = 0;
     
     int counter = 0;
+
     
     for (int i = 0; i < 9 ; i++) {
         float numElements ;
@@ -53,6 +56,7 @@ void niklasMorisawa::draw(){
         }    if(numElements > 6){
             numElements /= 2;
         }
+
         float grid = width / numElements;
         float scale = grid / myText.bound1.getWidth();
         
@@ -73,8 +77,13 @@ void niklasMorisawa::draw(){
             ofScale(scale, scale);
             ofTranslate(-myText.bound1.getWidth() * 0.5, -(myText.bound1.getHeight()*1.1) * 0.5);
             
-            if (counter % pattern == 1) {
-                myText.draw(+1);
+            
+            if(pattern == 1){
+                myText.draw(counter % 2);
+            }
+            if(counter % pattern == remainder){
+                myText.draw(counter % 2);
+
             }
             
             ofPopMatrix();
@@ -181,12 +190,13 @@ void textSqueez::draw(int counterIn){
     ofSetColor(15);
     
     
-    
     counter += counterIn;
-    
+    cout << "cIn: " << counterIn << " c: " << counter << endl;
+
     ofTranslate(0, bound1.height);
-    
-    if( counter % 2 == 0){
+//    if( counter % 2 == 0){
+
+    if( counterIn % 2 == 0){
         ofPushMatrix();
         ofScale(scaleA1, 1);
         ofTranslate(-bound1.x, 0);
