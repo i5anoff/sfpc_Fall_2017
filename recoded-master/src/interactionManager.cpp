@@ -58,20 +58,20 @@ void interactionManager::update()
             {
                 if (strings[0] == "a" && strings[5] == "z")
                 {
-                    
-                    
+
+
                     bGotPacket = true;
                     for (int i = 0; i < 4; i++)
                     {
                         currPacket.knobValues[i] = ofToFloat(strings[i + 1])/4096.0;
                         ///cout << "i " << i << " " << currPacket.knobValues[i]  << endl;
-                        
+
                     }
                 }
             }
         }
     }
-    //cout << byte;
+//    cout << byte;
 
     bool bChange = false;
     
@@ -97,7 +97,7 @@ void interactionManager::update()
                 if (change > .5) change -=1;
 //                cout << currPacket.knobValues[i] << endl;
 //                cout << prevPacket.knobValues[i] << endl;
-//                
+//
                 
                 int which = knobMappings[i];
                 float pctDiff = currPacket.knobValues[i]-prevPacket.knobValues[i];
@@ -106,7 +106,7 @@ void interactionManager::update()
                 // todo :
     //            if (IM.bInteracting) {
     //                int numParams = MIN(SM.scenes[SM.currentScene]->midiKnobs.size(),4);
-    //                
+    //
     //                for (int i=0; i<numParams; i++) {
     //                    float val = IM.prevPacket.knobValues[i];
     //                    cout << "setting param " << i << " to " << val << endl;
@@ -136,13 +136,13 @@ void interactionManager::update()
     }
     //--------------------------------------------- send outgoing packet
 }
-    
+
 void interactionManager::turnOffLEDs() {
     this->setLEDs(0,0,0,0);
 }
 
 void interactionManager::setLEDs(int led1, int led2, int led3, int led4) {
-    int ledValuesByte = (led1 & 0x1) + ((led2 & 0x1) << 1) + ((led3 & 0x1) << 2) + ((led4 & 0x1) << 3); 
+    int ledValuesByte = (led1 & 0x1) + ((led2 & 0x1) << 1) + ((led3 & 0x1) << 2) + ((led4 & 0x1) << 3);
     serial.writeByte(ledValuesByte);
 }
 

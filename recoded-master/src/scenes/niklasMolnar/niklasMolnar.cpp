@@ -9,20 +9,20 @@ void niklasMolnar::setup(){
     scale =  0.613;
     framePad = 0.82;
     
-    grid.set("number elements", 3, 1, 50);
+    grid.set("grid", 3, 1, 50);
         parameters.add(grid);
-    rectCopy.set("inner copys", 32, 1, 100);
+    rectCopy.set("inner copys", 25, 1, 100);
         parameters.add(rectCopy);
-    randMin.set("distortion max value", 200, 0, 200);
+    randMin.set("Random max value", 117, 0, 200);
         parameters.add(randMin);
-    randMax.set("distortion min value", -35, 0, -200);
+    randMax.set("randMin min value", -117, 0, -200);
         parameters.add(randMax);
     
     
     timeStamp = ofGetElapsedTimef();
 
     setAuthor("Niklas May");
-    setOriginalArtist("Vera Monar");
+    setOriginalArtist("Vera Molnar");
     loadCode("scenes/niklasMolnar/exampleCode.cpp");
     
 }
@@ -32,8 +32,8 @@ void niklasMolnar::update(){
     rectSizeY = scale * 1.25;
     gridW = grid;
     gridH = grid;
-    gridUnitW = VISUALS_WIDTH * framePad / (gridW);
-    gridUnitH = VISUALS_HEIGHT * framePad / (gridH);
+    gridUnitW = dimensions.width * framePad / (gridW);
+    gridUnitH = dimensions.height * framePad / (gridH);
     
     if (random % 3 == 0) {
         if (ofGetElapsedTimef() - timeStamp > 0.5){
@@ -75,14 +75,17 @@ void niklasMolnar::drawRectangle( ofPoint a, ofPoint b, ofPoint c, ofPoint d){
     
 }
 void niklasMolnar::draw(){
-    ofSetBackgroundColor(15);
-    ofSetColor(240);
+    ofPushStyle();
+        ofSetColor(240);
+        ofDrawRectangle(dimensions);
+    ofPopStyle();
+    ofSetColor(15);
     
     ofSeedRandom(random);
     
     
-    ofTranslate((VISUALS_WIDTH - (VISUALS_WIDTH * framePad)) / 2,         //push grid in center
-                (VISUALS_HEIGHT - (VISUALS_HEIGHT * framePad)) / 2);
+    ofTranslate((dimensions.width - (dimensions.width * framePad)) / 2,         //push grid in center
+                (dimensions.height - (dimensions.height * framePad)) / 2);
     
     for (int i = 0; i < gridW; i++) {
         for (int j = 0; j < gridH; j++){
@@ -94,9 +97,9 @@ void niklasMolnar::draw(){
             
             ofScale(rectSizeX, rectSizeY);
             
-            ofPoint a = ofPoint(0 + ofRandom(randMin, randMax), 0);                   // draw from 0, 0
-            ofPoint b = ofPoint(gridUnitW + ofRandom(randMin, randMax), 0);
-            ofPoint c = ofPoint(0 + ofRandom(randMin, randMax), gridUnitH);
+            ofPoint a = ofPoint(1 + ofRandom(randMin, randMax), 1);                   // draw from 0, 0
+            ofPoint b = ofPoint(gridUnitW + ofRandom(randMin, randMax), 1);
+            ofPoint c = ofPoint(1 + ofRandom(randMin, randMax), gridUnitH);
             ofPoint d = ofPoint(gridUnitW + ofRandom(randMin, randMax), gridUnitH);
             drawRectangle(a, b, c, d);
             

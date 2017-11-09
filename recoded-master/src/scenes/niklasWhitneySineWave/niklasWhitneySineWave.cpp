@@ -61,7 +61,7 @@ float niklasWhitneySineWave::drawYElements(float xIn, float yIn, float wIn, floa
 
 void niklasWhitneySineWave::update(){
     frame = .6;
-    frameHeight = VISUALS_HEIGHT * frame;
+    frameHeight = dimensions.height * frame;
     
     x[0] = 0;
     
@@ -80,10 +80,14 @@ void niklasWhitneySineWave::update(){
 
 void niklasWhitneySineWave::draw(){
 
-//    ofSetBackgroundColor(240);
-    ofSetColor(240);
+    ofPushStyle();
+        ofSetColor(240);
+        ofDrawRectangle(dimensions);
+    ofPopStyle();
     
-    ofTranslate((VISUALS_WIDTH - totalWidth) * 0.5, (VISUALS_HEIGHT - frameHeight) * 0.5);
+    ofSetColor(15);
+    
+    ofTranslate((dimensions.width - totalWidth) * 0.5, (dimensions.height - frameHeight) * 0.5);
     
     for (int i = 0; i < xElements; i++) {
         drawYElements(x[i], 0, 0, frameHeight, scale[i]);
