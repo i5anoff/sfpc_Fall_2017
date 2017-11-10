@@ -789,7 +789,7 @@ void hashMono::setup(){
     
     letterShape tempExclamationMark;
     exclamationMark.kerning = 0;
-        tempExclamationMark.lineType(true, true); // c vert
+        tempExclamationMark.lineType(true); // c vert
         tempExclamationMark.pts[0].set(1,0, 1, 0,w7,0, 0,0);
         tempExclamationMark.pts[1].set(1,0, 1, 0,w7,0, h14,0);
         exclamationMark.shapes.push_back(tempExclamationMark);

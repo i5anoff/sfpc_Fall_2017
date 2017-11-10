@@ -70,12 +70,17 @@ void ofApp::update(){
     for(int i = 0; i < letters.size(); i++){
         
         noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)), 0, 1, 0.8, 1.2);
-        if((i + patOff - modInact) % mod1 == 1)          wTemp = w * 1.91;
+        
+        if(letters[i] == "fullStop" || letters[i] == "colon" || letters[i] == "comma" || letters[i] == "exclamationMark" || letters[i] == "questionMark" || letters[i] == "dash" || letters[i] == "apostrophe"){
+            wTemp = w * 1.3;
+        }
+        
+        else if((i + patOff - modInact) % mod1 == 1)          wTemp = w * 1.91;
         else if((i + 1 + patOff - modInact) % mod2 == 1)     wTemp = w * 3.08;
         else                                   wTemp = w * 1.3;
         
-//        width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
-        width.push_back(w);
+        width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
+//        width.push_back(w);
     }
     
     horAlt.clear();
@@ -84,7 +89,7 @@ void ofApp::update(){
         
         if ((i + patOff - modInact) % mod2 == 1) horAltTemp = true;
         else horAltTemp = false;
-        horAlt.push_back(false);
+        horAlt.push_back(horAltTemp);
     }
     
     downStrokeAlt.clear();
@@ -93,7 +98,7 @@ void ofApp::update(){
         
         if ((i + patOff - modInact) % mod3 == 1) downStrokeAltTemp = true;
         else downStrokeAltTemp = false;
-        downStrokeAlt.push_back(false);
+        downStrokeAlt.push_back(downStrokeAltTemp);
         
     }
     
@@ -103,7 +108,7 @@ void ofApp::update(){
         
         if ((i + patOff - modInact) % mod4 == 1) horAlt2Temp = true;
         else horAlt2Temp = false;
-        horAlt2.push_back(false);
+        horAlt2.push_back(horAlt2Temp);
         
     }
 
@@ -134,7 +139,6 @@ void ofApp::draw(){
                horAlt[i],
                horAlt2[i]);
     }
-    
     
     
     
