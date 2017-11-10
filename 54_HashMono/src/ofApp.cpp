@@ -74,7 +74,8 @@ void ofApp::update(){
         else if((i + 1 + patOff - modInact) % mod2 == 1)     wTemp = w * 3.08;
         else                                   wTemp = w * 1.3;
         
-        width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
+//        width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
+        width.push_back(w);
     }
     
     horAlt.clear();
@@ -83,7 +84,7 @@ void ofApp::update(){
         
         if ((i + patOff - modInact) % mod2 == 1) horAltTemp = true;
         else horAltTemp = false;
-        horAlt.push_back(horAltTemp);
+        horAlt.push_back(false);
     }
     
     downStrokeAlt.clear();
@@ -92,7 +93,7 @@ void ofApp::update(){
         
         if ((i + patOff - modInact) % mod3 == 1) downStrokeAltTemp = true;
         else downStrokeAltTemp = false;
-        downStrokeAlt.push_back(downStrokeAltTemp);
+        downStrokeAlt.push_back(false);
         
     }
     
@@ -102,14 +103,12 @@ void ofApp::update(){
         
         if ((i + patOff - modInact) % mod4 == 1) horAlt2Temp = true;
         else horAlt2Temp = false;
-        horAlt2.push_back(horAlt2Temp);
+        horAlt2.push_back(false);
         
     }
 
     xyUpdate();
-    
-        inActiveAnimation();
-
+    inActiveAnimation();
     
     if(elapsedTime > 10){
         if (ofGetFrameNum() % (60*8) == 0){
@@ -125,7 +124,6 @@ void ofApp::draw(){
     
     
     ofTranslate(padding,padding);
-//    ofScale(0.5, 0.5);
     
     for(int i = 0; i < letters.size(); i++){
         t.draw(letters[i], xPos[i-1], yPos[i],
@@ -136,6 +134,7 @@ void ofApp::draw(){
                horAlt[i],
                horAlt2[i]);
     }
+    
     
     
     
@@ -153,7 +152,6 @@ void ofApp::draw(){
 //    widthPrev.size() <<
 //    " letter count: " <<
 //    endl;
-    
     
 }
 
@@ -187,7 +185,7 @@ void ofApp::inActiveAnimation(){
         if (inactPct > 1) inactPct = 1;
             modInact = (1-inactPct) * 0 + inactPct * 60;
         }
-    cout << "inact mod: " << modInact << endl;
+//    cout << "inact mod: " << modInact << endl;
 
 }
 
@@ -225,6 +223,7 @@ void ofApp::xyUpdate(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
+    
     // animation
     startTime = ofGetElapsedTimef();
     patOff = ofRandom(1,6);
@@ -244,12 +243,43 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     
+    cout << key << endl;
+
+    
     if (key == 32 && letters.size() > 0) {
         blanks.erase(blanks.end()-1);
         blanks.push_back("blank");
     }
     if (key == 13 && letters.size() > 0){
         lines.erase(lines.end()-1);
+        lines.push_back("newLine");
+    }
+    if (key == 87){ // .
+//        lines.erase(lines.end()-1);
+        lines.push_back("newLine");
+    }
+    if (key == 46){ // ,
+        //        lines.erase(lines.end()-1);
+        lines.push_back("newLine");
+    }
+    if (key == 58){ // :
+        //        lines.erase(lines.end()-1);
+        lines.push_back("newLine");
+    }
+    if (key == 95){ // -
+        //        lines.erase(lines.end()-1);
+        lines.push_back("newLine");
+    }
+    if (key == 33){ // !
+        letters.push_back("exclamationMark");
+        blanksAndLinesNull();
+    }
+    if (key == 63){ // ?
+        //        lines.erase(lines.end()-1);
+        lines.push_back("newLine");
+    }
+    if (key == 39){ // '
+        //        lines.erase(lines.end()-1);
         lines.push_back("newLine");
     }
     if (key == 'a') {

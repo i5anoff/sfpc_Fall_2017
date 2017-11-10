@@ -25,7 +25,9 @@ void hashMono::setup(){
     float h11 = 11 * yUnit;
     float h13 = 13 * yUnit;
     float h14 = 14 * yUnit;
+    float h15 = 15 * yUnit;
     float h16 = 16 * yUnit;
+    float h18 = 18 * yUnit;
     float h23 = 23 * yUnit;
 
     float r1 =  15;
@@ -751,6 +753,20 @@ void hashMono::setup(){
         tempZ.pts[1].set(1,0, 1, 0,w12,0, 1,0);
         Z.shapes.push_back(tempZ);
     
+    letterShape tempExclamationMark;
+    exclamationMark.kerning = 0;
+        tempExclamationMark.lineType(true, true); // c vert
+        tempExclamationMark.pts[0].set(1,0, 1, 0,w7,0, 0,0);
+        tempExclamationMark.pts[1].set(1,0, 1, 0,w7,0, h15,0);
+        exclamationMark.shapes.push_back(tempExclamationMark);
+    
+        tempExclamationMark.lineType(true); // dot
+        tempExclamationMark.pts[0].set(1,0, 1, 0,w7,0, h18,0);
+        tempExclamationMark.pts[1].set(1,0, 1, 0,w7,0, 1, 0);
+        exclamationMark.shapes.push_back(tempExclamationMark);
+    
+
+    
 }
 
 
@@ -769,6 +785,10 @@ void hashMono::draw(string letter,
                     bool downStrokeAlt,
                     bool horAlt,
                     bool horAlt2){
+    
+    if (letter == "exclamationMark") {
+        exclamationMark.draw(LETTERARGUMENTS);
+    }
     if (letter == "A") {
         A.draw(LETTERARGUMENTS);
     }
@@ -847,5 +867,6 @@ void hashMono::draw(string letter,
     if (letter == "Z") {
         Z.draw(LETTERARGUMENTS);
     }
+
 
 }
