@@ -254,33 +254,33 @@ void ofApp::keyReleased(int key){
         lines.erase(lines.end()-1);
         lines.push_back("newLine");
     }
-    if (key == 87){ // .
-//        lines.erase(lines.end()-1);
-        lines.push_back("newLine");
-    }
-    if (key == 46){ // ,
-        //        lines.erase(lines.end()-1);
-        lines.push_back("newLine");
+    if (key == 46){ // .
+        letters.push_back("fullStop");
+        blanksAndLinesNull();
     }
     if (key == 58){ // :
-        //        lines.erase(lines.end()-1);
-        lines.push_back("newLine");
+        letters.push_back("colon");
+        blanksAndLinesNull();
     }
-    if (key == 95){ // -
-        //        lines.erase(lines.end()-1);
-        lines.push_back("newLine");
+    if (key == 44){ // ,
+        letters.push_back("comma");
+        blanksAndLinesNull();
     }
     if (key == 33){ // !
         letters.push_back("exclamationMark");
         blanksAndLinesNull();
     }
     if (key == 63){ // ?
-        //        lines.erase(lines.end()-1);
-        lines.push_back("newLine");
+        letters.push_back("questionMark");
+        blanksAndLinesNull();
+    }
+    if (key == 95){ // -
+        letters.push_back("dash");
+        blanksAndLinesNull();
     }
     if (key == 39){ // '
-        //        lines.erase(lines.end()-1);
-        lines.push_back("newLine");
+        letters.push_back("apostrophe");
+        blanksAndLinesNull();
     }
     if (key == 'a') {
         letters.push_back("A");

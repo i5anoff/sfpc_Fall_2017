@@ -240,7 +240,15 @@ public:
     letter X;
     letter Y;
     letter Z;
+    letter fullStop;
+    letter colon;
+    letter comma;
     letter exclamationMark;
+    letter questionMark;
+    letter dash;
+    letter apostrophe;
+
+
 
     
 };

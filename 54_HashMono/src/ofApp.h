@@ -68,7 +68,13 @@ public:
     
     vector < float > widthPrev;
 
-    
+    letter fullStop;
+    letter colon;
+    letter comma;
+    letter exclamationMark;
+    letter questionMark;
+    letter dash;
+    letter apostrophe;
     
     // type position
     vector < string > letters;

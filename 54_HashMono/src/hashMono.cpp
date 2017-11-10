@@ -18,6 +18,8 @@ void hashMono::setup(){
     float w12 = 12 * xUnit;
 
     float yUnit = 0.05;
+    float h5 = 5 * yUnit;
+    float h6 = 6 * yUnit;
     float h7 = 7 * yUnit;
     float h8 = 8 * yUnit;
     float h9 = 9 * yUnit;
@@ -27,11 +29,16 @@ void hashMono::setup(){
     float h14 = 14 * yUnit;
     float h15 = 15 * yUnit;
     float h16 = 16 * yUnit;
+    float h17 = 17 * yUnit;
     float h18 = 18 * yUnit;
+    float h20 = 20 * yUnit;
+    float h21 = 21 * yUnit;
     float h23 = 23 * yUnit;
+    float h24 = 23 * yUnit;
 
     float r1 =  15;
     float r2 =  20;
+    float r3 =  5;
 
     letterShape tempA;
     A.kerning = 0;
@@ -753,17 +760,104 @@ void hashMono::setup(){
         tempZ.pts[1].set(1,0, 1, 0,w12,0, 1,0);
         Z.shapes.push_back(tempZ);
     
+    letterShape tempFullStop;
+        fullStop.kerning = 0;
+        tempFullStop.lineType(true); // dot
+        tempFullStop.pts[0].set(1,0, 1, 0,w7,0, h17,0);
+        tempFullStop.pts[1].set(1,0, 1, 0,w7,0, 1, 0);
+        fullStop.shapes.push_back(tempFullStop);
+    
+    letterShape tempColon;
+        colon.kerning = 0;
+        tempColon.lineType(true); // t
+        tempColon.pts[0].set(1,0, 1, 0,w7,0, h17,0);
+        tempColon.pts[1].set(1,0, 1, 0,w7,0, 1, 0);
+        colon.shapes.push_back(tempColon);
+    
+        tempColon.lineType(true); // b
+        tempColon.pts[0].set(1,0, 1, 0,w7,0, h5,0);
+        tempColon.pts[1].set(1,0, 1, 0,w7,0, h8, 0);
+        colon.shapes.push_back(tempColon);
+    
+    letterShape tempComma;
+        comma.kerning = 0;
+        tempComma.lineType(true);
+        tempComma.pts[0].set(1,0, 1, 0,w7,0, h18,0);
+        tempComma.pts[1].set(1,0, 1, 0,w7,0, h24, 0);
+        comma.shapes.push_back(tempComma);
+    
+    
     letterShape tempExclamationMark;
     exclamationMark.kerning = 0;
         tempExclamationMark.lineType(true, true); // c vert
         tempExclamationMark.pts[0].set(1,0, 1, 0,w7,0, 0,0);
-        tempExclamationMark.pts[1].set(1,0, 1, 0,w7,0, h15,0);
+        tempExclamationMark.pts[1].set(1,0, 1, 0,w7,0, h14,0);
         exclamationMark.shapes.push_back(tempExclamationMark);
     
         tempExclamationMark.lineType(true); // dot
-        tempExclamationMark.pts[0].set(1,0, 1, 0,w7,0, h18,0);
+        tempExclamationMark.pts[0].set(1,0, 1, 0,w7,0, h17,0);
         tempExclamationMark.pts[1].set(1,0, 1, 0,w7,0, 1, 0);
         exclamationMark.shapes.push_back(tempExclamationMark);
+    
+    letterShape tempQuestionMark;
+        questionMark.kerning = 0;
+        tempQuestionMark.lineType(false); // tl
+        tempQuestionMark.center.set(1,r1, 1, r1,0,0, 0,0);
+        tempQuestionMark.startAngle = PI;
+        tempQuestionMark.radius = r1;
+        questionMark.shapes.push_back(tempQuestionMark);
+    
+        tempQuestionMark.lineType(true); // t hor
+        tempQuestionMark.pts[0].set(1, r1, 1, 0, 0, 0, 0, 0);
+        tempQuestionMark.pts[1].set(1, 0, 1, 0, w12, -r1, 0, 0);
+        questionMark.shapes.push_back(tempQuestionMark);
+    
+        tempQuestionMark.lineType(false); // tr
+        tempQuestionMark.center.set(1,0, 1, r1, w12,-r1, 0,0);
+        tempQuestionMark.startAngle = 3*PI/2.0;
+        tempQuestionMark.radius = r1;
+        questionMark.shapes.push_back(tempQuestionMark);
+    
+        tempQuestionMark.lineType(true); // tr
+        tempQuestionMark.pts[0].set(1,0, 1, 0,w12,0, 0,r1);
+        tempQuestionMark.pts[1].set(1,0, 1, 0,w12,0, h10,-r1);
+        questionMark.shapes.push_back(tempQuestionMark);
+
+        tempQuestionMark.lineType(false); // r m
+        tempQuestionMark.center.set(1,0, 1, -r1, w12, -r1, h10, 0);
+        tempQuestionMark.startAngle = 0;
+        tempQuestionMark.radius = r1;
+        questionMark.shapes.push_back(tempQuestionMark);
+    
+        tempQuestionMark.lineType(true); // m hor
+        tempQuestionMark.pts[0].set(1, 0, 1, 0, w7, 0, h10, 0);
+        tempQuestionMark.pts[1].set(1, 0, 1, 0, w12, -r1, h10, 0);
+        questionMark.shapes.push_back(tempQuestionMark);
+    
+        tempQuestionMark.lineType(true); // c vert
+        tempQuestionMark.pts[0].set(1,0, 1, 0,w7,0, h10, 0);
+        tempQuestionMark.pts[1].set(1,0, 1, 0,w7,0, h14,0);
+        questionMark.shapes.push_back(tempQuestionMark);
+    
+        tempQuestionMark.lineType(true); // dot
+        tempQuestionMark.pts[0].set(1,0, 1, 0,w7,0, h17,0);
+        tempQuestionMark.pts[1].set(1,0, 1, 0,w7,0, 1, 0);
+        questionMark.shapes.push_back(tempExclamationMark);
+    
+    letterShape tempDash;
+        dash.kerning = 0;
+        tempDash.lineType(true);
+        tempDash.pts[0].set(1,0, 1, 0,w2,0, h11,0);
+        tempDash.pts[1].set(1,0, 1, 0,1,0, h11,0);
+        dash.shapes.push_back(tempDash);
+    
+    letterShape tempApostrophe;
+        apostrophe.kerning = 0;
+        tempApostrophe.lineType(true);
+        tempApostrophe.pts[0].set(1,0, 1, 0,w7,0, 0,0);
+        tempApostrophe.pts[1].set(1,0, 1, 0,w7,0, h6,0);
+        apostrophe.shapes.push_back(tempApostrophe);
+    
     
 
     
@@ -786,8 +880,26 @@ void hashMono::draw(string letter,
                     bool horAlt,
                     bool horAlt2){
     
+    if (letter == "fullStop") {
+        fullStop.draw(LETTERARGUMENTS);
+    }
+    if (letter == "colon") {
+        colon.draw(LETTERARGUMENTS);
+    }
+    if (letter == "comma") {
+        comma.draw(LETTERARGUMENTS);
+    }
     if (letter == "exclamationMark") {
         exclamationMark.draw(LETTERARGUMENTS);
+    }
+    if (letter == "questionMark") {
+        questionMark.draw(LETTERARGUMENTS);
+    }
+    if (letter == "dash") {
+        dash.draw(LETTERARGUMENTS);
+    }
+    if (letter == "apostrophe") {
+        apostrophe.draw(LETTERARGUMENTS);
     }
     if (letter == "A") {
         A.draw(LETTERARGUMENTS);
