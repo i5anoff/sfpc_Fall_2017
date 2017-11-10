@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
-//        gui.setup();
+        gui.setup();
     t.setup();
     
     // type basics
@@ -24,13 +24,16 @@ void ofApp::setup(){
     
     bIsInactive = false;
     modInact = 0;
+    bIsAnimation = true;
+    bIsAnimationText = "on";
     
     //type manipulation
-    gui.add(mod1.setup("mod1", 4, 1, 20));
-    gui.add(mod2.setup("mod2", 4, 1, 20));
-    gui.add(mod3.setup("mod3", 2, 1, 20));
-    gui.add(mod4.setup("mod4", 4, 1, 20));
-    gui.add(mod5.setup("mod5", 1, 1, 20));
+    gui.add(mod2.setup("width 1", 4, 1, 10));
+    gui.add(mod3.setup("width 2", 2, 1, 10));
+    gui.add(mod1.setup("verAlt1", 4, 1, 10));
+    gui.add(mod5.setup("horAalt 1", 2, 1, 10));
+    gui.add(mod4.setup("horAlt 2", 4, 1, 10));
+
 
     //layout
     ofSetBackgroundColor(255);
@@ -87,7 +90,7 @@ void ofApp::update(){
     bool horAltTemp = false;
     for (int i = 0; i < letters.size(); i++){
         
-        if ((i + patOff - modInact) % mod2 == 1) horAltTemp = true;
+        if ((i + patOff - modInact) % mod5 == 1) horAltTemp = true;
         else horAltTemp = false;
         horAlt.push_back(horAltTemp);
     }
@@ -113,21 +116,23 @@ void ofApp::update(){
     }
 
     xyUpdate();
-    inActiveAnimation();
     
-    if(elapsedTime > 10){
-        if (ofGetFrameNum() % (60*8) == 0){
-            keyPressed(32);
-        };
+    if(bIsAnimation){
+       inActiveAnimation();
+        if(elapsedTime > 10){
+            if (ofGetFrameNum() % (60*8) == 0){
+                keyPressed(32);
+            };
+        }
     }
     
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    gui.draw();
+//    gui.draw();
     
-    
+    ofPushMatrix();
     ofTranslate(padding,padding);
     
     for(int i = 0; i < letters.size(); i++){
@@ -139,6 +144,7 @@ void ofApp::draw(){
                horAlt[i],
                horAlt2[i]);
     }
+    ofPopMatrix();
     
     
     
@@ -157,6 +163,20 @@ void ofApp::draw(){
 //    " letter count: " <<
 //    endl;
     
+    stringstream parameters;
+    parameters <<
+    "size: " << unit <<
+    " | width1: " << mod2 <<
+    " | width2: " << mod3 <<
+    " | verticalAlt: " << mod1 <<
+    " | horizontalAlt1: " << mod5 <<
+    " | horizontalAlt2: " << mod4 <<
+    " | autoAnimation: " << bIsAnimationText <<
+    endl;
+    
+
+    ofDrawBitmapStringHighlight(parameters.str(), 30, ofGetHeight() - 30, 255, 170);
+    cout << bIsAnimation << endl;
 }
 
 //--------------------------------------------------------------
@@ -248,7 +268,87 @@ void ofApp::keyPressed(int key){
 void ofApp::keyReleased(int key){
     
     cout << key << endl;
+    
+    /// contols
+    
+    if (key == 257 || key == 258) { // unit
+        if(key == 257){
+            unit = unit - 1;
+        }
+        if(key == 258){
+            unit = unit + 1;
+        }
+    }
+    if (key == 259 || key == 260) { // w1, mod1
+        if(key == 259){
+            mod1 = mod1 - 1;
+        }
+        if(key == 260){
+            mod1 =  mod1 + 1;
+        }
+    }
+    if (key == 261 || key == 262) { // w2, mod2
+        if(key == 261){
+            mod2 = mod2 - 1;
+        }
+        if(key == 262){
+            mod2 = mod2 + 1;
+        }
+    }
+    if (key == 263 || key == 264) { // v alt, mod3
+        if(key == 263){
+            mod3 = mod3 - 1;
+        }
+        if(key == 264){
+            mod3 = mod3 + 1;
+        }
+    }
+    if (key == 265 || key == 266) { // h alt1, mod5
+        if(key == 265){
+            mod5 = mod5 - 1;
+        }
+        if(key == 266){
+            mod5 = mod5 + 1;
+        }
+    }
+    if (key == 267 || key == 268) { // h alt2, mod4
+        if(key == 267){
+            mod4 = mod4 - 1;
+        }
+        if(key == 268){
+            mod4 = mod4 + 1;
+        }
+    }
+    if (key == 9) { // animation
+        if(bIsAnimation == true) {
+            bIsAnimation = false;
+            bIsAnimationText = "off";
+        }
+        else {
+            bIsAnimation = true;
+            bIsAnimationText = "on";
+        }
+        
+    }
+    if (key == 96){ //default
+        mod1 = 4;
+        mod2 = 4;
+        mod3 = 2;
+        mod4 = 4;
+        mod5 = 2;
+        unit = 4;
+        bIsAnimation = true;
+    }
 
+//           gui.add(unit.setup("unit", 4, 3, 15));
+
+//    gui.add(mod1.setup("mod1", 4, 1, 20));
+//    gui.add(mod2.setup("mod2", 4, 1, 20));
+//    gui.add(mod3.setup("mod3", 2, 1, 20));
+//    gui.add(mod4.setup("mod4", 4, 1, 20));
+//    gui.add(mod5.setup("mod5", 1, 1, 20));
+
+    
     
     if (key == 32 && letters.size() > 0) {
         blanks.erase(blanks.end()-1);

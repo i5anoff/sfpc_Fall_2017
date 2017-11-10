@@ -52,6 +52,8 @@ public:
     float inactElapsedTime;
     float inactPct;
     int modInact;
+    bool bIsAnimation;
+    string bIsAnimationText;
 
     
     // type manipulation
