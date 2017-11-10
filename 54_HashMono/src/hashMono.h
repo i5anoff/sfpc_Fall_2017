@@ -53,7 +53,7 @@ public:
     bool bIsLine;
     bool bIsDownStrokAlt;
     bool bIsHorAlt;
-    bool bIshorAlt2;
+    bool bIsHorAlt2;
 
     
     // if line!
@@ -69,7 +69,7 @@ public:
         bIsLine = line;
         bIsHorAlt = horAlt;
         bIsDownStrokAlt = downStrokAlt;
-        bIshorAlt2 = horAlt2;
+        bIsHorAlt2 = horAlt2;
     }
     
     void draw( float x, float y, int letterCount, float w, float h, bool downStrokAlt, bool horAlt, bool horAlt2) {
@@ -127,10 +127,38 @@ public:
                 }
           
             }
-            
-//            if (bIsHorAlt == false &&  bIsDownStrokAlt == false){
-                else {
+            if (bIsHorAlt2){
+                
+                if(horAlt2){
+                    for(int i = 0; i < 2; i++){
+                        ofPushStyle();
+                            ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+                            if(i == 0) ofSetColor(c2);
+                            if(i == 1) ofSetColor(c3);
+                            ofSetLineWidth(lineL);
+                        
+                        ofPushMatrix();
+                            if(i == 0) ofTranslate(-(w*0.15), -(h*0.15));
+                            if(i == 1) ofTranslate(-(w*0.5), +(h*0.15));
+                        
+                            for (int j = 0; j < 2; j++){
+                                ofPushMatrix();
+                                    ofTranslate(j * (lineL * 0.9), j * (lineL * 0.9));
+                                    ofLine(ptA, ptB);
+                                ofPopMatrix();
+                            }
+                        
+                        ofPopMatrix();
+                            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+                        ofPopStyle();
+                    }
+                }
+                else{
                     ofLine(ptA, ptB);
+                    }
+            }
+            if(bIsHorAlt == false && bIsHorAlt2 == false ) {
+                ofLine(ptA, ptB);
             }
         }
         
@@ -143,33 +171,11 @@ public:
                 float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
                 line.addVertex( pt + (radius) * ofPoint(cos(angle), sin(angle)));
             }
-//            if(bIshorAlt2 && horAlt2){
-//                ofPushStyle();
-//                    ofSetColor(c3);
-//                    ofSetLineWidth(lineL);
-//                    line.clear();
-//                    for (int i = 0; i < 30; i++){
-//                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
-//                        line.addVertex( pt + (radius + (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
-//                    }
-//                    line.draw();
-//                    line.clear();
-//                    for (int i = 0; i < 30; i++){
-//                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
-//                        line.addVertex( pt + (radius - (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
-//                        ofSetColor(c3);
-//                        ofSetLineWidth(lineL);
-//                    line.draw();
-//                ofPopStyle();
-//                }
-//            }
-//            else{
                 ofPushStyle();
                 ofSetColor(c1);
                 line.draw();
                 ofPopStyle();
-//            }
-        }
+            }
         
         }
     

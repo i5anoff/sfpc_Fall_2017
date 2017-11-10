@@ -2,8 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-//    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
-        gui.setup();
+    gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
+//        gui.setup();
     t.setup();
     
     // type basics
