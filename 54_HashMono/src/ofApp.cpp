@@ -60,6 +60,9 @@ void ofApp::update(){
     pct = powf(pct, .5);
     if (pct > 1) pct = 1;
     
+
+    
+    
     prevUpdate();
 
     width.clear();
@@ -102,9 +105,18 @@ void ofApp::update(){
         horAlt2.push_back(horAlt2Temp);
         
     }
-//    inActiveAnimation();
 
     xyUpdate();
+    
+        inActiveAnimation();
+
+    
+    if(elapsedTime > 10){
+        if (ofGetFrameNum() % (60*8) == 0){
+            keyPressed(32);
+        };
+    }
+    
 }
 
 //--------------------------------------------------------------
