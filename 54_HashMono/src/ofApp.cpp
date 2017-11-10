@@ -7,7 +7,7 @@ void ofApp::setup(){
     t.setup();
     
     // type basics
-    gui.add(unit.setup("unit", 3, 3, 15));
+    gui.add(unit.setup("unit", 4, 3, 15));
     
     
     // type position
@@ -29,11 +29,11 @@ void ofApp::setup(){
     gui.add(mod1.setup("mod1", 4, 1, 20));
     gui.add(mod2.setup("mod2", 4, 1, 20));
     gui.add(mod3.setup("mod3", 2, 1, 20));
-    gui.add(mod4.setup("mod4", 0, 1, 20));
-    gui.add(mod5.setup("mod4", 0, 1, 20));
+    gui.add(mod4.setup("mod4", 4, 1, 20));
+    gui.add(mod5.setup("mod5", 1, 1, 20));
 
     //layout
-    ofSetBackgroundColor(244);
+    ofSetBackgroundColor(255);
     padding = 80;
     
     
@@ -69,7 +69,7 @@ void ofApp::update(){
         noise = ofMap(ofNoise(i * amp, (ofGetElapsedTimef() * speed)), 0, 1, 0.8, 1.2);
         if((i + patOff - modInact) % mod1 == 1)          wTemp = w * 1.91;
         else if((i + 1 + patOff - modInact) % mod2 == 1)     wTemp = w * 3.08;
-        else                                   wTemp = w;
+        else                                   wTemp = w * 1.3;
         
         width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
     }
@@ -93,13 +93,13 @@ void ofApp::update(){
         
     }
     
-    cirAlt.clear();
-    bool dcirAltTemp = false;
+    horAlt2.clear();
+    bool horAlt2Temp = false;
     for (int i = 0; i < letters.size(); i++){
         
-        if ((i + patOff - modInact) % mod3 == 1) dcirAltTemp = true;
-        else dcirAltTemp = false;
-        cirAlt.push_back(dcirAltTemp);
+        if ((i + patOff - modInact) % mod4 == 1) horAlt2Temp = true;
+        else horAlt2Temp = false;
+        horAlt2.push_back(horAlt2Temp);
         
     }
 //    inActiveAnimation();
@@ -122,7 +122,7 @@ void ofApp::draw(){
                h,
                downStrokeAlt[i],
                horAlt[i],
-               false);
+               horAlt2[i]);
     }
     
     

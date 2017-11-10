@@ -370,7 +370,7 @@ void hashMono::setup(){
         tempM.pts[1].set(1,0, 1, 0,w12,0, 1,0);
         M.shapes.push_back(tempM);
     
-        tempM.lineType(true); // l dia
+        tempM.lineType(true, false, false, true); // l dia
         tempM.pts[0].set(1,0, 1, 0,0,0, 0,0);
         tempM.pts[1].set(1,0, 1, 0,w6,0, h14,0);
         M.shapes.push_back(tempM);
@@ -768,7 +768,7 @@ void hashMono::draw(string letter,
                     float height,
                     bool downStrokeAlt,
                     bool horAlt,
-                    bool cirAlt){
+                    bool horAlt2){
     if (letter == "A") {
         A.draw(LETTERARGUMENTS);
     }

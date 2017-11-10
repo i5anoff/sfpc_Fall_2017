@@ -64,7 +64,7 @@ public:
     vector < float > width;
     vector < bool > horAlt;
     vector < bool > downStrokeAlt;
-    vector < bool > cirAlt;
+    vector < bool > horAlt2;
     
     vector < float > widthPrev;
 

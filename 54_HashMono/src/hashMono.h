@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#define LETTERARGUMENTS x, y, letterCount, width, height, downStrokeAlt, horAlt, cirAlt
+#define LETTERARGUMENTS x, y, letterCount, width, height, downStrokeAlt, horAlt, horAlt2
 
 class letterPoint {
     
@@ -53,7 +53,7 @@ public:
     bool bIsLine;
     bool bIsDownStrokAlt;
     bool bIsHorAlt;
-    bool bIsCirAlt;
+    bool bIshorAlt2;
 
     
     // if line!
@@ -65,16 +65,16 @@ public:
     float startAngle;
     
     
-    void lineType(bool line, bool downStrokAlt = false, bool horAlt = false, bool cirAlt = false){
+    void lineType(bool line, bool downStrokAlt = false, bool horAlt = false, bool horAlt2 = false){
         bIsLine = line;
         bIsHorAlt = horAlt;
         bIsDownStrokAlt = downStrokAlt;
-        bIsCirAlt = cirAlt;
+        bIshorAlt2 = horAlt2;
     }
     
-    void draw( float x, float y, int letterCount, float w, float h, bool downStrokAlt, bool horAlt, bool cirAlt) {
+    void draw( float x, float y, int letterCount, float w, float h, bool downStrokAlt, bool horAlt, bool horAlt2) {
         
-        float lineS = 2.5;
+        float lineS = 2;
         float lineL = 8;
         ofColor c1 = ofColor(0, 0, 0);
         ofColor c2 = ofColor(230, 1, 16);
@@ -92,7 +92,9 @@ public:
                 ofPushStyle();
                     if(downStrokAlt) {
                         ofSetLineWidth(lineL);
-                        if (letterCount % 3 == 0) ofSetColor(c2);
+//                        if (letterCount % 3 == 0) ofSetColor(c2);
+                        ofLine(ptA, ptB);
+
                         for (int i = 0; i < 2; i++){
                             ofPushMatrix();
                                 ofTranslate(i * (lineL * 0.9), 0);
@@ -126,7 +128,8 @@ public:
           
             }
             
-            if (bIsHorAlt == false &&  bIsDownStrokAlt == false){
+//            if (bIsHorAlt == false &&  bIsDownStrokAlt == false){
+                else {
                     ofLine(ptA, ptB);
             }
         }
@@ -140,31 +143,32 @@ public:
                 float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
                 line.addVertex( pt + (radius) * ofPoint(cos(angle), sin(angle)));
             }
-            if(bIsCirAlt && cirAlt){
-                ofPushStyle();
-                    ofSetColor(c3);
-                    ofSetLineWidth(lineL);
-                    line.clear();
-                    for (int i = 0; i < 30; i++){
-                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
-                        line.addVertex( pt + (radius + (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
-                    }
-                    line.draw();
-                    line.clear();
-                    for (int i = 0; i < 30; i++){
-                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
-                        line.addVertex( pt + (radius - (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
-                        ofSetColor(c3);
-                        ofSetLineWidth(lineL);
-                    line.draw();
-                ofPopStyle();
-                }
-            }else{
+//            if(bIshorAlt2 && horAlt2){
+//                ofPushStyle();
+//                    ofSetColor(c3);
+//                    ofSetLineWidth(lineL);
+//                    line.clear();
+//                    for (int i = 0; i < 30; i++){
+//                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
+//                        line.addVertex( pt + (radius + (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
+//                    }
+//                    line.draw();
+//                    line.clear();
+//                    for (int i = 0; i < 30; i++){
+//                        float angle = startAngle + ofMap(i, 0, 29, 0, PI/2);
+//                        line.addVertex( pt + (radius - (lineL * 0.75 * 0.5)) * ofPoint(cos(angle), sin(angle)));
+//                        ofSetColor(c3);
+//                        ofSetLineWidth(lineL);
+//                    line.draw();
+//                ofPopStyle();
+//                }
+//            }
+//            else{
                 ofPushStyle();
                 ofSetColor(c1);
                 line.draw();
                 ofPopStyle();
-            }
+//            }
         }
         
         }
@@ -177,11 +181,11 @@ public:
     
     vector < letterShape > shapes;
     float kerning;
-    void draw( float x, float y, int letterCount, float w, float h, bool downStrokeAlt, bool horAlt, bool cirAlt){
+    void draw( float x, float y, int letterCount, float w, float h, bool downStrokeAlt, bool horAlt, bool horAlt2){
         
         
         for (int i = 0; i < shapes.size(); i++){
-            shapes[i].draw(x + (w * kerning), y, letterCount, w, h, downStrokeAlt, horAlt, cirAlt);
+            shapes[i].draw(x + (w * kerning), y, letterCount, w, h, downStrokeAlt, horAlt, horAlt2);
         }
         
     }
@@ -201,7 +205,7 @@ public:
               float height,
               bool downStrokeAlt,
               bool horAlt,
-              bool cirAlt);
+              bool horAlt2);
 
     
     letter A;
