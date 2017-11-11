@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofHideCursor();
+    ofSetEscapeQuitsApp(false);
+
+    
     gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
         gui.setup();
     t.setup();
@@ -13,6 +16,8 @@ void ofApp::setup(){
     
     // type position
     lines.push_back("null");
+    cStartTime = ofGetElapsedTimef();
+    
     
     // animation
     bIsPrevUpdate = false;
@@ -43,7 +48,6 @@ void ofApp::setup(){
     
     
     
-    ofSetEscapeQuitsApp(false);
     
     
 }
@@ -84,7 +88,6 @@ void ofApp::update(){
         else                                   wTemp = w * 1.3;
         
         width.push_back((1-pct) * widthPrev[i] + pct * (wTemp * noise));
-//        width.push_back(w);
     }
     
     horAlt.clear();
@@ -137,33 +140,41 @@ void ofApp::draw(){
     ofPushMatrix();
     ofTranslate(padding,padding);
     
-    for(int i = 0; i < letters.size(); i++){
-        t.draw(letters[i], xPos[i-1], yPos[i],
-               i,
-               width[i],
-               h,
-               downStrokeAlt[i],
-               horAlt[i],
-               horAlt2[i]);
-    }
+        for(int i = 0; i < letters.size(); i++){
+            t.draw(letters[i], xPos[i-1], yPos[i],
+                   i,
+                   width[i],
+                   h,
+                   downStrokeAlt[i],
+                   horAlt[i],
+                   horAlt2[i]);
+        }
+    
+        if(xPos.size() > 0) {
+            cursor(xPos.at(xPos.size()-1), yPos.at(yPos.size()-1));
+        }else {
+            cursor(0, 0);
+        }
     ofPopMatrix();
     
+
+    stringstream typing;
+    typing <<
+    " letters: " <<
+    letters.size() <<
+    " blanks: " <<
+    blanks.size() <<
+    " lines: " <<
+    lines.size() <<
+    " width: " <<
+    width.size() <<
+    " width prev: " <<
+    widthPrev.size() <<
+    " letter count: " <<
+    endl;
     
-    
-//    cout << "ST: " << startTime << " ET: " << elapsedTime << endl;
-//    cout <<
-//    " letters: " <<
-//    letters.size() <<
-//    " blanks: " <<
-//    blanks.size() <<
-//    " lines: " <<
-//    lines.size() <<
-//    " width: " <<
-//    width.size() <<
-//    " width prev: " <<
-//    widthPrev.size() <<
-//    " letter count: " <<
-//    endl;
+    ofDrawBitmapStringHighlight(typing.str(), 30, ofGetHeight() - 80, 255, 120);
+
     
     stringstream parameters;
     parameters <<
@@ -179,7 +190,31 @@ void ofApp::draw(){
 
     ofDrawBitmapStringHighlight(parameters.str(), 30, ofGetHeight() - 30, 255, 120);
 }
-
+//--------------------------------------------------------------
+void ofApp::cursor(float xPosIn, float yPosIn){
+    
+    cEt = ofGetElapsedTimef() - cStartTime;
+    cPct = cEt / 0.75;
+    if (cPct > 1.5){
+        cPct = 0;
+        cStartTime = ofGetElapsedTimef();
+    }
+    
+    
+    float xPos = xPosIn;
+    float yPos = yPosIn;
+    
+    if(lines.at(lines.size()-1) == "newLine"){
+        yPos = yPosIn + lineHeight;
+    }
+    
+    ofPushStyle();
+        ofSetColor(0, 131, 206);
+        if (cPct > 1){
+            ofDrawRectangle(xPos, yPos - (h * 0.125), 2, h * 1.25);
+        }
+    ofPopStyle();
+}
 //--------------------------------------------------------------
 void ofApp::prevUpdate(){
     if (bIsPrevUpdate){
@@ -243,6 +278,19 @@ void ofApp::xyUpdate(){
 //            lines.erase(lines.end()-1);
 //            lines.push_back("newLine");
 //        }
+        
+//        if (xPos.size() > 1 && xPos.at(i) > ofGetWidth() - (padding)){
+//            lines.erase(lines.end()-1);
+//            lines.push_back("newLine");
+//        }
+        
+                if (xPos.size() > 1 && xPos.at(i) > ofGetWidth() - (padding)){
+                    lines.erase(lines.end()-2);
+                    lines.insert(lines.begin() + i-1, "newLine");
+                    
+//                    letters.insert(letters.begin() + i-2,"dash");
+//                    blanksAndLinesNull();
+                }
     }
 }
 //--------------------------------------------------------------

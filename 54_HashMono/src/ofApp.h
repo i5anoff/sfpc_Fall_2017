@@ -87,6 +87,12 @@ public:
     void blanksAndLinesNull();
     void xyUpdate();
     
+    void cursor(float xPos, float yPos);
+    float cStartTime;
+    float cEt;
+    float cPct;
+    bool bIsDrawCursor;
+    
     //layout
     float padding;
     
