@@ -158,22 +158,22 @@ void ofApp::draw(){
     ofPopMatrix();
     
 
-    stringstream typing;
-    typing <<
-    " letters: " <<
-    letters.size() <<
-    " blanks: " <<
-    blanks.size() <<
-    " lines: " <<
-    lines.size() <<
-    " width: " <<
-    width.size() <<
-    " width prev: " <<
-    widthPrev.size() <<
-    " letter count: " <<
-    endl;
-    
-    ofDrawBitmapStringHighlight(typing.str(), 30, ofGetHeight() - 80, 255, 120);
+//    stringstream typing;
+//    typing <<
+//    " letters: " <<
+//    letters.size() <<
+//    " blanks: " <<
+//    blanks.size() <<
+//    " lines: " <<
+//    lines.size() <<
+//    " width: " <<
+//    width.size() <<
+//    " width prev: " <<
+//    widthPrev.size() <<
+//    " letter count: " <<
+//    endl;
+//
+//    ofDrawBitmapStringHighlight(typing.str(), 30, ofGetHeight() - 80, 255, 120);
 
     
     stringstream parameters;
