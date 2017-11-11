@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofHideCursor();
     gui.setup("slider", "settings", ofGetWidth() - 225, ofGetHeight() - 350);
         gui.setup();
     t.setup();
@@ -42,7 +43,7 @@ void ofApp::setup(){
     
     
     
-    
+    ofSetEscapeQuitsApp(false);
     
     
 }
@@ -119,8 +120,9 @@ void ofApp::update(){
     
     if(bIsAnimation){
        inActiveAnimation();
-        if(elapsedTime > 10){
-            if (ofGetFrameNum() % (60*8) == 0){
+        if(elapsedTime > 8  ){
+            if (ofGetFrameNum() % (60*4) == 0){
+//                patOff = ofRandom(1,6);
                 keyPressed(32);
             };
         }
@@ -166,17 +168,16 @@ void ofApp::draw(){
     stringstream parameters;
     parameters <<
     "size: " << unit <<
-    " | width1: " << mod2 <<
-    " | width2: " << mod3 <<
-    " | verticalAlt: " << mod1 <<
+    " | width1: " << mod1 <<
+    " | width2: " << mod2 <<
+    " | verticalAlt: " << mod3 <<
     " | horizontalAlt1: " << mod5 <<
     " | horizontalAlt2: " << mod4 <<
     " | autoAnimation: " << bIsAnimationText <<
     endl;
     
 
-    ofDrawBitmapStringHighlight(parameters.str(), 30, ofGetHeight() - 30, 255, 170);
-    cout << bIsAnimation << endl;
+    ofDrawBitmapStringHighlight(parameters.str(), 30, ofGetHeight() - 30, 255, 120);
 }
 
 //--------------------------------------------------------------
@@ -250,7 +251,7 @@ void ofApp::keyPressed(int key){
     
     // animation
     startTime = ofGetElapsedTimef();
-    patOff = ofRandom(1,6);
+    if(bIsAnimation == true) patOff = ofRandom(1,6);
     bIsPrevUpdate = true;
     bIsInactive = false;
     modInact = 0;
@@ -272,50 +273,50 @@ void ofApp::keyReleased(int key){
     /// contols
     
     if (key == 257 || key == 258) { // unit
-        if(key == 257){
+        if(key == 257 && unit != 3){
             unit = unit - 1;
         }
-        if(key == 258){
+        if(key == 258 && unit != 15){
             unit = unit + 1;
         }
     }
     if (key == 259 || key == 260) { // w1, mod1
-        if(key == 259){
+        if(key == 259 && mod1 != 1){
             mod1 = mod1 - 1;
         }
-        if(key == 260){
+        if(key == 260 && mod1 != 20){
             mod1 =  mod1 + 1;
         }
     }
     if (key == 261 || key == 262) { // w2, mod2
-        if(key == 261){
+        if(key == 261 && mod2 != 1){
             mod2 = mod2 - 1;
         }
-        if(key == 262){
+        if(key == 262 && mod2 != 20){
             mod2 = mod2 + 1;
         }
     }
     if (key == 263 || key == 264) { // v alt, mod3
-        if(key == 263){
+        if(key == 263 && mod3 != 1){
             mod3 = mod3 - 1;
         }
-        if(key == 264){
+        if(key == 264 && mod3 != 20) {
             mod3 = mod3 + 1;
         }
     }
     if (key == 265 || key == 266) { // h alt1, mod5
-        if(key == 265){
+        if(key == 265 && mod5 != 1){
             mod5 = mod5 - 1;
         }
-        if(key == 266){
+        if(key == 266 && mod5 != 20){
             mod5 = mod5 + 1;
         }
     }
     if (key == 267 || key == 268) { // h alt2, mod4
-        if(key == 267){
+        if(key == 267 && mod4 != 1){
             mod4 = mod4 - 1;
         }
-        if(key == 268){
+        if(key == 268 && mod4 != 20){
             mod4 = mod4 + 1;
         }
     }
@@ -338,6 +339,7 @@ void ofApp::keyReleased(int key){
         mod5 = 2;
         unit = 4;
         bIsAnimation = true;
+        bIsAnimationText = "on";
     }
 
 //           gui.add(unit.setup("unit", 4, 3, 15));
@@ -378,7 +380,7 @@ void ofApp::keyReleased(int key){
         letters.push_back("questionMark");
         blanksAndLinesNull();
     }
-    if (key == 95){ // -
+    if (key == 45){ // -
         letters.push_back("dash");
         blanksAndLinesNull();
     }
